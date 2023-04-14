@@ -1,21 +1,42 @@
-import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { Formik } from "formik";
-import { Link, Navigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import { setLogin } from "../../state";
 
-const loginSchema = {
-    email: yup.string().required(),
-    password: yup.string().required(),
-};
+const loginSchema =  yup.object().shape({
+    email: yup.string().email("invalid email").required("required"),
+    password: yup.string().required("required"),
+  });
 
 const initialValueLogin = {
-    email:"",
-    password:"",
+    email:"" ,
+    password: "",
 };
 
 const Form = () => {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const handelFormSubmit = async (values, onSubmitProps) => {
-        login(values, onSubmitProps);
+        const loggedInResponse = await fetch("http://localhost:3001/auth/login",{
+            method: "POST",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify(values),
+        });
+        const loggedIn = await loggedInResponse.json();
+        onSubmitProps.resetForm();
+        if(loggedIn){
+            dispatch(
+                setLogin({
+                    token: loggedIn.token,
+                    user: loggedIn.user,
+                })
+            );
+            navigate("/app");
+        }
     };
     return(
         <Formik
@@ -27,13 +48,13 @@ const Form = () => {
                 values,
                 errors,
                 touched,
-                handelBlur,
-                handelChange,
-                handelSubmit,
+                handleBlur,
+                handleChange,
+                handleSubmit,
                 setFieldValue,
                 resetForm,
             }) => (
-                <form onSubmit={handelSubmit}>
+                <form onSubmit={handleSubmit}>
                     <Box 
                     display = "grid"
                     gridTemplateColumns= "repeat(2, minmax(0,1fr))"
@@ -45,15 +66,23 @@ const Form = () => {
                     >
                         <TextField 
                         label = "Email"
-                        sx = {{
-                            gridColumn: 'span 2'
-                        }}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.email}
+                        name="email"
+                        error={Boolean(touched.firstName) && Boolean(errors.firstName)}
+                        helperText={touched.firstName && errors.firstName}
+                        sx={{ gridColumn: "span 2" }}
                         />
                         <TextField 
                         label = "Password"
-                        sx = {{
-                            gridColumn: 'span 2'
-                        }}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.password}
+                        name="password"
+                        error={Boolean(touched.firstName) && Boolean(errors.firstName)}
+                        helperText={touched.firstName && errors.firstName}
+                        sx={{ gridColumn: "span 2" }}
                         />
                         <Box gridColumn = "span 2">
                             <Button
@@ -78,7 +107,6 @@ const Form = () => {
                     </Box>
                 </form>
             )}
-
         </Formik>
     );
 };

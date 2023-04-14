@@ -1,14 +1,15 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import { Formik } from "formik";
 import { Link, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
 const registerSchema = yup.object().shape({
     firstName: yup.string().required("required"),
-    lastName: yup.string().required(),
-    userName:yup.string().required(),
-    email: yup.string().required(),
-    password: yup.string().required(),
+    lastName: yup.string().required("required"),
+    userName:yup.string().required("required"),
+    email: yup.string().email("Invalid Email").required("required"),
+    password: yup.string().required("required"),
 
 });
 
@@ -21,7 +22,21 @@ const initialValueRegister = {
 };
 
 const Form = () => {
-    const handleFormSubmit = async (values, onSubmitProps) => {};
+    const navigate = useNavigate();
+
+    const handleFormSubmit = async (values, onSubmitProps) => {
+        const savedUserResponse = await fetch(
+            "http://localhost:3001/auth/register",
+            {
+                 method:"POST",
+                 headers: { "Content-Type": "application/json" },
+                 body: JSON.stringify(values),
+            });
+
+            const savedUser = await savedUserResponse.json();
+            onSubmitProps.resetForm();
+            if(savedUser) {navigate("/auth/login");}
+    };
     return(
         <Formik
         onSubmit={handleFormSubmit}
@@ -107,7 +122,8 @@ const Form = () => {
                             }}>
                                 SignUp
                             </Button>
-                            <Typography 
+                            <Typography
+                            //{onClick = {() => {resetForm();}}} 
                             sx={{
                                 gridColumn: "span 2",
                                 textAlign: "center",
