@@ -3,14 +3,14 @@ import { Formik } from "formik";
 import { Link, Navigate } from "react-router-dom";
 import * as yup from "yup";
 
-const registerSchema = {
-    firstName: yup.string().required(),
+const registerSchema = yup.object().shape({
+    firstName: yup.string().required("required"),
     lastName: yup.string().required(),
     userName:yup.string().required(),
     email: yup.string().required(),
     password: yup.string().required(),
 
-};
+});
 
 const initialValueRegister = {
     firstName: "",
@@ -21,12 +21,10 @@ const initialValueRegister = {
 };
 
 const Form = () => {
-    const handelFormSubmit = async (values, onSubmitProps) => {
-        login(values, onSubmitProps);
-    };
+    const handleFormSubmit = async (values, onSubmitProps) => {};
     return(
         <Formik
-        onSubmit={handelFormSubmit}
+        onSubmit={handleFormSubmit}
         initialValues={initialValueRegister}
         validationSchema={registerSchema}
         >
@@ -34,13 +32,13 @@ const Form = () => {
                 values,
                 errors,
                 touched,
-                handelBlur,
-                handelChange,
-                handelSubmit,
+                handleBlur,
+                handleChange,
+                handleSubmit,
                 setFieldValue,
                 resetForm,
             }) => (
-                <form onSubmit={handelSubmit}>
+                <form onSubmit={handleSubmit}>
                     <Box 
                     display = "grid"
                     gridTemplateColumns= "repeat(2, minmax(0,1fr))"
@@ -52,37 +50,45 @@ const Form = () => {
                     >
                         <TextField 
                         label = "First Name"
-                        onBlur = {handelBlur}
-                        onChange={handelChange}
+                        onBlur = {handleBlur}
+                        onChange={handleChange}
                         value = {values.firstName}
                         name="firstName"
+                        error={Boolean(touched.firstName) && Boolean(errors.firstName)}
+                        helperText={touched.firstName && errors.firstName}
                         sx = {{gridColumn: 'span 1'}}
                         />
                         <TextField 
                         label = "Last Name"
-                        onBlur = {handelBlur}
-                        onChange={handelChange}
-                        value = {values.firstName}
-                        name="firstName"
+                        onBlur = {handleBlur}
+                        onChange={handleChange}
+                        value = {values.lastName}
+                        name="lastName"
                         sx = {{gridColumn: 'span 1'}}
                         />
                         <TextField 
                         label = "User Name"
-                        sx = {{
-                            gridColumn: 'span 2'
-                        }}
+                        onBlur = {handleBlur}
+                        onChange={handleChange}
+                        value = {values.userName}
+                        name="userName"
+                        sx = {{gridColumn: 'span 2'}}
                         />
                         <TextField 
                         label = "Email"
-                        sx = {{
-                            gridColumn: 'span 2'
-                        }}
+                        onBlur = {handleBlur}
+                        onChange={handleChange}
+                        value = {values.email}
+                        name="email"
+                        sx = {{gridColumn: 'span 2'}}
                         />
                         <TextField 
                         label = "Password"
-                        sx = {{
-                            gridColumn: 'span 1'
-                        }}
+                        onBlur = {handleBlur}
+                        onChange={handleChange}
+                        value = {values.password}
+                        name="password"
+                        sx = {{gridColumn: 'span 1'}}
                         />
                         <TextField 
                         label = "Confirm Password"
