@@ -21,7 +21,7 @@ const LoginPage = () => {
             <Box
             gridColumn="span 5"
             sx={{
-                my:20,
+                my:30,
             }}
             >
                 <Typography 
@@ -30,7 +30,7 @@ const LoginPage = () => {
                         sx={{
                             textAlign: "center",
                         }}
-                        >Sign Up</Typography>
+                        >Sign In</Typography>
                 <Form/>
             </Box>
         </Box>

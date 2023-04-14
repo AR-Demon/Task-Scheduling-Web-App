@@ -44,24 +44,6 @@ const Form = () => {
                     }}
                     >
                         <TextField 
-                        label = "First Name"
-                        sx = {{
-                            gridColumn: 'span 1'
-                        }}
-                        />
-                        <TextField 
-                        label = "Last Name"
-                        sx = {{
-                            gridColumn: 'span 1'
-                        }}
-                        />
-                        <TextField 
-                        label = "User Name"
-                        sx = {{
-                            gridColumn: 'span 2'
-                        }}
-                        />
-                        <TextField 
                         label = "Email"
                         sx = {{
                             gridColumn: 'span 2'
@@ -70,13 +52,7 @@ const Form = () => {
                         <TextField 
                         label = "Password"
                         sx = {{
-                            gridColumn: 'span 1'
-                        }}
-                        />
-                        <TextField 
-                        label = "Confirm Password"
-                        sx = {{
-                            gridColumn: 'span 1'
+                            gridColumn: 'span 2'
                         }}
                         />
                         <Box gridColumn = "span 2">
@@ -88,7 +64,7 @@ const Form = () => {
                               m: "1rem 0",
                               p: "0.5em",
                             }}>
-                                SignUp
+                                SignIn
                             </Button>
                             <Typography 
                             sx={{
@@ -96,7 +72,7 @@ const Form = () => {
                                 textAlign: "center",
                             }}
                             >
-                                Already have an account?<Link to="/auth/register">Login </Link>here.
+                                Don't have an account? <Link to="/auth/register">SignUp </Link>here.
                             </Typography>
                         </Box>
                     </Box>
