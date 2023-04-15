@@ -8,18 +8,17 @@ const userSchema = new mongoose.Schema({
         max: 50,
     },
 
-    middleName: {
+    lastName: {
         type: String,
         required: true,
         min: 3,
         max: 50,
     },
 
-    lastName: {
+    userName: {
         type: String,
         required: true,
-        min: 3,
-        max: 50,
+        min: 5,
     },
 
     email:{
