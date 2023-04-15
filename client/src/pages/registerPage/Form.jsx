@@ -6,7 +6,7 @@ import * as yup from "yup";
 
 const registerSchema = yup.object().shape({
     firstName: yup.string().required("required"),
-    lastName: yup.string().required("required"),
+    lastName: yup.string().required("Valid"),
     userName:yup.string().required("required"),
     email: yup.string().email("Invalid Email").required("required"),
     password: yup.string().required("required"),
@@ -79,6 +79,8 @@ const Form = () => {
                         onChange={handleChange}
                         value = {values.lastName}
                         name="lastName"
+                        error={Boolean(touched.lastName) && Boolean(errors.lastName)}
+                        helperText={touched.lastName && errors.lastName}
                         sx = {{gridColumn: 'span 1'}}
                         />
                         <TextField 
@@ -87,6 +89,8 @@ const Form = () => {
                         onChange={handleChange}
                         value = {values.userName}
                         name="userName"
+                        error={Boolean(touched.firstName) && Boolean(errors.firstName)}
+                        helperText={touched.firstName && errors.firstName}
                         sx = {{gridColumn: 'span 2'}}
                         />
                         <TextField 
@@ -95,6 +99,8 @@ const Form = () => {
                         onChange={handleChange}
                         value = {values.email}
                         name="email"
+                        error={Boolean(touched.email) && Boolean(errors.email)}
+                        helperText={touched.email && errors.email}
                         sx = {{gridColumn: 'span 2'}}
                         />
                         <TextField 
@@ -103,10 +109,14 @@ const Form = () => {
                         onChange={handleChange}
                         value = {values.password}
                         name="password"
+                        error={Boolean(touched.firstName) && Boolean(errors.firstName)}
+                        helperText={touched.firstName && errors.firstName}
                         sx = {{gridColumn: 'span 1'}}
                         />
                         <TextField 
                         label = "Confirm Password"
+                        error={Boolean(touched.firstName) && Boolean(errors.firstName)}
+                        helperText={touched.firstName && errors.firstName}
                         sx = {{
                             gridColumn: 'span 1'
                         }}
