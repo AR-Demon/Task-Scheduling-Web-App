@@ -20,7 +20,7 @@ const Form = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handelFormSubmit = async (values, onSubmitProps) => {
+    const handleFormSubmit = async (values, onSubmitProps) => {
         const loggedInResponse = await fetch("http://localhost:3001/auth/login",{
             method: "POST",
             headers: {"Content-Type":"application/json"},
@@ -35,12 +35,15 @@ const Form = () => {
                     user: loggedIn.user,
                 })
             );
-            navigate("/app");
+            if (loggedIn.msg == "User Does Not Exist"){navigate("/auth/register");alert(loggedIn.msg);}
+            else{navigate("/app");}
+            console.log(loggedIn.msg);
+                        
         }
     };
     return(
         <Formik
-        onSubmit={handelFormSubmit}
+        onSubmit={handleFormSubmit}
         initialValues={initialValueLogin}
         validationSchema={loginSchema}
         >
