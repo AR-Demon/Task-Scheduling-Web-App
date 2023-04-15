@@ -1,8 +1,8 @@
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
-import HomePage from "./scenes/homePage/index.jsx";
-import MainApp from "./scenes/app";
-import LoginPage from "./scenes/loginPage";
-import RegisterPage from "./scenes/registerPage";
+import HomePage from "./pages/homePage/index.jsx";
+import MainApp from "./pages/app";
+import LoginPage from "./pages/loginPage";
+import RegisterPage from "./pages/registerPage";
 import { useSelector } from "react-redux";
 
 function App() {
