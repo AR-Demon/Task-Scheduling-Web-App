@@ -120,7 +120,7 @@ const Form = () => {
                               m: "1rem 0",
                               p: "0.5em",
                             }}>
-                                SignUp
+                                Sign Up
                             </Button>
                             <Typography
                             //{onClick = {() => {resetForm();}}} 

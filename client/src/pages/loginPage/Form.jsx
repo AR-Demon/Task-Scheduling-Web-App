@@ -96,7 +96,7 @@ const Form = () => {
                               m: "1rem 0",
                               p: "0.5em",
                             }}>
-                                SignIn
+                                Sign In
                             </Button>
                             <Typography 
                             sx={{
@@ -104,7 +104,7 @@ const Form = () => {
                                 textAlign: "center",
                             }}
                             >
-                                Don't have an account? <Link to="/auth/register">SignUp </Link>here.
+                                Don't have an account? <Link to="/auth/register">Sign Up </Link>here.
                             </Typography>
                         </Box>
                     </Box>
