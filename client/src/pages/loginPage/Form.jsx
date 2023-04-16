@@ -6,8 +6,8 @@ import * as yup from "yup";
 import { setLogin } from "../../state";
 
 const loginSchema = yup.object().shape({
-  email: yup.string().email("invalid email").required("required"),
-  password: yup.string().required("required"),
+  email: yup.string().email("Invalid Email").required("Required"),
+  password: yup.string().required("Required"),
 });
 
 const initialValueLogin = {
@@ -75,8 +75,8 @@ const Form = () => {
               onChange={handleChange}
               value={values.email}
               name="email"
-              error={Boolean(touched.firstName) && Boolean(errors.firstName)}
-              helperText={touched.firstName && errors.firstName}
+              error={Boolean(touched.email) && Boolean(errors.email)}
+              helperText={touched.email && errors.email}
               sx={{ gridColumn: "span 2" }}
             />
             <TextField
