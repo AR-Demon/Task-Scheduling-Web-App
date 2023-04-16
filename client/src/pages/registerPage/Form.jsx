@@ -6,7 +6,7 @@ import * as yup from "yup";
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("Required"),
-  lastName: yup.string().required("Valid"),
+  lastName: yup.string().required("Required"),
   userName: yup.string().required("Required"),
   email: yup.string().email("Invalid Email").required("Required"),
   password: yup.string().required("Required"),
@@ -91,8 +91,8 @@ const Form = () => {
               onChange={handleChange}
               value={values.userName}
               name="userName"
-              error={Boolean(touched.firstName) && Boolean(errors.firstName)}
-              helperText={touched.firstName && errors.firstName}
+              error={Boolean(touched.userName) && Boolean(errors.userName)}
+              helperText={touched.userName && errors.userName}
               sx={{ gridColumn: "span 2" }}
             />
             <TextField
@@ -117,8 +117,6 @@ const Form = () => {
             />
             <TextField
               label="Confirm Password"
-              error={Boolean(touched.firstName) && Boolean(errors.firstName)}
-              helperText={touched.firstName && errors.firstName}
               sx={{
                 gridColumn: "span 1",
               }}
@@ -136,7 +134,7 @@ const Form = () => {
                 Sign Up
               </Button>
               <Typography
-                //{onClick = {() => {resetForm();}}}
+                onClick = {() => {resetForm();}}
                 sx={{
                   gridColumn: "span 2",
                   textAlign: "center",
