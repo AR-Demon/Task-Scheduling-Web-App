@@ -10,6 +10,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js"
 import { verifyToken } from "./middleware/auth.js";
+import userRoutes from "./routes/user.js"
 
 /*  CONFIGURATIONS  */
 const __filename = fileURLToPath(import.meta.url);
@@ -42,6 +43,7 @@ const upload = multer({ storage});
 
 /* ROUTES */
 app.use("/auth", authRoutes);
+app.use ("/user",userRoutes);
 
 
 /* MONGOOSE SETUP */
