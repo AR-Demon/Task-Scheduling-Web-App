@@ -3,17 +3,22 @@ import UserStats from "../models/UserStats.js"
 
 export const createStats = async(req,res) => {
     try {
-        const { Id } = req.params;
+        const { Id } = req.query.Id;
         const newUserStats = new UserStats({
-            userId:Id,
+            user_Id:Id,
             userLevel:1,
             userLevelExp:0,
             userAttribute:{
                 strength:1,
+                strengthXp:0,
                 intelligence:1,
+                intelligenceXp:0,
                 agility:1,
+                agilityXp:0,
                 dexterity:1,
+                dexterityXp:0,
                 luck:1,
+                luckXp:0
             },
         });
         const saveUser = await newUserStats.save();
