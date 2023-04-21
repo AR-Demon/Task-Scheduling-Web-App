@@ -11,11 +11,17 @@ function App() {
     <div className="app">
       <BrowserRouter>
         <Routes>
-          <Route path = "/auth/login" element = {<LoginPage/>}/>
-          <Route path="/auth/register" element = {<RegisterPage/>}/>
-          <Route path = "/app" element = {isAuth? <MainApp/> : <Navigate to="/" />}/>
-          <Route path = "/home" element = {<HomePage/>}/>
-          <Route path = "/" element = {isAuth? <Navigate to="/app" /> : <Navigate to="/home" />}/>
+          <Route path="/auth/login" element={<LoginPage />} />
+          <Route path="/auth/register" element={<RegisterPage />} />
+          <Route
+            path="/app"
+            element={isAuth ? <MainApp /> : <Navigate to="/" />}
+          />
+          <Route path="/home" element={<HomePage />} />
+          <Route
+            path="/"
+            element={isAuth ? <Navigate to="/app" /> : <Navigate to="/home" />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
