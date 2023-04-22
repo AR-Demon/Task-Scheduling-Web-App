@@ -30,24 +30,12 @@ const store = configureStore({
     }),
 });
 
-import { createTheme, ThemeProvider } from "@mui/material";
-
-const theme = createTheme({
-  typography: {
-    button: {
-      fontStyle: "bold",
-    },
-  },
-});
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistStore(store)}>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
+        <App />
       </PersistGate>
     </Provider>
   </React.StrictMode>
