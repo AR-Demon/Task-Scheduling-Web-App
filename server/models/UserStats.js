@@ -17,7 +17,11 @@ const UserStatsSchema = new mongoose.Schema({
 
     },
     userAttribute:{
-        strength:{
+        strengthLevel:{
+            type: Number,
+            required : true, 
+        },
+        strengthStatus:{
             type: Number,
             required : true, 
         },
@@ -25,33 +29,49 @@ const UserStatsSchema = new mongoose.Schema({
             type: Number,
             required : true, 
         },
-        intelligence:{
+        intelligenceLevel:{
             type: Number,
             required : true,
+        },
+        intelligenceStatus:{
+            type: Number,
+            required : true, 
         },
         intelligenceXp:{
             type: Number,
             required : true,
         },
-        agility:{
+        agilityLevel:{
             type: Number,
             required : true,
+        },
+        agilityStatus:{
+            type: Number,
+            required : true, 
         },
         agilityXp:{
             type: Number,
             required : true,
         },
-        dexterity:{
+        dexterityLevel:{
             type: Number,
             required : true,
+        },
+        dexterityStatus:{
+            type: Number,
+            required : true, 
         },
         dexterityXp:{
             type: Number,
             required : true,
         },
-        luck:{
+        luckLevel:{
             type: Number,
             required : true,
+        },
+        luckStatus:{
+            type: Number,
+            required : true, 
         },
         luckXp:{
             type: Number,
