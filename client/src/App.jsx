@@ -13,7 +13,7 @@ function App() {
         <Routes>
           <Route path = "/auth/login" element = {<LoginPage/>}/>
           <Route path="/auth/register" element = {<RegisterPage/>}/>
-          <Route path = "/app" element = {isAuth? <MainApp/> : <Navigate to="/" />}/>
+          <Route path = "/app" element = {isAuth? <MainApp/> : <Navigate to="/auth/login" />}/>
           <Route path = "/home" element = {<HomePage/>}/>
           <Route path = "/" element = {isAuth? <Navigate to="/app" /> : <Navigate to="/home" />}/>
         </Routes>

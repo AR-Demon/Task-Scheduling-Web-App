@@ -1,10 +1,10 @@
 import express from "express";
-import {} from "../controllers/todo.js";
+import {createTodo} from "../controllers/todo.js";
 
 const Routes = express.Router();
 
 /* TODO ROUTES */
-Routes.post("");
+Routes.post("/todo", createTodo);
 
 
 export default Routes;

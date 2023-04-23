@@ -40,7 +40,6 @@ const Form = () => {
       } else {
         navigate("/app");
       }
-      console.log(loggedIn.msg);
     }
   };
   return (
