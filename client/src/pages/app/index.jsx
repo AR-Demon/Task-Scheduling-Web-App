@@ -1,15 +1,12 @@
-import { Button } from "@mui/material";
-import { setLogout } from "../../state";
-import { useDispatch } from "react-redux";
+import SideNav from "./components/navigation/sideNav";
+import { Navbar } from "./components/navigation/topNavbar";
 
 const MainApp = () => {
-    const dispatch = useDispatch();
-    return(
+  return (
     <div>
-        Main App Goes Here.
-        <Button onClick={() => dispatch(setLogout())}>Log Out</Button>
+      <Navbar />
     </div>
-    );
+  );
 };
 
 export default MainApp;
