@@ -4,6 +4,7 @@ const todoSchema = new mongoose.Schema({
     userId:{
         type: String,
         required: true,
+        ref:"User",
     },
     userName:{
         type: String,
@@ -30,7 +31,7 @@ const todoSchema = new mongoose.Schema({
         type:Array,
         required:false,
     },
-    attribute:{
+    attachedAttribute:{
         type: String,
         required: true,
     },
@@ -44,7 +45,7 @@ const todoSchema = new mongoose.Schema({
     },
     due:{
         _date:{
-            type: Timestamp,
+            type: Date,
             required: true,
         },
         date:{
@@ -60,7 +61,7 @@ const todoSchema = new mongoose.Schema({
             required: true,
         },
     },
-});
+},{timestamps:true});
 
 const Todo = mongoose.model("Todo", todoSchema);
 export default Todo;
