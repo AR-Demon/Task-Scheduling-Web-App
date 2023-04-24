@@ -1,9 +1,10 @@
-import SideNav from "./components/navigation/sideNav";
 import { Navbar } from "./components/navigation/topNavbar";
+import { ToDoList } from "./components/To-do List/toDoList";
 
 const MainApp = () => {
   return (
     <div>
+      <ToDoList />
       <Navbar />
     </div>
   );
