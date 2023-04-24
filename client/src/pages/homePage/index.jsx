@@ -5,12 +5,10 @@ const HomePage = () => {
   const navigate = useNavigate();
   const navigateLogin = () => {
     navigate("/auth/login");
-  }
+  };
   return (
     <div>
-      Home Page of prayash
-      <Link to="/auth/login">Log In</Link>
-      yunidh's home page
+      Home Page
       <Button onClick={navigateLogin}>Login</Button>
     </div>
   );

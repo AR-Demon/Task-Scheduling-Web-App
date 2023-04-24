@@ -29,7 +29,7 @@ const LoginPage = () => {
           variant="h4"
           gridColumn="span 2"
           sx={{
-            TypographyAlign: "center",
+            textAlign: "center",
           }}
         >
           Sign In

@@ -137,6 +137,7 @@ export function ToDoList() {
             <div style={modalStyle}>
               <h2>Add New Task</h2>
               <TextField
+                autoFocus="true"
                 label="Task"
                 value={newTask}
                 onChange={handleNewTaskChange}
@@ -159,6 +160,7 @@ export function ToDoList() {
             <div style={modalStyle}>
               <h2>Edit Task</h2>
               <TextField
+                autoFocus="true"
                 label="Task"
                 value={editTask}
                 onChange={handleEditTaskChange}
