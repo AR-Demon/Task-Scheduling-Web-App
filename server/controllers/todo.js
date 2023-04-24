@@ -82,13 +82,25 @@ export const GetTodo = async(req, res) => {
 }
 
 export const deleteTodo = async(req, res) => {
-    try{}catch(error){
+    try{
+        const todoId = req.query.todoId;
+        const todo = await Todo.findByIdAndDelete(todoId);
+        if(!todo){return res.status(404).json({msg:"Todo Not Found"})}
+
+        res.status(200).json({msg:"Todo Deleted"});
+    }catch(error){
         res.status(500).json({error: error.message});
     }
 }
 
 export const deleteTodos = async(req, res) => {
-    try{}catch(error){
+    const userId = req.query.userId;
+    try{
+        const deleteTodo = await Todo.deleteMany({userId});
+        if(deleteTodo.deletedCount === 0){return res.status(404).json({msg:"Todo Not Found"})}
+
+        res.status(200).json({message:deleteTodo.deletedCount+' Todos Deleted Successfully'});
+    }catch(error){
         res.status(500).json({error: error.message});
     }
 }
