@@ -45,7 +45,7 @@ const todoSchema = new mongoose.Schema({
     },
     due:{
         _date:{
-            type: String,
+            type: Date,
             required: true,
         },
         date:{
