@@ -13,7 +13,7 @@ const todoSchema = new mongoose.Schema({
     email:{
         type: String,
         required: true,
-        unique:true,
+        unique:false,
     },
     content:{
         type: String,
@@ -28,7 +28,7 @@ const todoSchema = new mongoose.Schema({
         required: true,
     },
     label:{
-        type:Array,
+        type:String,
         required:false,
     },
     attachedAttribute:{
@@ -45,11 +45,11 @@ const todoSchema = new mongoose.Schema({
     },
     due:{
         _date:{
-            type: Date,
+            type: String,
             required: true,
         },
         date:{
-            type: Date,
+            type: String,
             required: true,
         },
         isRecurring:{

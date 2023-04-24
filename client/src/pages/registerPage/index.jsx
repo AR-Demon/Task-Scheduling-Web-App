@@ -1,4 +1,4 @@
-import coffee from "./coffee.png";
+import picture from "../../assets/react.svg";
 import Form from "./Form";
 import { Box, Typography} from "@mui/material";
 
@@ -11,7 +11,7 @@ const LoginPage = () => {
             <Box
             gridColumn="span 15"
             sx={{
-                backgroundImage:`url(${coffee})`,
+                backgroundImage:`url(${picture})`,
                 backgroundSize:"cover",
                 backgroundRepeat: 'no-repeat',
                 width:"100%",
