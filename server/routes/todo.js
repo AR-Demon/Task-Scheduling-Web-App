@@ -1,5 +1,5 @@
 import express from "express";
-import {createTodo, GetTodos, GetTodo, updateTodo} from "../controllers/todo.js";
+import {createTodo, GetTodos, GetTodo, updateTodo, completeTodo} from "../controllers/todo.js";
 
 const Routes = express.Router();
 
@@ -7,7 +7,7 @@ const Routes = express.Router();
 Routes.post("/todo", createTodo);
 Routes.get("/todo",GetTodo);
 Routes.get("/todos", GetTodos);
-Routes.patch("/todo/complete/:Id",updateTodo);
+Routes.patch("/todo/complete/:Id",completeTodo);
 
 
 export default Routes;

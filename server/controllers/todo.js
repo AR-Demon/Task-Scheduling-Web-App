@@ -47,14 +47,15 @@ export const updateTodo = async(req, res) => {
 }
 
 export const completeTodo = async(req, res) => {
+    const currentDate = new Date();
     const updates = Object.keys(req.body);
     const allowUpdates = ['checked', 'completed_at'];
     const isValidOperation = updates.every(update => allowUpdates.includes(update));
     if(!isValidOperation){return res.status(400).json({error: "Invalid Updates!"});}
-    const currentDate = new Date();
     try {
-        const userTodo = await Todo.findByIdAndUpdate(req.params.Id, {checked:true,completed_at:currentDate});
-        if(!user){return res.status(404).json({error:'User Not Found'});}
+        const userTodo = await Todo.findByIdAndUpdate(req.params.Id, {checked:req.body.checked,completed_at:currentDate},{ new: true, runValidators: true });
+        if(!userTodo){return res.status(404).json({error:'User Todo Not Found'});}
+        res.status(200).json(userTodo);
     }catch(error){res.status(500).json({error: error.message});}
 }
 
