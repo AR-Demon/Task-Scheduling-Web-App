@@ -5,7 +5,7 @@ const Routes = express.Router();
 
 /* User Stats Routes */
 Routes.post("/stats",createStats);
-Routes.patch("/stats",updateStats);
+Routes.all("/stats/update",updateStats);
 Routes.get("/stats",getStats);
 
 

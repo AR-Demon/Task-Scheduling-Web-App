@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Todo from "../models/Todo.js"
 
+// create a todo of user with userId email content description label attachAttribute
 export const createTodo = async(req, res) => {
     try{
         const userId = req.query.Id;
