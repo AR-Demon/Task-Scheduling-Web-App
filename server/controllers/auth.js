@@ -26,8 +26,8 @@ export const register = async (req, res) => {
         });
 
         const saveUser = await newUser.save();
+        delete saveUser.password;
         res.status(201).json(saveUser);
-
     }catch(error){
         res.status(500).json({ error : error.message}); 
     }

@@ -40,13 +40,41 @@ export const createTodo = async(req, res) => {
 }
 
 export const updateTodo = async(req, res) => {
-    try{}catch(error){}
+    try{}catch(error){
+        res.status(500).json({error: error.message});
+    }
+}
+
+export const GetTodos = async(req, res) => {
+    try{
+        const userId = req.query.Id;
+        const userTodos = await Todo.find({userId:userId});
+        if(!userTodos){ return res.status(410).json({msg:"User Have No Todo"})}
+        res.status(200).json(userTodos);
+    }catch(error){
+        res.status(500).json({error: error.message});
+    }
 }
 
 export const GetTodo = async(req, res) => {
-    try{}catch(error){}
+    try{
+        const todoId = req.query.todoId;
+        const userTodo = await Todo.findOne({_id:todoId});
+        if(!userTodo){ return res.status(410).json({msg:"User Have No Todo"})}
+        res.status(200).json(userTodo);
+    }catch(error){
+        res.status(500).json({error: error.message});
+    }
 }
 
 export const deleteTodo = async(req, res) => {
-    try{}catch(error){}
+    try{}catch(error){
+        res.status(500).json({error: error.message});
+    }
+}
+
+export const deleteTodos = async(req, res) => {
+    try{}catch(error){
+        res.status(500).json({error: error.message});
+    }
 }
