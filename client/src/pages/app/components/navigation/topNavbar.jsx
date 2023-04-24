@@ -21,7 +21,6 @@ import { styled, useTheme } from "@mui/material/styles";
 import * as React from "react";
 import Divider from "@mui/material/Divider";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { css } from "@mui/material/styles";
 
 const drawerWidth = 260;
 

@@ -34,7 +34,6 @@ export const createTodo = async(req, res) => {
         });
         const saveTodo = await newTodo.save();
         res.status(200).json(saveTodo);
-        //res.status(200).json({userId:userId,email:email});
     }catch(error){
         res.status(500).json({error: error.message});
     }
