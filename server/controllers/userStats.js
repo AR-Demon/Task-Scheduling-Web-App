@@ -60,7 +60,9 @@ export const updateStats = async(req,res) => {
 
         //userAttribute store the attribute of the user todo
         const userAttribute = userTodo.attachedAttribute;
+        //userStats store full user stats 
         const userStats = await UserStats.findOne({user_Id});
+        if(!userStats){return res.status(404).json({msg:"Invalid UserId"});}
 
         //create logic
         /*

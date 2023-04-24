@@ -48,10 +48,13 @@ app.use("/user", todoRoutes);
 
 
 /* MONGOOSE SETUP */
+const currentDate = new Date();
 const PORT = process.env.PORT || 6001;
 mongoose.connect(process.env.MONGO_URL,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
-    app.listen(PORT, () => console.log('Server Port:',PORT));
+    app.listen(PORT,() => console.log('Server Port:',PORT,currentDate));
 }).catch((error) => console.log(error + 'did not connect'));
+
+//192.168.1.68
