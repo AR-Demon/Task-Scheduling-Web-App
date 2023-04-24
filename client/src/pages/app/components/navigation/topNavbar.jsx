@@ -22,7 +22,7 @@ import * as React from "react";
 import Divider from "@mui/material/Divider";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
-const drawerWidth = 260;
+const drawerWidth = 300;
 
 const AppBars = styled(AppBar, {
   shouldForwardProp: (prop) => prop !== "open",
