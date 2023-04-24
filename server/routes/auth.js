@@ -3,6 +3,8 @@ import { register } from "../controllers/auth.js"
 import { login } from "../controllers/auth.js"
 
 const Routes = express.Router();
+
+/* AUTHORIZATION ROUTES */
 Routes.post("/register", register);
 Routes.post("/login", login);
 

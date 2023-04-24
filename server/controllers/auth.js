@@ -34,6 +34,7 @@ export const register = async (req, res) => {
 };
 
 /* LOGGING IN */
+
 export const login = async(req, res) => {
     try{
         const{
@@ -50,7 +51,7 @@ export const login = async(req, res) => {
         if(!isMatch){return res.status(401).json({msg: "Invalid Credentials"});}
 
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
-        //delete user.password;
+        delete user.password;
         res.status(200).json({token, user});
     }catch(err){
         res.status(500).json({error : err.message});
