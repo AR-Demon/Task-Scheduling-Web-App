@@ -7,7 +7,7 @@ const Routes = express.Router();
 Routes.post("/todo", createTodo);
 Routes.get("/todo",GetTodo);
 Routes.get("/todos", GetTodos);
-Routes.put("/todo/update",updateTodo);
+Routes.patch("/todo/complete/:Id",updateTodo);
 
 
 export default Routes;

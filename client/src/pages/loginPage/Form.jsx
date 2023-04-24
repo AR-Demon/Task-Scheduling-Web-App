@@ -20,7 +20,7 @@ const Form = () => {
   const navigate = useNavigate();
 
   const handleFormSubmit = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
+    const loggedInResponse = await fetch("http://192.168.1.68:3001/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),

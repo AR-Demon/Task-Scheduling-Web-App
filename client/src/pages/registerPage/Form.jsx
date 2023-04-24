@@ -25,7 +25,7 @@ const Form = () => {
 
   const handleFormSubmit = async (values, onSubmitProps) => {
     const savedUserResponse = await fetch(
-      "http://localhost:3001/auth/register",
+      "http://192.168.1.68:3001/auth/register",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
