@@ -24,6 +24,7 @@ export function ToDoList() {
   const [editOpen, setEditOpen] = useState(false);
 
   const handleNewTaskChange = (event) => {
+    console.log(event);
     setNewTask(event.target.value);
   };
   const handleAddTask = () => {

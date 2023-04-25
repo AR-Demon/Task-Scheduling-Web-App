@@ -4,8 +4,8 @@ import { ToDoList } from "./components/To-do List/toDoList";
 const MainApp = () => {
   return (
     <div>
-      <ToDoList />
       <Navbar />
+      <ToDoList />
     </div>
   );
 };

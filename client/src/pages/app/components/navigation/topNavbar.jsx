@@ -3,12 +3,12 @@ import {
   Button,
   Box,
   Toolbar,
-  Grid,
   Typography,
   IconButton,
   Menu,
   Drawer,
   List,
+  Stack,
 } from "@mui/material";
 import { setLogout } from "../../../../state";
 import { useDispatch } from "react-redux";
@@ -21,8 +21,9 @@ import { styled, useTheme } from "@mui/material/styles";
 import * as React from "react";
 import Divider from "@mui/material/Divider";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { ToDoList } from "../To-do List/toDoList";
 
-const drawerWidth = 300;
+const drawerWidth = 400;
 
 const AppBars = styled(AppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -82,6 +83,7 @@ export function Navbar() {
           <IconButton
             disableRipple
             onClick={handleDrawerOpen}
+            edge="start"
             sx={{
               borderRadius: 6,
               padding: 0,
@@ -124,7 +126,7 @@ export function Navbar() {
             <Divider variant="middle" />
           </Drawer>
 
-          <Grid container direction={"row-reverse"}>
+          <Stack flexDirection={"row-reverse"} flexGrow={1}>
             <Button
               variant="text"
               sx={{
@@ -144,8 +146,7 @@ export function Navbar() {
                 Log Out
               </div>
             </Button>
-          </Grid>
-          <Menu id="Dashboard"></Menu>
+          </Stack>
         </Toolbar>
       </AppBars>
     </ThemeProvider>
