@@ -34,9 +34,9 @@ const Form = () => {
           user: loggedIn.user,
         })
       );
-      if (loggedIn.msg == "User Does Not Exist") {
+      if (loggedIn.msg === "User Does Not Exist") {
         navigate("/auth/register");
-        alert(loggedIn.msg);
+        alert(loggedIn.msg + " or Invalid Email/Username");
       } else {
         navigate("/app");
       }

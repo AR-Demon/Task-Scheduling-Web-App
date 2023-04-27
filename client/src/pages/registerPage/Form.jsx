@@ -34,10 +34,11 @@ const Form = () => {
     );
 
     const savedUser = await savedUserResponse.json();
-    onSubmitProps.resetForm();
-    if (savedUser) {
+    if(savedUser.error){alert("Email Already Taken");}
+    else if (savedUser) {
       navigate("/auth/login");
     }
+    //onSubmitProps.resetForm();
   };
   return (
     <Formik
