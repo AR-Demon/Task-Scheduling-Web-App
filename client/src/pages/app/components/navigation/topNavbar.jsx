@@ -10,7 +10,7 @@ import {
   List,
   Stack,
 } from "@mui/material";
-import { setLogout } from "../../../../state";
+import { setLogout } from "../../../../state/index";
 import { useDispatch } from "react-redux";
 import WebFont from "webfontloader";
 import { useEffect } from "react";
