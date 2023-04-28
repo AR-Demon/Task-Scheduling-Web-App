@@ -3,7 +3,7 @@ import { Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import { setLogin } from "../../state/index";
+import { setLogin } from "../../state/authReducer";
 
 const loginSchema = yup.object().shape({
   email: yup.string().email("Invalid Email").required("Required"),
