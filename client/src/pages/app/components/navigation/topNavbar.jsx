@@ -19,7 +19,12 @@ import Divider from "@mui/material/Divider";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { ToDoList } from "../To-do List/toDoList";
 import { setUserLogout } from "../../../../state/userReducer";
+<<<<<<< HEAD
 import { useTheme } from "@emotion/react";
+=======
+import {useTheme} from "@mui/material/styles";
+
+>>>>>>> main
 const drawerWidth = 400;
 
 const AppBars = styled(AppBar, {
