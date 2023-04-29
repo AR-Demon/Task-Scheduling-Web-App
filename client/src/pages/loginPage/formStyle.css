@@ -1,0 +1,23 @@
+.loginPage {
+  display: flex;
+  height: 100vh;
+}
+
+.bgImg {
+  background: url(./bg1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 70%;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.loginForm {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  background-color: #edb230;
+}

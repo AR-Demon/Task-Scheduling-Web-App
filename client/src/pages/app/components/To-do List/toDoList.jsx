@@ -224,7 +224,11 @@ export function ToDoList() {
                 style={centerStyle}
               >
                 <FormControl style={modalStyle}>
-                  <Typography variant="h3" fontFamily={"Outfit"}>
+                  <Typography
+                    variant="h3"
+                    fontWeight={400}
+                    fontFamily={"Outfit"}
+                  >
                     {" "}
                     ADD NEW TASK
                   </Typography>
