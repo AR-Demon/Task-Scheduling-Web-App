@@ -3,7 +3,8 @@ import { Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import { setLogin } from "../../state";
+import { setAuthLogin } from "../../state/authReducer";
+import { setUserLogin } from "../../state/userReducer";
 
 const loginSchema = yup.object().shape({
   email: yup.string().email("Invalid Email").required("Required"),
@@ -16,6 +17,7 @@ const initialValueLogin = {
 };
 
 const Form = () => {
+  //dispatch function for login functionality
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -28,16 +30,26 @@ const Form = () => {
     const loggedIn = await loggedInResponse.json();
     onSubmitProps.resetForm();
     if (loggedIn) {
-      dispatch(
-        setLogin({
-          token: loggedIn.token,
-          user: loggedIn.user,
-        })
-      );
-      if (loggedIn.msg == "User Does Not Exist") {
+      if (loggedIn.msg === "User Does Not Exist") {
         navigate("/auth/register");
+        alert(loggedIn.msg + " or Invalid Email/Username");
+      }
+      else if (loggedIn.msg === "Invalid Credentials"){
         alert(loggedIn.msg);
-      } else {
+      }
+      else {
+        dispatch(
+          setAuthLogin({
+            token: loggedIn.token,
+            user: loggedIn.user,
+          })
+        );
+        dispatch(
+          setUserLogin({
+            user:loggedIn.user,
+            token: loggedIn.token,
+          })
+        );
         navigate("/app");
       }
     }
