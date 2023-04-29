@@ -234,28 +234,31 @@ export function ToDoList() {
                   </Typography>
                   <TextField
                     label="Task"
-                    sx={{ width: "75%" }}
+                    sx={{ width: "75%", marginLeft: "2vw" }}
                     value={tasks.taskTitle}
                     onChange={handleTitle}
+                    variant="standard"
                   />
 
                   <TextField
                     label="Description"
-                    sx={{ width: "75%" }}
+                    sx={{ width: "75%", marginLeft: "2vw" }}
                     value={tasks.taskDescription}
                     onChange={handleDescription}
+                    variant="standard"
                     multiline
                   />
 
-                  <Stack direction={"row"} spacing={10}>
+                  <Stack direction={"row"} spacing={3}>
                     <TextField
-                      select
-                      size="small"
+                      size="medium"
                       variant="standard"
                       value={tasks.taskStat}
                       label="Stat"
                       onChange={handleStat}
-                      sx={{ width: 120 }}
+                      defaultValue="Strength"
+                      select
+                      sx={{ width: 200, alignItems: "left", marginLeft: "2vw" }}
                     >
                       <MenuItem value={"Strength"}> Strength</MenuItem>
                       <MenuItem value={"Intelligence"}>Intelligence</MenuItem>
@@ -279,7 +282,7 @@ export function ToDoList() {
 
                   <Button
                     sx={{
-                      width: 10,
+                      width: 20,
                       alignSelf: "center",
                       fontFamily: "Outfit",
                     }}
