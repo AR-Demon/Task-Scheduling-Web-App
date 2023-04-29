@@ -6,7 +6,7 @@ import {
   Drawer,
   Stack,
 } from "@mui/material";
-import { setAuthLogout } from "../../../../state/authReducer";
+import { setLogout } from "../../../../state";
 import { useDispatch } from "react-redux";
 import WebFont from "webfontloader";
 import { useEffect } from "react";
@@ -17,8 +17,6 @@ import { styled } from "@mui/material/styles";
 import * as React from "react";
 import Divider from "@mui/material/Divider";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { ToDoList } from "../To-do List/toDoList";
-import { setUserLogout } from "../../../../state/userReducer";
 
 const drawerWidth = 400;
 
@@ -49,9 +47,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 export function Navbar() {
-  const theme = useTheme();
-
-  //webLoader module to load custom fonts from google
+  //Webloader module to load custom fonts from google
   useEffect(() => {
     WebFont.load({
       google: {
@@ -131,7 +127,7 @@ export function Navbar() {
                 margin: 2,
                 ":hover": { bgcolor: "secondary.main", color: "white" },
               }}
-              onClick={() => {dispatch(setAuthLogout());dispatch(setUserLogout)}}
+              onClick={() => dispatch(setLogout())}
             >
               <div
                 style={{

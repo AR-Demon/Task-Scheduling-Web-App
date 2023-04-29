@@ -13,6 +13,7 @@ export const register = async (req, res) => {
             email,
             password,
         } = req.body;
+ 
         const salt = await bcrypt.genSalt();
         const passwordHash = await bcrypt.hash(password,salt);
 

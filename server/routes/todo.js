@@ -1,19 +1,18 @@
 import express from "express";
 import {createTodo, GetTodos, GetTodo, updateTodo, completeTodo, deleteTodo, deleteTodos} from "../controllers/todo.js";
-import {verifyToken} from "../middleware/auth.js"
 
 const Routes = express.Router();
 
 /* TODO ROUTES */
 //create todo
-Routes.post("/todo", verifyToken, createTodo);
+Routes.post("/todo", createTodo);
 //get single todo of user from todoId 
-Routes.get("/todo",verifyToken ,GetTodo);
+Routes.get("/todo",GetTodo);
 //get multiple Todos pf the user by userId
-Routes.get("/todos",verifyToken, GetTodos);
-Routes.delete("/todo",verifyToken, deleteTodo);
-Routes.delete("/todos",verifyToken, deleteTodos);
-Routes.patch("/todo/complete/:Id",verifyToken, completeTodo);
+Routes.get("/todos", GetTodos);
+Routes.delete("/todo",deleteTodo);
+Routes.delete("/todos", deleteTodos);
+Routes.patch("/todo/complete/:Id",completeTodo);
 
 
 export default Routes;

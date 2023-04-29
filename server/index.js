@@ -12,12 +12,6 @@ import authRoutes from "./routes/auth.js"
 import { verifyToken } from "./middleware/auth.js";
 import userRoutes from "./routes/userStats.js"
 import todoRoutes from "./routes/todo.js"
-import User from "./models/User.js";
-import { todo, userStats, users } from "./Data/index.js";
-import UserStats from "./models/UserStats.js";
-import Todo from "./models/Todo.js";
-
-
 /*  CONFIGURATIONS  */
 const __filename = fileURLToPath(import.meta.url);
 const __dirname =  path.dirname(__filename);
@@ -61,11 +55,6 @@ mongoose.connect(process.env.MONGO_URL,{
     useUnifiedTopology: true,
 }).then(() => {
     app.listen(PORT,() => console.log('Server Port:',PORT,currentDate));
-
-    /* ADD DATA ONE Time */
-    //User.insertMany(users);console.log("Inserted Many Users");
-    //UserStats.insertMany(userStats);console.log("Inserted Many Users Stats");
-    //Todo.insertMany(todo);console.log("Inserted Many Users Todos");
 }).catch((error) => console.log(error + 'did not connect'));
 
 //192.168.1.68
