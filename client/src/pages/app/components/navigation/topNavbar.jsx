@@ -1,13 +1,9 @@
 import {
   AppBar,
   Button,
-  Box,
   Toolbar,
-  Typography,
   IconButton,
-  Menu,
   Drawer,
-  List,
   Stack,
 } from "@mui/material";
 import { setAuthLogout } from "../../../../state/authReducer";
@@ -15,15 +11,15 @@ import { useDispatch } from "react-redux";
 import WebFont from "webfontloader";
 import { useEffect } from "react";
 import { ThemeProvider } from "@mui/material/styles";
-import { navTheme } from "../styles/themes";
+import { defaultTheme } from "../styles/themes";
 import { TrackerLogo } from "./trackerLogo";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import * as React from "react";
 import Divider from "@mui/material/Divider";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { ToDoList } from "../To-do List/toDoList";
 import { setUserLogout } from "../../../../state/userReducer";
-
+import { useTheme } from "@emotion/react";
 const drawerWidth = 400;
 
 const AppBars = styled(AppBar, {
@@ -62,7 +58,7 @@ export function Navbar() {
         families: ["Lusitana", "Outfit"],
       },
     });
-  }, []);
+  });
 
   //Dispatch function for Logout functionality
   const dispatch = useDispatch();
@@ -78,7 +74,7 @@ export function Navbar() {
   };
 
   return (
-    <ThemeProvider theme={navTheme}>
+    <ThemeProvider theme={defaultTheme}>
       <AppBars position="fixed" open={open}>
         <Toolbar sx={{ height: 80 }}>
           <IconButton
