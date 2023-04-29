@@ -1,12 +1,17 @@
 import { createTheme } from "@mui/material";
 
-export const navTheme = createTheme({
+export const defaultTheme = createTheme({
   palette: {
     primary: {
-      main: "#F2AF42",
+      main: "#EDB230",
     },
     secondary: {
-      main: "#964E0D",
+      main: "#721817",
     },
+  },
+  typography: {
+    fontFamily: "Lusitana, Outfit",
+    fontWeightRegular: "700",
+    fontSize: "16",
   },
 });
