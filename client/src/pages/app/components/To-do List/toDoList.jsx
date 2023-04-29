@@ -2,95 +2,35 @@ import {
   Modal,
   Button,
   Typography,
+  TextField,
   Paper,
   Box,
   Grid,
   AppBar,
   Toolbar,
-  Checkbox,
-  Switch,
-  FormControlLabel,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Select,
-  ThemeProvider,
-  TextField,
-  Stack,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-import { defaultTheme } from "../styles/themes";
-
 import React, { useState } from "react";
-import {
-  Add,
-  Edit,
-  Delete,
-  PriorityHigh,
-  Directions,
-} from "@mui/icons-material";
+import { Add, Edit, Delete } from "@mui/icons-material";
 import { centerStyle, modalStyle, circleButtons } from "./toDoListStyles";
 
 export function ToDoList() {
   const [tasks, setTasks] = useState([]);
-  const [newTask, setNewTask] = useState({
-    taskTitle: "",
-    taskDescription: "",
-    isPriority: false,
-    isDone: false,
-    taskStat: "",
-  });
+  const [newTask, setNewTask] = useState("");
   const [open, setOpen] = useState(false);
   const [editTask, setEditTask] = useState("");
   const [editIndex, setEditIndex] = useState(-1);
   const [editOpen, setEditOpen] = useState(false);
 
-  const handleTitle = (event) => {
-    newTask.taskTitle = event.target.value;
-    setNewTask(newTask);
+  const handleNewTaskChange = (event) => {
+    console.log(event);
+    setNewTask(event.target.value);
   };
-  const handleDescription = (event) => {
-    newTask.taskDescription = event.target.value;
-    setNewTask(newTask);
-  };
-  const handlePriority = () => {
-    if (newTask.isPriority === true) {
-      newTask.isPriority = false;
-    } else if (newTask.isPriority === false) {
-      newTask.isPriority = true;
-    }
-    setNewTask(newTask);
-    console.log(newTask.isPriority);
-  };
-  const handleStat = (event) => {
-    console.log(event.target.value);
-    newTask.taskStat = event.target.value;
-    setNewTask(newTask);
-  };
-
-  const handleAddTask = (event) => {
-    console.log(newTask);
-    const updatedTasks = [...tasks, newTask];
-    setTasks(updatedTasks);
-    setNewTask({
-      taskTitle: "",
-      taskDescription: "",
-      isPriority: false,
-      isDone: false,
-      Stat: "",
-    });
+  const handleAddTask = () => {
+    setTasks([...tasks, newTask]);
+    setNewTask("");
     setOpen(false);
-  };
-
-  const handleDone = (event) => {
-    if (newTask.isDone === true) {
-      newTask.isDone = false;
-    } else if (newTask.isDone === false) {
-      newTask.isDone = true;
-    }
-    console.log(newTask.isDone);
-    setNewTask(newTask);
   };
 
   const handleDeleteTask = (index) => {
@@ -107,7 +47,7 @@ export function ToDoList() {
     const newTasks = [...tasks];
     newTasks[editIndex] = editTask;
     setTasks(newTasks);
-    setEditTask({});
+    setEditTask("");
     setEditIndex(-1);
     setEditOpen(false);
   };
@@ -118,105 +58,81 @@ export function ToDoList() {
     setEditOpen(true);
   };
 
-  const priorityIcon = (check) => {
-    if (check === true) {
-      return <PriorityHigh />;
-    }
-  };
-
-  const colorPicker = (color) => {
-    return;
-  };
-
   return (
-    <div>
-      <ThemeProvider theme={defaultTheme}>
-        <Grid container>
-          <Paper
-            sx={{
-              height: "100%",
-              width: "50%",
-              padding: 5,
-              marginLeft: 50,
-              marginTop: 20,
-              bgcolor: "#FFF0DB",
-            }}
+    <Grid
+      container
+      sx={{
+        marginTop: 8,
+        marginLeft: 50,
+      }}
+    >
+      <Paper
+        sx={{
+          height: "100%",
+          width: "50%",
+          padding: 5,
+          margin: 5,
+          bgcolor: "#FFF0DB",
+        }}
+      >
+        <div style={centerStyle}>
+          <h1>To-Do List</h1>
+
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<Add />}
+            onClick={() => setOpen(true)}
           >
-            <div style={centerStyle}>
-              <Typography variant="h2">To-Do List</Typography>
-              <Button
-                variant="contained"
-                color="primary"
-                startIcon={<Add />}
-                onClick={() => setOpen(true)}
-                sx={{
-                  fontFamily: "Outfit",
+            Add Task
+          </Button>
+          <div>
+            {tasks.map((task, index) => (
+              <AppBar
+                key={index}
+                position="static"
+                style={{
+                  backgroundColor: "#ffdba8",
+                  color: "black",
+                  marginTop: 10,
+                  width: 500,
+                  borderRadius: 5,
                 }}
               >
-                Add Task
-              </Button>
-              <div>
-                {tasks.map((index, i) => (
-                  <AppBar
-                    key={i}
-                    position="static"
+                <Toolbar>
+                  <div
                     style={{
-                      backgroundColor: "#ffdba8",
-                      color: "black",
-                      marginTop: 10,
-                      width: 500,
-                      height: 300,
-                      borderRadius: 5,
+                      flexGrow: 1,
+                      justifyContent: "space-between",
                     }}
                   >
-                    <Toolbar>
-                      <Grid
-                        container
-                        sx={{
-                          flexDirection: "column",
-                          justifyContent: "space-evenly",
-                        }}
-                      >
-                        <Grid>
-                          <Box>{index.taskTitle}</Box>
-                        </Grid>
-                        <Grid>
-                          <Box>{index.taskDescription}</Box>
-                        </Grid>
-                        <Grid alignSelf={"end"}>
-                          <Box>{priorityIcon(index.isPriority)}</Box>
-                        </Grid>
-                        <Grid>{index.taskStat}</Grid>
-                      </Grid>
-                      <div style={{ display: "flex", direction: "row" }}>
-                        <Button
-                          variant="contained"
-                          color="error"
-                          sx={circleButtons}
-                          onClick={() => handleDeleteTask(index)}
-                        >
-                          <Delete />
-                        </Button>
+                    {index + 1}: {task}
+                  </div>
+                  <div>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      sx={circleButtons}
+                      onClick={() => handleDeleteTask(index)}
+                    >
+                      <Delete />
+                    </Button>
 
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          sx={circleButtons}
-                          onClick={() => {
-                            handleEditClick(index);
-                          }}
-                        >
-                          <Edit />
-                        </Button>
-                        <Checkbox
-                          // flexDirection={"row-reverse"}
-                          onClick={handleDone}
-                        />
-                      </div>
-                    </Toolbar>
-                  </AppBar>
-                ))}
-              </div>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      sx={circleButtons}
+                      onClick={() => {
+                        handleEditClick(index);
+                      }}
+                    >
+                      <Edit />
+                    </Button>
+                  </div>
+                </Toolbar>
+              </AppBar>
+            ))}
+          </div>
 
               <Modal //Add Task Modal
                 open={open}
