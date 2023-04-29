@@ -12,6 +12,6 @@ export const defaultTheme = createTheme({
   typography: {
     fontFamily: "Lusitana, Outfit",
     fontWeightRegular: "700",
-    fontSize: "16",
+    fontSize: 16,
   },
 });

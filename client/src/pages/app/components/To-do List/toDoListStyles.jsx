@@ -17,13 +17,14 @@ export const circleButtons = {
 
 export const modalStyle = {
   display: "flex",
-
   flexDirection: "column",
   backgroundColor: "#ffdba8",
-  borderRadius: "4px",
-  padding: 40,
-  gap: 20,
+  width:"25vw",
+  height:"25vh",
+  borderRadius: 20,
+  padding: 30,
+  gap: 5,
   color: "black",
-  alignItems: "center",
+  //alignItems: "center",
   justifyContent: "center",
 };

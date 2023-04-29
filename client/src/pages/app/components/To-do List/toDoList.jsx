@@ -224,34 +224,36 @@ export function ToDoList() {
                 style={centerStyle}
               >
                 <FormControl style={modalStyle}>
-                  <Typography variant="h3" fontFamily={"Outfit"}>
-                    {" "}
+                  <Typography variant="h5" fontFamily={"Outfit"} sx={{marginLeft:"7.5vw", fontSize:"2.5vh"}}>
                     ADD NEW TASK
                   </Typography>
                   <TextField
                     label="Task"
-                    sx={{ width: "75%" }}
+                    sx={{ width: "75%", marginLeft:"2vw" }}
                     value={tasks.taskTitle}
                     onChange={handleTitle}
+                    variant="standard"
                   />
 
                   <TextField
                     label="Description"
-                    sx={{ width: "75%" }}
+                    sx={{ width: "75%", marginLeft:"2vw" }}
                     value={tasks.taskDescription}
                     onChange={handleDescription}
+                    variant="standard"
                     multiline
                   />
 
-                  <Stack direction={"row"} spacing={10}>
+                  <Stack direction={"row"} spacing={3}>
                     <TextField
-                      select
-                      size="small"
+                      size="medium"
                       variant="standard"
                       value={tasks.taskStat}
                       label="Stat"
                       onChange={handleStat}
-                      sx={{ width: 120 }}
+                      defaultValue="Strength"
+                      select
+                      sx={{ width: 200, alignItems: "left", marginLeft:"2vw" }}
                     >
                       <MenuItem value={"Strength"}> Strength</MenuItem>
                       <MenuItem value={"Intelligence"}>Intelligence</MenuItem>
@@ -263,7 +265,7 @@ export function ToDoList() {
                     <FormControlLabel
                       control={
                         <Switch
-                          sx={{ flexGrow: "1" }}
+                          sx={{ flexGrow: "1",}}
                           value={tasks.isPriority}
                           onChange={handlePriority}
                         />
@@ -275,7 +277,7 @@ export function ToDoList() {
 
                   <Button
                     sx={{
-                      width: 10,
+                      width: 20,
                       alignSelf: "center",
                       fontFamily: "Outfit",
                     }}
@@ -287,95 +289,6 @@ export function ToDoList() {
                   </Button>
                 </FormControl>
               </Modal>
-
-              {/* <Modal //edit Modal
-                open={editOpen}
-                onClose={() => setEditOpen(false)}
-                style={centerStyle}
-                    {index + 1}: {task}
-                  </div>
-                  <div>
-                    <Button
-                      variant="contained"
-                      color="error"
-                      sx={circleButtons}
-                      onClick={() => handleDeleteTask(index)}
-                    >
-                      <Delete />
-                    </Button>
-
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      sx={circleButtons}
-                      onClick={() => {
-                        handleEditClick(index);
-                      }}
-                    >
-                      <Edit />
-                    </Button>
-                  </div>
-                </Toolbar>
-              </AppBar>
-            ))}
-          </div>
-
-          <Modal open={open} onClose={() => setOpen(false)} style={centerStyle}>
-            <div style={modalStyle}>
-              <h2>Add New Task</h2>
-              <TextField
-                label="Task"
-                value={newTask}
-                onChange={handleNewTaskChange}
-                fullWidth
-                autoFocus
-              />
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleAddTask}
-              >
-                Add
-              </Button>
-            </div>
-          </Modal>
-          <Modal
-            open={editOpen}
-            onClose={() => setEditOpen(false)}
-            style={centerStyle}
-          >
-            <div style={modalStyle}>
-              <h2>Edit Task</h2>
-              <TextField
-                autoFocus
-                label="Task"
-                value={editTask}
-                onChange={handleEditTaskChange}
-                fullWidth
-              />
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleEditTask}
-              >
-                <div style={modalStyle}>
-                  <h2>Edit Task</h2>
-                  <FormControl></FormControl>
-                  <TextField
-                    label="Task"
-                    value={editTask}
-                    onChange={handleEditTaskChange}
-                    fullWidth
-                  />
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleEditTask}
-                  >
-                    Save
-                  </Button>
-                </div>
-              </Modal> */}
             </div>
           </Paper>
         </Grid>
