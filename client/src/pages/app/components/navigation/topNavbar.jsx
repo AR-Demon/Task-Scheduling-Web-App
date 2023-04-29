@@ -19,6 +19,7 @@ import Divider from "@mui/material/Divider";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { ToDoList } from "../To-do List/toDoList";
 import { setUserLogout } from "../../../../state/userReducer";
+import {useTheme} from "@mui/material/styles";
 
 const drawerWidth = 400;
 
