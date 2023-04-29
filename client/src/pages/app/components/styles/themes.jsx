@@ -1,12 +1,12 @@
 import { createTheme } from "@mui/material";
 
-export const defaultTheme = createTheme({
+export const navTheme = createTheme({
   palette: {
     primary: {
-      main: "#EDB230",
+      main: "#F2AF42",
     },
     secondary: {
-      main: "#721817",
+      main: "#964E0D",
     },
   },
   typography: {
