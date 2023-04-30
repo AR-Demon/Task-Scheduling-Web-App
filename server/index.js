@@ -65,7 +65,7 @@ mongoose.connect(process.env.MONGO_URL,{
     /* ADD DATA ONE Time */
     //User.insertMany(users);console.log("Inserted Many Users");
     //UserStats.insertMany(userStats);console.log("Inserted Many Users Stats");
-    //Todo.insertMany(todo);console.log("Inserted Many Users Todos");
+    //Todo.insertMany(todo);console.log("Inserted Many Users Todo");
 }).catch((error) => console.log(error + 'did not connect'));
 
 //192.168.1.68

@@ -33,7 +33,7 @@ function MainApp(){
     return userStatsData;
   }
   
-
+  // Execute the function when page reloads.
   useEffect(() => {
     getUserTodo().then((data) => {
       console.log(data);
@@ -41,7 +41,6 @@ function MainApp(){
     });
     getUserStats().then((data) => {
       dispatch(setUserStats(data));
-      //console.log(data);
     })
   }, [getUserTodo, dispatch, getUserStats]);
   return (
