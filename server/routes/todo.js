@@ -14,6 +14,7 @@ Routes.get("/todos",verifyToken, GetTodos);
 Routes.delete("/todo",verifyToken, deleteTodo);
 Routes.delete("/todos",verifyToken, deleteTodos);
 Routes.patch("/todo/complete/:Id",verifyToken, completeTodo);
+Routes.patch("/todo/update/:Id", verifyToken, updateTodo);
 
 
 export default Routes;

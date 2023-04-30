@@ -42,7 +42,8 @@ export const createTodo = async(req, res) => {
 
 export const updateTodo = async(req, res) => {
     const updates = Object.keys(req.body);
-    const allowUpdates = ['content', 'description', 'priority', 'label', 'attachedAttribute', 'due'];
+    const date = new Date();
+    const allowUpdates = ['content', 'description', 'priority', 'label', 'attachedAttribute','date'];
     const isValidOperation = updates.every(update => allowUpdates.includes(update));
     if(!isValidOperation){return res.status(400).json({error: "Invalid Updates!"});}
     try{
@@ -53,7 +54,10 @@ export const updateTodo = async(req, res) => {
             label:req.body.label,
             attachedAttribute:req.body.attachedAttribute,
             due:{
+                _date:req.body.date,
                 date:req.body.date,
+                isRecurring:false,
+                string:"hello",
             }
         }, {new: true, runValidators: true});
         if(!userTodo){return res.status(404).json({error:'User Todo Not Found'});}
