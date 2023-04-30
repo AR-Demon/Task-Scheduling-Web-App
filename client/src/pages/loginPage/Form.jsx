@@ -3,8 +3,8 @@ import { Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import { setAuthLogin } from "../../state/authReducer";
-import { setUserLogin } from "../../state/userReducer";
+import { setUserLogin} from "../../state/userReducer";
+
 
 const loginSchema = yup.object().shape({
   email: yup.string().email("Invalid Email").required("Required"),
@@ -27,7 +27,9 @@ const Form = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     });
+
     const loggedIn = await loggedInResponse.json();
+
     onSubmitProps.resetForm();
     if (loggedIn) {
       if (loggedIn.msg === "User Does Not Exist") {
@@ -39,15 +41,9 @@ const Form = () => {
       }
       else {
         dispatch(
-          setAuthLogin({
+          setUserLogin({
             token: loggedIn.token,
             user: loggedIn.user,
-          })
-        );
-        dispatch(
-          setUserLogin({
-            user:loggedIn.user,
-            token: loggedIn.token,
           })
         );
         navigate("/app");

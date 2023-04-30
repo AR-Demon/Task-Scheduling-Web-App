@@ -3,8 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     user: null,
     userStats:null,
-    todo: {},
     token: null,
+    Todo: [],
+    
 };
 const userSlice = createSlice({
     name: "User",
@@ -13,16 +14,24 @@ const userSlice = createSlice({
         setUserLogin: (state, action) => {
             state.user = action.payload.user;
             state.token = action.payload.token;
-            state.todo =  action.payload.todo;
+        },
+        setUserTodo: (state, action) => {
+            const newTodoArray = action.payload;
+            state.Todo = newTodoArray;
+        },
+        setUserStats: (state, action) => {
+            const newUserStats = action.payload;
+            state.userStats = newUserStats;
         },
         setUserLogout: (state) => {
             state.user = null;
             state.token = null;
+            state.userStats = null;
+            state.Todo = [];
         },
-        setUserTodo:(state, action) => {}
-    },
+    }
 });
 
-export const {setUserLogin, setUserLogout} = userSlice.actions;
+export const {setUserLogin ,setUserTodo,setUserStats, setUserLogout} = userSlice.actions;
 
 export default userSlice.reducer;

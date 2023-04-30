@@ -91,7 +91,7 @@ export const todo = [
         "__v": 0
     },
     {
-        "userId": userId[1],
+        "userId": userId[0],
         "userName": "ar",
         "email": "random02@gmail.com",
         "content": "#001 TODO",
@@ -113,7 +113,7 @@ export const todo = [
         "__v": 0
     },
     {
-        "userId": userId[2],
+        "userId": userId[0],
         "userName": "ar",
         "email": "random03@gmail.com",
         "content": "#001 TODO",
@@ -135,7 +135,7 @@ export const todo = [
         "__v": 0
     },
     {
-        "userId": userId[3],
+        "userId": userId[0],
         "userName": "ar",
         "email": "random04@gmail.com",
         "content": "#001 TODO",

@@ -6,7 +6,6 @@ import {
   Drawer,
   Stack,
 } from "@mui/material";
-import { setAuthLogout } from "../../../../state/authReducer";
 import { useDispatch } from "react-redux";
 import WebFont from "webfontloader";
 import { useEffect } from "react";
@@ -131,7 +130,7 @@ export function Navbar() {
                 margin: 2,
                 ":hover": { bgcolor: "secondary.main", color: "white" },
               }}
-              onClick={() => {dispatch(setAuthLogout());dispatch(setUserLogout)}}
+              onClick={() => {dispatch(setUserLogout());dispatch(setUserLogout)}}
             >
               <div
                 style={{
