@@ -23,7 +23,7 @@ function MainApp(){
     return UserTodoData;
   }
 
-  //
+  //function to get particular user stats
   const getUserStats = async() => {
     const Response = await fetch (`http://localhost:3001/user/stats?Id=${user_id}`,{
     method:"GET",
