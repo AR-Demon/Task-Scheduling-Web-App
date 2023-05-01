@@ -34,7 +34,7 @@ function MainApp(){
     return userStatsData;
   }
 
-  const SyncData = async() => {}
+  //const SyncData = async() => {}
   
   // Execute the function when page reloads.
   useEffect(() => {
