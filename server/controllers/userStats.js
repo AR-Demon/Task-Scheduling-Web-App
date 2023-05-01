@@ -17,15 +17,15 @@ export const createStats = async(req,res) => {
                 intelligenceLevel:1,
                 intelligenceStatus:0,
                 intelligenceXp:0,
-                agilityLevel:1,
-                agilityStatus:0,
-                agilityXp:0,
-                dexterityLevel:1,
-                dexterityStatus:0,
-                dexterityXp:0,
-                luckLevel:1,
-                luckStatus:0,
-                luckXp:0
+                healthLevel:1,
+                healthStatus:0,
+                healthXp:0,
+                charismaXp:0,
+                charismaLevel:1,
+                charismaStatus:0,
+                creativityLevel:1,
+                creativityStatus:0,
+                creativityXp:0
             },
         });
         const saveUser = await newUserStats.save();
@@ -89,14 +89,3 @@ export const getStats = async(req,res) => {
         res.status(500).json({error: error.message});
     }
 }
-
-/*export const test = async(req,res) => {
-    try {
-        const response = await fetch('https://pokeapi.co/api/v2/pokemon/');
-        const json = await response.json();
-        //if(!response){return res.status(400).json({msg:"failed",text:url});}
-        res.status(200).json(json);
-    } catch (error) {
-        res.status(500).json({error: error.message});
-    }
-}*/

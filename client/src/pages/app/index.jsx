@@ -3,6 +3,7 @@ import { Navbar } from "./components/navigation/topNavbar";
 import { ToDoList } from "./components/To-do List/toDoList";
 import { setUserStats, setUserTodo } from "../../state/userReducer";
 import { useEffect} from "react";
+import { Box } from "@mui/material";
 
 function MainApp(){
   console.log("MainApp rendered");
@@ -32,16 +33,17 @@ function MainApp(){
     const userStatsData = await Response.json();
     return userStatsData;
   }
-  
 
+  //const SyncData = async() => {}
+  
+  // Execute the function when page reloads.
   useEffect(() => {
     getUserTodo().then((data) => {
-      console.log(data);
+      //console.log(data);
       dispatch(setUserTodo(data));
     });
     getUserStats().then((data) => {
       dispatch(setUserStats(data));
-      //console.log(data);
     })
   }, [getUserTodo, dispatch, getUserStats]);
   return (
@@ -49,12 +51,17 @@ function MainApp(){
       style={{
         width: "100%",
         height: "100%",
-        backgroundColor: "#371817",
+        backgroundColor: "#292d3e",
         margin: 0,
       }}
     >
+      <Box>
         <Navbar />
+      </Box>
+      <Box>
         <ToDoList />
+      </Box>        
+        
     </div>
   );
 };

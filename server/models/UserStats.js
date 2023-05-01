@@ -41,39 +41,39 @@ const UserStatsSchema = new mongoose.Schema({
             type: Number,
             required : true,
         },
-        agilityLevel:{
+        healthLevel:{
             type: Number,
             required : true,
         },
-        agilityStatus:{
+        healthStatus:{
             type: Number,
             required : true, 
         },
-        agilityXp:{
+        healthXp:{
             type: Number,
             required : true,
         },
-        dexterityLevel:{
+        charismaLevel:{
             type: Number,
             required : true,
         },
-        dexterityStatus:{
+        charismaStatus:{
             type: Number,
             required : true, 
         },
-        dexterityXp:{
+        charismaXp:{
             type: Number,
             required : true,
         },
-        luckLevel:{
+        creativityLevel:{
             type: Number,
             required : true,
         },
-        luckStatus:{
+        creativityStatus:{
             type: Number,
             required : true, 
         },
-        luckXp:{
+        creativityXp:{
             type: Number,
             required : true,
         },
