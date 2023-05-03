@@ -1,11 +1,10 @@
 import { useDispatch, useSelector} from "react-redux";
-import { setUserStats, setUserTodo } from "../../state/userReducer";
+import { setUserStats, setUserTodo, SyncStateData } from "../../state/userReducer";
 import { useEffect, useState} from "react";
-import { Box, Button, Fade, FormControlLabel, Grid, Slide, ThemeProvider } from "@mui/material";
+import { Box, Button, Fade, Grid, ThemeProvider, Collapse } from "@mui/material";
 import {createTheme} from "@mui/material";
 import {NavBar} from "./widget/NavBar";
 import UserStatsBar from "./widget/UserStatsWidget";
-import Switch from '@mui/material/Switch';
 import { useRef } from "react";
 
 function Test () {
@@ -39,7 +38,14 @@ function Test () {
     return userStatsData;
   }
 
-  //const SyncData = async() => {}
+  const SyncData = async() => {
+    const userStateData = {
+      "userTodo": await getUserTodo(),
+      "userStats": await getUserStats(),
+    }; 
+    dispatch(SyncStateData(userStateData));
+    console.log(userStateData);
+  }
   
   // Execute the function when page reloads.
   useEffect(() => {
@@ -73,7 +79,7 @@ function Test () {
             >
                 {/*<Slide direction="right" in={openStatus} mountOnEnter unmountOnExit container={containerReference.current}>*/}
                 <Fade in = {openStatus}  mountOnEnter unmountOnExit>
-                <Grid item xs={1} sm={1} md={1}
+                <Grid item xs={2} sm={2} md={1}
                 >
                   <UserStatsBar openStatus = {openStatus} />
                 </Grid>
@@ -82,7 +88,7 @@ function Test () {
                 <Grid item xs sm md
                 >
                   <div>
-                    <Button onClick = {handleDrawerOpenStatus}>toggle</Button>
+                    <Button onClick = {SyncData}>toggle</Button>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis veniam quas blanditiis amet dolor temporibus repellendus molestiae? Quas ab voluptas cupiditate tenetur voluptatum delectus asperiores, voluptate odio magnam consectetur? Corrupti?
                   </div>
                 </Grid>
