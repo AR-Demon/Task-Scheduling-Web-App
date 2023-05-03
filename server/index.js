@@ -12,8 +12,8 @@ import authRoutes from "./routes/auth.js"
 import { verifyToken } from "./middleware/auth.js";
 import userRoutes from "./routes/userStats.js"
 import todoRoutes from "./routes/todo.js"
-import User from "./models/User.js";
 import { todo, userStats, users } from "./Data/index.js";
+import User from "./models/User.js";
 import UserStats from "./models/UserStats.js";
 import Todo from "./models/Todo.js";
 

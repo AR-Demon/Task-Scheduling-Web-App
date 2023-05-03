@@ -1,10 +1,12 @@
 import { useDispatch, useSelector} from "react-redux";
 import { setUserStats, setUserTodo } from "../../state/userReducer";
 import { useEffect, useState} from "react";
-import { Box, Button, Grid, ThemeProvider } from "@mui/material";
+import { Box, Button, Fade, FormControlLabel, Grid, Slide, ThemeProvider } from "@mui/material";
 import {createTheme} from "@mui/material";
 import {NavBar} from "./widget/NavBar";
 import UserStatsBar from "./widget/UserStatsWidget";
+import Switch from '@mui/material/Switch';
+import { useRef } from "react";
 
 function Test () {
     console.log("TestApp rendered");
@@ -51,6 +53,7 @@ function Test () {
   }, [getUserTodo, dispatch, getUserStats]);
 
   const theme = createTheme();
+  const containerReference = useRef(null);
 
   return (
     <ThemeProvider theme={theme}>
@@ -66,15 +69,17 @@ function Test () {
             justifyContent="flex-start"
             spacing={{ xs: 0, md: 0 }}
             columns={{ xs: 5, sm: 5, md: 5 }}
+            ref = {containerReference}
             >
-                {openStatus && 
+                {/*<Slide direction="right" in={openStatus} mountOnEnter unmountOnExit container={containerReference.current}>*/}
+                <Fade in = {openStatus}  mountOnEnter unmountOnExit>
                 <Grid item xs={1} sm={1} md={1}
                 >
                   <UserStatsBar openStatus = {openStatus} />
                 </Grid>
-                }
+                </Fade>
+                {/*</Slide>*/}
                 <Grid item xs sm md
-                sx ={{marginLeft:3}}
                 >
                   <div>
                     <Button onClick = {handleDrawerOpenStatus}>toggle</Button>
