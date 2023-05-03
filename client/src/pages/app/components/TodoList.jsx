@@ -27,8 +27,28 @@ import { TaskCard } from "../widget/TaskCardWidget";
 import { useSelector } from "react-redux";
 
 export function ToDoList() {
+  function TodoDataPending () {
+    const stateTodo = useSelector((state) => state.Todo);
+    const TodoArray = [];
+    stateTodo.map((task, index) => {
+        //const keys = Object.keys(task);
+        const todoObject = {
+            user_id: task._id,
+            taskTitle:task.content,
+            taskDescription:task.description,
+            isPriority:((task.priority == 0)? false : true),
+            isDone: task.checked,
+            taskStat: (task.attachedAttribute),
+        };
+        TodoArray.push(todoObject);
+        //console.log(task,todoObject,keys);
+        //console.log(task, index, keys);
+    });
+    //console.log(TodoArray);
+    return TodoArray;
+  }
   const stateTodo = useSelector((state) => state.Todo);
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(TodoDataPending());
   const [completedTasks, setCompletedTasks] = useState([]);
   const [newTask, setNewTask] = useState({
     taskTitle: "",
