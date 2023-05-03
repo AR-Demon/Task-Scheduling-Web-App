@@ -123,11 +123,6 @@ export function ToDoList() {
       return <PriorityHigh />;
     }
   };
-
-  const colorPicker = (color) => {
-    return;
-  };
-
   return (
     <div>
       <ThemeProvider theme={defaultTheme}>
