@@ -19,8 +19,9 @@ export const modalStyle = {
   display: "flex",
   flexDirection: "column",
   backgroundColor: "#ffdba8",
-  borderRadius: "4px",
   padding: 40,
   outline: "none",
+  gap: 20,
+  alignItems: "center",
   justifyContent: "space-around",
 };

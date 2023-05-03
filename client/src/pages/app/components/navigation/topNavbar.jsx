@@ -15,7 +15,7 @@ import { useDispatch } from "react-redux";
 import WebFont from "webfontloader";
 import { useEffect } from "react";
 import { ThemeProvider } from "@mui/material/styles";
-import { navTheme } from "../styles/themes";
+import { defaultTheme } from "../styles/themes";
 import { TrackerLogo } from "./trackerLogo";
 import { styled, useTheme } from "@mui/material/styles";
 import * as React from "react";
@@ -74,7 +74,7 @@ export function Navbar() {
   };
 
   return (
-    <ThemeProvider theme={navTheme}>
+    <ThemeProvider theme={defaultTheme}>
       <AppBars position="fixed" open={open}>
         <Toolbar sx={{ height: 80 }}>
           <IconButton
