@@ -4,7 +4,6 @@ import {
   Typography,
   Paper,
   Grid,
-  Checkbox,
   Switch,
   FormControlLabel,
   MenuItem,
@@ -12,35 +11,25 @@ import {
   ThemeProvider,
   TextField,
   Stack,
-  Card,
-  CardContent,
-  CardActions,
-  IconButton,
+  Tab,
+  Box,
   Divider,
-  Avatar,
 } from "@mui/material";
-import PropTypes from "prop-types";
+
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
 
 import { defaultTheme } from "../styles/themes";
 
 import React, { useState } from "react";
-import {
-  Add,
-  Edit,
-  Delete,
-  PriorityHigh,
-  FitnessCenter,
-  Psychology,
-  ColorLens,
-  AutoAwesome,
-  Favorite,
-  TaskAlt,
-  Brightness1Outlined,
-} from "@mui/icons-material";
+import { Add, Brightness1Outlined, TaskAlt } from "@mui/icons-material";
 import { centerStyle, modalStyle, circleButtons } from "./toDoListStyles";
+import { TaskCard } from "./TaskCard";
 
 export function ToDoList() {
   const [tasks, setTasks] = useState([]);
+  const [completedTasks, setCompletedTasks] = useState([]);
   const [newTask, setNewTask] = useState({
     taskTitle: "",
     taskDescription: "",
@@ -76,10 +65,12 @@ export function ToDoList() {
     setNewTask(newTask);
   };
 
+  const updatedPendingTasks = [...tasks, newTask];
+  const updatedCompleteTasks = [...completedTasks, newTask];
   const handleAddTask = (event) => {
     console.log(newTask);
-    const updatedTasks = [...tasks, newTask];
-    setTasks(updatedTasks);
+    // const updatedTasks = [...tasks, newTask];
+    setTasks(updatedPendingTasks);
     setNewTask({
       taskTitle: "",
       taskDescription: "",
@@ -90,126 +81,64 @@ export function ToDoList() {
     setOpen(false);
   };
 
-  const handleDone = (event) => {
-    if (newTask.isDone === true) {
-      newTask.isDone = false;
-    } else if (newTask.isDone === false) {
-      newTask.isDone = true;
-    }
-    console.log(newTask.isDone);
-    setNewTask(newTask);
+  const handleCheck = (index) => {
+    // const editedTasks = [...tasks];
+    // const storeTask = editedTasks.pop(index, 1);
+    // const editedCompletedTasks = [...completedTasks];
+    // const updateCompletedTask = [editedCompletedTasks.push(storeTask)];
+    // setTasks(editedTasks);
+    // setCompletedTasks(updateCompletedTask);
+    // console.log(` isDone:${index.isDone}`);
+    // setNewTask(newTask);
   };
+
+  // const handleUnCheck = (index) => {
+  //   const editedTasks = [...tasks];
+  //   const storeTask = editedTasks.pop(index, 1);
+  //   const updateCompletedTask = [completedTasks.push(storeTask)];
+
+  //   setTasks(tasks);
+  //   setCompletedTasks(updateCompletedTask);
+
+  //   console.log(` isDone:${index.isDone}`);
+  //   setNewTask(newTask);
+  // };
 
   const handleDeleteTask = (index) => {
-    const newTasks = [...tasks];
-    newTasks.splice(index, 1);
-    setTasks(newTasks);
+    const editedTasks = [...tasks];
+    editedTasks.splice(index, 1);
+    setTasks(editedTasks);
   };
 
-  const handleEditTaskChange = (event) => {
-    setEditTask(event.target.value);
+  const handleDeleteCompletedTask = (index) => {
+    const editedTasks = [...completedTasks];
+    editedTasks.splice(index, 1);
+    setTasks(editedTasks);
   };
 
-  const handleEditTask = () => {
-    const newTasks = [...tasks];
-    newTasks[editIndex] = editTask;
-    setTasks(newTasks);
-    setEditTask({});
-    setEditIndex(-1);
-    setEditOpen(false);
-  };
+  // const handleEditTaskChange = (event) => {
+  //   setEditTask(event.target.value);
+  // };
 
-  const handleEditClick = (index) => {
-    setEditTask(tasks[index]);
-    setEditIndex(index);
-    setEditOpen(true);
-  };
+  // const handleEditTask = () => {
+  //   const newTasks = [...tasks];
+  //   newTasks[editIndex] = editTask;
+  //   setTasks(newTasks);
+  //   setEditTask({});
+  //   setEditIndex(-1);
+  //   setEditOpen(false);
+  // };
 
-  const priorityIcon = (check) => {
-    if (check === true) {
-      return <PriorityHigh />;
-    }
-  };
+  // const handleEditClick = (index) => {
+  //   setEditTask(tasks[index]);
+  //   setEditIndex(index);
+  //   setEditOpen(true);
+  // };
 
-  function statIcon(stat) {
-    switch (stat) {
-      case "Strength":
-        return (
-          <Avatar
-            sx={{
-              bgcolor: "#A00E1C",
-              margin: 2,
-              padding: 1,
-              alignSelf: "center",
-            }}
-          >
-            <FitnessCenter />
-          </Avatar>
-        );
+  const [tabValue, setTabValue] = useState(0);
 
-      case "Intelligence":
-        return (
-          <Avatar
-            sx={{
-              bgcolor: "#5296A5",
-              margin: 2,
-              padding: 1,
-              alignSelf: "center",
-            }}
-          >
-            <Psychology />
-          </Avatar>
-        );
-      case "Creativity":
-        return (
-          <Avatar
-            sx={{
-              bgcolor: "#623F7B",
-              margin: 2,
-              padding: 1,
-              alignSelf: "center",
-            }}
-          >
-            <ColorLens />
-          </Avatar>
-        );
-
-      case "Charisma":
-        return (
-          <Avatar
-            sx={{
-              bgcolor: "#EE85B5",
-              margin: 2,
-              padding: 1,
-              alignSelf: "center",
-            }}
-          >
-            <AutoAwesome />
-          </Avatar>
-        );
-
-      case "Health":
-        return (
-          <Avatar
-            sx={{
-              bgcolor: "#3CAB34",
-              margin: 2,
-              padding: 1,
-              alignSelf: "center",
-            }}
-          >
-            <Favorite />
-          </Avatar>
-        );
-      default:
-        break;
-    }
-  }
-
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleTabChange = (event, newTabValue) => {
+    setTabValue(newTabValue);
   };
 
   return (
@@ -225,119 +154,90 @@ export function ToDoList() {
             bgcolor: "#FFF0DB",
           }}
         >
-          <div style={centerStyle}>
-            <Typography variant="h2">To-Do List</Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<Add />}
-              onClick={() => setOpen(true)}
-              sx={{
-                fontFamily: "Outfit",
-                marginBottom: 2,
-              }}
-            >
-              Add Task
-            </Button>
-          </div>
+          <Typography style={centerStyle} variant="h2">
+            To-Do List
+          </Typography>
 
-          <Grid sx={{ display: "flex", spacing: 10, flexWrap: "wrap" }}>
-            {tasks.map((index, i) => (
-              <Card
-                key={i}
+          <TabContext value={tabValue}>
+            <Box>
+              <TabList
+                disableRipple
+                onChange={handleTabChange}
+                centered
                 sx={{
                   display: "flex",
-                  flexDirection: "column",
-                  backgroundColor: "#ffdba8",
-                  color: "black",
-                  height: 280,
-                  width: 470,
-                  margin: 2,
-                  borderRadius: 3,
+                  "& button": {
+                    borderRadius: 2,
+                    padding: 2,
+                  },
+
+                  // "& button:hover": { bgcolor: "#ffdba8" },
+
+                  "& .MuiTabs-indicator": {
+                    bgcolor: "#ab713d",
+                  },
                 }}
               >
-                <Stack sx={{ display: "flex", flexDirection: "row" }}>
-                  <Typography
-                    variant="h5"
-                    sx={{
-                      padding: 4,
-                      paddingRight: 1,
-                      flexGrow: 1,
-                      paddingBottom: 0,
-                      wordBreak: "break-word",
-                      maxHeight: 40,
-                    }}
-                  >
-                    {index.taskTitle}
-                  </Typography>
-                  <Divider
-                    variant="middle"
-                    sx={{ borderRightWidth: 2, borderRadius: 30 }}
-                    orientation="vertical"
-                    flexItem
-                  />
-                  {statIcon(index.taskStat)}
-                </Stack>
-                <Divider
-                  variant="middle"
-                  flexItem
-                  sx={{ borderBottomWidth: 2, borderRadius: 30 }}
+                <Tab
+                  disableRipple
+                  sx={{
+                    fontFamily: "outfit",
+                    flexGrow: 1,
+                  }}
+                  label="Pending"
+                  value="1"
+                  icon={<Brightness1Outlined />}
+                  iconPosition="start"
                 />
+                <hr
+                  style={{
+                    marginLeft: 70,
+                    marginRight: 70,
+                    borderStyle: "outset",
+                    opacity: "70%",
+                  }}
+                />
+                <Tab
+                  disableRipple
+                  sx={{ fontFamily: "outfit", flexGrow: 1 }}
+                  label="Completed"
+                  value="2"
+                  icon={<TaskAlt />}
+                  iconPosition="start"
+                />
+              </TabList>
+              <Divider />
+            </Box>
 
-                <Grid item xs>
-                  <CardContent>
-                    <Typography
-                      fontStyle={"oblique"}
-                      sx={{
-                        wordBreak: "break-word",
-                        textAlign: "left",
-                        marginLeft: 2,
-                      }}
-                    >
-                      <Paper
-                        elevation={0}
-                        sx={{
-                          backgroundColor: "#ffe6c2",
-                          padding: 2,
-                          marginRight: 2,
-                        }}
-                      >
-                        {index.taskDescription}
-                      </Paper>
-                    </Typography>
-                  </CardContent>
-                </Grid>
-                <Grid item>
-                  <CardActions sx={{ width: 300 }}>
-                    <IconButton
-                      variant="contained"
-                      color="error"
-                      onClick={() => handleDeleteTask(index)}
-                    >
-                      <Delete sx={{ color: "secondary.main" }} />
-                    </IconButton>
-
-                    <IconButton
-                      variant="contained"
-                      color="secondary"
-                      onClick={() => {
-                        handleEditClick(index);
-                      }}
-                    >
-                      <Edit />
-                    </IconButton>
-
-                    <Checkbox
-                      sx={{ marginLeft: "100%" }}
-                      icon={<Brightness1Outlined />}
-                      checkedIcon={<TaskAlt sx={{ color: "secondary.main" }} />}
-                      onClick={handleDone}
-                    />
-                  </CardActions>
-                </Grid>
-              </Card>
-            ))}
-          </Grid>
+            <TabPanel value="1">
+              <div style={centerStyle}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={<Add />}
+                  onClick={() => setOpen(true)}
+                  sx={{
+                    fontFamily: "Outfit",
+                    marginBottom: 2,
+                  }}
+                >
+                  Add Task
+                </Button>
+              </div>
+              <TaskCard
+                tasks={tasks}
+                handleDeleteTask={handleDeleteTask}
+                handleDone={handleCheck}
+              />
+            </TabPanel>
+            <TabPanel value="2">
+              <TaskCard
+                tasks={completedTasks}
+                handleDeleteTask={handleDeleteCompletedTask}
+                handleDone={handleCheck}
+              />
+            </TabPanel>
+          </TabContext>
 
           <Modal //Add Task Modal
             open={open}
