@@ -65,12 +65,11 @@ export function ToDoList() {
     setNewTask(newTask);
   };
 
-  const updatedPendingTasks = [...tasks, newTask];
-  const updatedCompleteTasks = [...completedTasks, newTask];
   const handleAddTask = (event) => {
+    const addTask = [...tasks, newTask];
     console.log(newTask);
     // const updatedTasks = [...tasks, newTask];
-    setTasks(updatedPendingTasks);
+    setTasks(addTask);
     setNewTask({
       taskTitle: "",
       taskDescription: "",
@@ -81,28 +80,17 @@ export function ToDoList() {
     setOpen(false);
   };
 
-  const handleCheck = (index) => {
-    // const editedTasks = [...tasks];
-    // const storeTask = editedTasks.pop(index, 1);
-    // const editedCompletedTasks = [...completedTasks];
-    // const updateCompletedTask = [editedCompletedTasks.push(storeTask)];
-    // setTasks(editedTasks);
-    // setCompletedTasks(updateCompletedTask);
-    // console.log(` isDone:${index.isDone}`);
-    // setNewTask(newTask);
+  const handleDone = (index) => {
+    const editedTasks = [...tasks];
+    const editedCTasks = [...completedTasks];
+    const i = editedTasks.indexOf(index);
+    let storeTask = editedTasks[i];
+    storeTask.isDone = true;
+    editedCTasks.push(storeTask);
+    editedTasks.splice(i, 1);
+    setTasks(editedTasks);
+    setCompletedTasks(editedCTasks);
   };
-
-  // const handleUnCheck = (index) => {
-  //   const editedTasks = [...tasks];
-  //   const storeTask = editedTasks.pop(index, 1);
-  //   const updateCompletedTask = [completedTasks.push(storeTask)];
-
-  //   setTasks(tasks);
-  //   setCompletedTasks(updateCompletedTask);
-
-  //   console.log(` isDone:${index.isDone}`);
-  //   setNewTask(newTask);
-  // };
 
   const handleDeleteTask = (index) => {
     const editedTasks = [...tasks];
@@ -111,9 +99,10 @@ export function ToDoList() {
   };
 
   const handleDeleteCompletedTask = (index) => {
-    const editedTasks = [...completedTasks];
-    editedTasks.splice(index, 1);
-    setTasks(editedTasks);
+    const editedCTasks = [...completedTasks];
+    editedCTasks.splice(index, 1);
+    setCompletedTasks(editedCTasks);
+    console.log(index);
   };
 
   // const handleEditTaskChange = (event) => {
@@ -227,14 +216,13 @@ export function ToDoList() {
               <TaskCard
                 tasks={tasks}
                 handleDeleteTask={handleDeleteTask}
-                handleDone={handleCheck}
+                handleDone={handleDone}
               />
             </TabPanel>
             <TabPanel value="2">
               <TaskCard
                 tasks={completedTasks}
                 handleDeleteTask={handleDeleteCompletedTask}
-                handleDone={handleCheck}
               />
             </TabPanel>
           </TabContext>

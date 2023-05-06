@@ -100,11 +100,15 @@ function statIcon(stat) {
       break;
   }
 }
-// const priorityIcon = (check) => {
-//   if (check === true) {
-//     return <PriorityHigh />;
-//   }
-// };
+
+function CheckButton(index, props) {
+  console.log(index);
+  if (index.isDone == false) {
+    return <Brightness1Outlined />;
+  } else if (index.isDone == true) {
+    return <TaskAlt />;
+  }
+}
 
 export function TaskCard(props) {
   return (
@@ -185,7 +189,6 @@ export function TaskCard(props) {
               >
                 <Delete sx={{ color: "secondary.main" }} />
               </IconButton>
-
               <IconButton
                 variant="contained"
                 color="secondary"
@@ -195,20 +198,14 @@ export function TaskCard(props) {
               >
                 <Edit />
               </IconButton>
-
-              <Checkbox
-                sx={{ marginLeft: "100%" }}
-                icon={<Brightness1Outlined />}
-                checkedIcon={
-                  <TaskAlt
-                    sx={{
-                      color: "secondary.main",
-                      "& .MuiSvgIcon-root": { fontSize: 28 },
-                    }}
-                  />
-                }
-                onClick={props.handleDone}
-              />
+              <IconButton
+                onClick={() => {
+                  props.handleDone(index);
+                }}
+                disabled={index.isDone}
+              >
+                {CheckButton(index)}
+              </IconButton>
             </CardActions>
           </Grid>
         </Card>
