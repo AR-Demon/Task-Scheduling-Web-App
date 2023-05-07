@@ -1,10 +1,11 @@
 import { useDispatch, useSelector} from "react-redux";
-import { setUserStats, setUserTodo } from "../../state/userReducer";
+import { setUserStats, setUserTodo, SyncStateData } from "../../state/userReducer";
 import { useEffect, useState} from "react";
-import { Box, Button, Grid, ThemeProvider } from "@mui/material";
+import { Box, Button, Fade, Grid, ThemeProvider, Collapse } from "@mui/material";
 import {createTheme} from "@mui/material";
 import {NavBar} from "./widget/NavBar";
 import UserStatsBar from "./widget/UserStatsWidget";
+import { useRef } from "react";
 
 function Test () {
     console.log("TestApp rendered");
@@ -37,7 +38,14 @@ function Test () {
     return userStatsData;
   }
 
-  //const SyncData = async() => {}
+  const SyncData = async() => {
+    const userStateData = {
+      "userTodo": await getUserTodo(),
+      "userStats": await getUserStats(),
+    }; 
+    dispatch(SyncStateData(userStateData));
+    console.log(userStateData);
+  }
   
   // Execute the function when page reloads.
   useEffect(() => {
@@ -51,6 +59,7 @@ function Test () {
   }, [getUserTodo, dispatch, getUserStats]);
 
   const theme = createTheme();
+  const containerReference = useRef(null);
 
   return (
     <ThemeProvider theme={theme}>
@@ -66,18 +75,20 @@ function Test () {
             justifyContent="flex-start"
             spacing={{ xs: 0, md: 0 }}
             columns={{ xs: 5, sm: 5, md: 5 }}
+            ref = {containerReference}
             >
-                {openStatus && 
-                <Grid item xs={1} sm={1} md={1}
+                {/*<Slide direction="right" in={openStatus} mountOnEnter unmountOnExit container={containerReference.current}>*/}
+                <Fade in = {openStatus}  mountOnEnter unmountOnExit>
+                <Grid item xs={2} sm={2} md={1}
                 >
                   <UserStatsBar openStatus = {openStatus} />
                 </Grid>
-                }
+                </Fade>
+                {/*</Slide>*/}
                 <Grid item xs sm md
-                sx ={{marginLeft:3}}
                 >
                   <div>
-                    <Button onClick = {handleDrawerOpenStatus}>toggle</Button>
+                    <Button onClick = {SyncData}>toggle</Button>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis veniam quas blanditiis amet dolor temporibus repellendus molestiae? Quas ab voluptas cupiditate tenetur voluptatum delectus asperiores, voluptate odio magnam consectetur? Corrupti?
                   </div>
                 </Grid>

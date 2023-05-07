@@ -33,7 +33,7 @@ const userSlice = createSlice({
             const newUserStats = action.payload.userStats;
             state.userStats = newUserStats;
             state.userStats = action.payload.userStats;
-            const newTodoArray = action.payload.Todo;
+            const newTodoArray = action.payload.userTodo;
             state.Todo = newTodoArray;
         }
     }

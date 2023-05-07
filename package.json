@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "client": "cd client && npm run dev ",
+    "server": "cd server && nodemon index.js"
+  },
   "dependencies": {
     "yup-password": "^0.2.2"
   }
