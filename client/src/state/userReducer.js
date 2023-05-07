@@ -29,9 +29,16 @@ const userSlice = createSlice({
             state.userStats = null;
             state.Todo = [];
         },
+        SyncStateData: (state, action) => {
+            const newUserStats = action.payload.userStats;
+            state.userStats = newUserStats;
+            state.userStats = action.payload.userStats;
+            const newTodoArray = action.payload.Todo;
+            state.Todo = newTodoArray;
+        }
     }
 });
 
-export const {setUserLogin ,setUserTodo,setUserStats, setUserLogout} = userSlice.actions;
+export const {setUserLogin ,setUserTodo,setUserStats, setUserLogout, SyncStateData} = userSlice.actions;
 
 export default userSlice.reducer;
