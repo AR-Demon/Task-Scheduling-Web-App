@@ -246,9 +246,9 @@ export function ToDoList() {
                       value={tasks.taskStat}
                       label="Stat"
                       onChange={handleStat}
-                      defaultValue=""
+                      defaultValue="Strength"
                       select
-                      sx={{ width: "10vw", alignItems: "left", marginLeft:"2vw" }}
+                      sx={{ width: 200, alignItems: "left", marginLeft:"2vw" }}
                     >
                       <MenuItem value={"Strength"}> Strength</MenuItem>
                       <MenuItem value={"Intelligence"}>Intelligence</MenuItem>
