@@ -6,6 +6,7 @@ import {createTheme} from "@mui/material";
 import {NavBar} from "./components/NavBar";
 import UserStatsBar from "./components/UserStatsBar";
 import { useRef } from "react";
+import { ToDoList } from "./components/TodoList";
 
 function Test () {
     console.log("MainApp rendered");
@@ -87,10 +88,10 @@ function Test () {
                 {/*</Slide>*/}
                 <Grid item xs sm md
                 >
-                  <div>
+                  {/*<div>
                     <Button onClick = {SyncData}>toggle</Button>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis veniam quas blanditiis amet dolor temporibus repellendus molestiae? Quas ab voluptas cupiditate tenetur voluptatum delectus asperiores, voluptate odio magnam consectetur? Corrupti?
-                  </div>
+                  </div>*/}
+                  <ToDoList/>
                 </Grid>
                 
             </Grid>

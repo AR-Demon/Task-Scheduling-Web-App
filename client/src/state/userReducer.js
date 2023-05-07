@@ -5,7 +5,7 @@ const initialState = {
     userStats:null,
     token: null,
     Todo: [],
-    
+    userBarStatus: true,
 };
 const userSlice = createSlice({
     name: "User",
@@ -28,6 +28,9 @@ const userSlice = createSlice({
             state.token = null;
             state.userStats = null;
             state.Todo = [];
+        },
+        setUserBarStatus: (state) => {
+            state.userBarStatus = state.userBarStatus === true? false : true;
         },
         SyncStateData: (state, action) => {
             const newUserStats = action.payload.userStats;

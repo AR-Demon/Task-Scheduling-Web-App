@@ -52,7 +52,7 @@ export function NavBar( props ) {
           edge="start"
           aria-label="open drawer"
           sx={{ mr: 0 }}
-          onClick={props.handelMenuClick}
+          onClick={() => {props.handelMenuClick();}}
         >
           <MenuIcon />
         </IconButton>
