@@ -33,17 +33,16 @@ function MainApp(){
     const userStatsData = await Response.json();
     return userStatsData;
   }
-
-  //const SyncData = async() => {}
   
-  // Execute the function when page reloads.
+
   useEffect(() => {
     getUserTodo().then((data) => {
-      //console.log(data);
+      console.log(data);
       dispatch(setUserTodo(data));
     });
     getUserStats().then((data) => {
       dispatch(setUserStats(data));
+      //console.log(data);
     })
   }, [getUserTodo, dispatch, getUserStats]);
   return (
