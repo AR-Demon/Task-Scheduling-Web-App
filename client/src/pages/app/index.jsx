@@ -8,7 +8,7 @@ import UserStatsBar from "./components/UserStatsBar";
 import { useRef } from "react";
 
 function Test () {
-    console.log("TestApp rendered");
+    console.log("MainApp rendered");
   //useDispatch to use Reducer Function for local storage
   const dispatch = useDispatch();
 

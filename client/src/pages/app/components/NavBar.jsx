@@ -57,7 +57,7 @@ export function NavBar( props ) {
           <MenuIcon />
         </IconButton>
         <Box>
-          <IconButton onClick={() => {navigate("/test/app")}} edge="start" sx ={{borderRadius: 1,}}>
+          <IconButton onClick={() => {navigate("/app")}} edge="start" sx ={{borderRadius: 1,}}>
             <TrackerLogo/>
             <div
               style={{
@@ -73,7 +73,7 @@ export function NavBar( props ) {
         <Box>
           <Button 
           variant="text"
-          onClick={() => {/*dispatch(setUserLogout());dispatch(setUserLogout)*/}}
+          onClick={() => {dispatch(setUserLogout());dispatch(setUserLogout())}}
           sx={{
             color: "black",
           }}>
