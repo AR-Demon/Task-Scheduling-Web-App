@@ -12,6 +12,7 @@ import {
   Divider,
   Avatar,
   Box,
+  ThemeProvider,
 } from "@mui/material";
 import {
   Edit,
@@ -108,7 +109,7 @@ function CheckDescription(index) {
       <Paper
         elevation={0}
         sx={{
-          backgroundColor: "#ffe6c2",
+          bgcolor: "secondary.medium",
           padding: 2,
           marginRight: 2,
           display: "flex",
@@ -123,9 +124,9 @@ function CheckDescription(index) {
 
 function CheckButton(index) {
   console.log(index);
-  if (index.isDone == false) {
+  if (index.isDone === false) {
     return <Brightness1Outlined />;
-  } else if (index.isDone == true) {
+  } else if (index.isDone === true) {
     return <TaskAlt />;
   }
 }
@@ -176,7 +177,7 @@ export function TaskCard(props) {
             sx={{
               display: "flex",
               flexDirection: "column",
-              backgroundColor: "#ffdba8",
+              backgroundColor: "secondary.dark",
               color: "black",
               minHeight: 170,
               width: 370,
@@ -222,7 +223,7 @@ export function TaskCard(props) {
                   color="error"
                   onClick={() => props.handleDeleteTask(index)}
                 >
-                  <Delete sx={{ color: "secondary.main" }} />
+                  <Delete sx={{ color: "primary.main" }} />
                 </IconButton>
                 <IconButton
                   variant="contained"
@@ -231,7 +232,7 @@ export function TaskCard(props) {
                     handleEditClick(index);
                   }}
                 >
-                  <Edit />
+                  <Edit sx={{ color: "primary.dark" }} />
                 </IconButton>
                 <IconButton
                   onClick={() => {
