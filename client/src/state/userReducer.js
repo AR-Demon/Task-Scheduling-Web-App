@@ -5,7 +5,7 @@ const initialState = {
     userStats:null,
     token: null,
     Todo: [],
-    
+    userBarStatus: true,
 };
 const userSlice = createSlice({
     name: "User",
@@ -29,16 +29,19 @@ const userSlice = createSlice({
             state.userStats = null;
             state.Todo = [];
         },
+        setUserBarStatus: (state) => {
+            state.userBarStatus = !state.userBarStatus;
+        },
         SyncStateData: (state, action) => {
             const newUserStats = action.payload.userStats;
             state.userStats = newUserStats;
             state.userStats = action.payload.userStats;
-            const newTodoArray = action.payload.Todo;
+            const newTodoArray = action.payload.userTodo;
             state.Todo = newTodoArray;
         }
     }
 });
 
-export const {setUserLogin ,setUserTodo,setUserStats, setUserLogout, SyncStateData} = userSlice.actions;
+export const {setUserLogin ,setUserTodo, setUserStats, setUserLogout, SyncStateData, setUserBarStatus} = userSlice.actions;
 
 export default userSlice.reducer;

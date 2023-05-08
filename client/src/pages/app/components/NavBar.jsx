@@ -11,8 +11,8 @@ import { useDispatch } from "react-redux";
 import WebFont from "webfontloader";
 import { useEffect } from "react";
 import { ThemeProvider } from "@mui/material/styles";
-import { defaultTheme } from "./themes";
-import { TrackerLogo } from "./trackerLogo";
+import { defaultTheme } from "../theme/NavBarThemes";
+import { TrackerLogo } from "../widget/trackerLogowidget";
 import * as React from "react";
 import { setUserLogout } from "../../../state/userReducer";
 import { useTheme } from "@emotion/react";
@@ -52,12 +52,12 @@ export function NavBar( props ) {
           edge="start"
           aria-label="open drawer"
           sx={{ mr: 0 }}
-          onClick={props.handelMenuClick}
+          onClick={() => {props.handelMenuClick();}}
         >
           <MenuIcon />
         </IconButton>
         <Box>
-          <IconButton onClick={() => {navigate("/test/app")}} edge="start" sx ={{borderRadius: 1,}}>
+          <IconButton onClick={() => {navigate("/app")}} edge="start" sx ={{borderRadius: 1,}}>
             <TrackerLogo/>
             <div
               style={{
@@ -73,7 +73,7 @@ export function NavBar( props ) {
         <Box>
           <Button 
           variant="text"
-          onClick={() => {/*dispatch(setUserLogout());dispatch(setUserLogout)*/}}
+          onClick={() => {dispatch(setUserLogout());dispatch(setUserLogout())}}
           sx={{
             color: "black",
           }}>

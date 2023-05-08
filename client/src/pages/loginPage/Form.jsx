@@ -18,7 +18,6 @@ import * as yup from "yup";
 import { setUserLogin} from "../../state/userReducer";
 import { useState } from "react";
 
-
 const loginSchema = yup.object().shape({
   email: yup.string().email("Invalid Email").required("Required"),
   password: yup.string().required("Required"),
