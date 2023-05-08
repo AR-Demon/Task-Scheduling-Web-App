@@ -24,8 +24,10 @@ import {
   import { Add, Brightness1Outlined, TaskAlt } from "@mui/icons-material";
   import { centerStyle, modalStyle, circleButtons } from "../theme/TodoTheme";
   import { TaskCard } from "../widget/TaskCardWidget";
+import { useSelector } from "react-redux";
   
   export function ToDoList() {
+    const stateTodo = useSelector((state) => state.Todo);
     const [tasks, setTasks] = useState([]);
     const [completedTasks, setCompletedTasks] = useState([]);
     const [newTask, setNewTask] = useState({
@@ -135,23 +137,24 @@ import {
         <div>
           <Paper
             sx={{
-              height: "93vh",
-              //width: "67%",
-              //padding: 4,
+              height: "100%",
+              minHeight:"93vh",
+              //width: "9%",
+              //paddingTop: 4,
               //marginLeft: "27%",
               //marginTop: 20,
               bgcolor: "#FFF0DB",
               //borderRadius: 10,
             }}
           >
-            <Typography style={centerStyle} variant="h2">
+            <Typography style={centerStyle} variant="h2" sx={{padding : 5}}>
               To-Do List
             </Typography>
   
-            <TabContext value={tabValue}>
+            <TabContext value={`${tabValue}`}>
               <Box>
                 <TabList
-                  disableRipple
+                  disableripple
                   onChange={handleTabChange}
                   centered
                   sx={{
@@ -190,7 +193,7 @@ import {
                     }}
                   />
                   <Tab
-                    disableRipple
+                    disableripple
                     sx={{
                       fontFamily: "outfit",
                       flexGrow: 1,

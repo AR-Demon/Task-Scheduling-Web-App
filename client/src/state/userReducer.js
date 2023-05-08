@@ -30,7 +30,7 @@ const userSlice = createSlice({
             state.Todo = [];
         },
         setUserBarStatus: (state) => {
-            state.userBarStatus = state.userBarStatus === true? false : true;
+            state.userBarStatus = !state.userBarStatus;
         },
         SyncStateData: (state, action) => {
             const newUserStats = action.payload.userStats;
@@ -42,6 +42,6 @@ const userSlice = createSlice({
     }
 });
 
-export const {setUserLogin ,setUserTodo,setUserStats, setUserLogout, SyncStateData} = userSlice.actions;
+export const {setUserLogin ,setUserTodo, setUserStats, setUserLogout, SyncStateData, setUserBarStatus} = userSlice.actions;
 
 export default userSlice.reducer;

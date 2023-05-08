@@ -1,5 +1,5 @@
 import { useDispatch, useSelector} from "react-redux";
-import { setUserStats, setUserTodo, SyncStateData } from "../../state/userReducer";
+import { setUserBarStatus, setUserStats, setUserTodo, SyncStateData } from "../../state/userReducer";
 import { useEffect, useState} from "react";
 import { Box, Button, Fade, Grid, ThemeProvider, Collapse } from "@mui/material";
 import {createTheme} from "@mui/material";
