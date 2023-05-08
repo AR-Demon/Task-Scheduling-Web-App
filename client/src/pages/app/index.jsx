@@ -1,15 +1,20 @@
 import { useDispatch, useSelector} from "react-redux";
-import { Navbar } from "./components/navigation/topNavbar";
-import { ToDoList } from "./components/To-do List/toDoList";
-import { setUserStats, setUserTodo } from "../../state/userReducer";
-import { useEffect} from "react";
-import { Box } from "@mui/material";
+import { setUserBarStatus, setUserStats, setUserTodo, SyncStateData } from "../../state/userReducer";
+import { useEffect, useState} from "react";
+import { Box, Button, Fade, Grid, ThemeProvider, Collapse } from "@mui/material";
+import {createTheme} from "@mui/material";
+import {NavBar} from "./components/NavBar";
+import UserStatsBar from "./components/UserStatsBar";
+import { useRef } from "react";
+import { ToDoList } from "./components/TodoList";
 
-function MainApp(){
-  console.log("MainApp rendered");
+function Test () {
+    console.log("MainApp rendered");
   //useDispatch to use Reducer Function for local storage
   const dispatch = useDispatch();
 
+  const [openStatus, setOpenStatus] = useState(true);
+  const handleDrawerOpenStatus = () => {setOpenStatus(!openStatus);console.log(openStatus);};
   //useSelector to ge local storage userId and Token for authorization
   const user_id = useSelector((state) => state.user._id);
   const token = useSelector((state) => state.token);
@@ -34,7 +39,14 @@ function MainApp(){
     return userStatsData;
   }
 
-  //const SyncData = async() => {}
+  const SyncData = async() => {
+    const userStateData = {
+      "userTodo": await getUserTodo(),
+      "userStats": await getUserStats(),
+    }; 
+    dispatch(SyncStateData(userStateData));
+    console.log(userStateData);
+  }
   
   // Execute the function when page reloads.
   useEffect(() => {
@@ -46,24 +58,45 @@ function MainApp(){
       dispatch(setUserStats(data));
     })
   }, [getUserTodo, dispatch, getUserStats]);
-  return (
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        backgroundColor: "#292d3e",
-        margin: 0,
-      }}
-    >
-      <Box>
-        <Navbar />
-      </Box>
-      <Box>
-        <ToDoList />
-      </Box>        
-        
-    </div>
-  );
-};
 
-export default MainApp;
+  const theme = createTheme();
+  const containerReference = useRef(null);
+
+  return (
+    <ThemeProvider theme={theme}>
+    <Box sx={{
+        backgroundColor: "#292d3e",
+        width: "100vw",
+        height: "100vh",
+        }}>
+          <NavBar handelMenuClick = {handleDrawerOpenStatus} sx={{ position: "fixed", zIndex: 1 }}/>
+            <Grid
+            container
+            direction= "row"
+            justifyContent="flex-start"
+            spacing={{ xs: 0, md: 0 }}
+            columns={{ xs: 5, sm: 5, md: 5 }}
+            ref = {containerReference}
+            >
+                {/*<Slide direction="right" in={openStatus} mountOnEnter unmountOnExit container={containerReference.current}>*/}
+                <Fade in = {openStatus}  mountOnEnter unmountOnExit>
+                <Grid item xs={2} sm={2} md={1}
+                >
+                  <UserStatsBar openStatus = {openStatus} />
+                </Grid>
+                </Fade>
+                {/*</Slide>*/}
+                <Grid item xs sm md
+                >
+                  {/*<div>
+                    <Button onClick = {SyncData}>toggle</Button>
+                  </div>*/}
+                  <ToDoList/>
+                </Grid>
+                
+            </Grid>
+    </Box>
+    </ThemeProvider>
+  );
+}
+export default Test;

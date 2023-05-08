@@ -31,6 +31,7 @@ import {
   Directions,
 } from "@mui/icons-material";
 import { centerStyle, modalStyle, circleButtons } from "./toDoListStyles";
+import { Formik } from "formik";
 
 export function ToDoList() {
   const [tasks, setTasks] = useState([]);
@@ -213,6 +214,7 @@ export function ToDoList() {
                 ))}
               </div>
 
+              <Formik>                
               <Modal //Add Task Modal
                 open={open}
                 onClose={() => setOpen(false)}
@@ -284,6 +286,7 @@ export function ToDoList() {
                   </Button>
                 </FormControl>
               </Modal>
+              </Formik>
             </div>
           </Paper>
         </Grid>
