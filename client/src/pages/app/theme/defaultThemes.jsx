@@ -3,21 +3,27 @@ import { createTheme } from "@mui/material";
 export const defaultTheme = createTheme({
   palette: {
     primary: {
-      main: "#ba265a", //main red
+      main: "#8B0000", //main red
+      medium: "#660000", //navbar red
       dark: "#81173c", //darker red
     },
     secondary: {
-      main: "#FFF0DB", //to do list paper color
-      medium: "#ffecd1", //card description color
-      dark: "#ffdba8", //card color
+      main: "#383838", //to do list paper color
+      medium: "#D3D3D3", //card description color
+      dark: "#E8E8E8", //card color
     },
     background: {
-      main: "#1e222b", //main background
-      light: "#292d3e", //profile background
+      main: "#000000", //main background
+      light: "#FFFFFF", //profile background
+    },
+
+    text: {
+      main: "white",
     },
   },
   typography: {
     fontFamily: "Lusitana, Outfit",
+
     fontWeightRegular: "700",
     fontSize: 16,
   },

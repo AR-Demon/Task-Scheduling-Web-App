@@ -139,14 +139,20 @@ export function ToDoList() {
           sx={{
             height: "100%",
 
-            width: "100%",
+            width: "83%",
             paddingTop: 4,
             marginTop: 20,
-            bgcolor: "secondary.main",
+            marginLeft: 23,
+            // bgcolor: "secondary.main",
+            backgroundImage: "linear-gradient(#232526,#414345 )",
             borderRadius: 10,
           }}
         >
-          <Typography style={centerStyle} variant="h2" sx={{ padding: 5 }}>
+          <Typography
+            style={centerStyle}
+            variant="h2"
+            sx={{ padding: 5, color: "text.main" }}
+          >
             To-Do List
           </Typography>
 
@@ -162,6 +168,9 @@ export function ToDoList() {
                   },
                   "& .MuiTabs-indicator": {
                     bgcolor: "primary.main",
+                    marginBottom: 0.3,
+                    paddingBottom: 0.5,
+                    borderRadius: 5,
                   },
                 }}
               >
@@ -170,8 +179,9 @@ export function ToDoList() {
                   sx={{
                     fontFamily: "outfit",
                     flexGrow: 1,
-                    fontWeight: "bold",
+
                     fontSize: 20,
+                    color: "white",
                   }}
                   label="Pending"
                   value="0"
@@ -191,7 +201,7 @@ export function ToDoList() {
                   sx={{
                     fontFamily: "outfit",
                     flexGrow: 1,
-                    fontWeight: "bold",
+                    color: "white",
                     fontSize: 22,
                   }}
                   label="Completed"
@@ -201,7 +211,15 @@ export function ToDoList() {
                 />
               </TabList>
             </Box>
-            <Divider />
+            <Divider
+              variant="middle"
+              sx={{
+                bgcolor: "white",
+                opacity: "20%",
+                marginLeft: 15,
+                marginRight: 15,
+              }}
+            />
 
             <TabPanel value="0">
               <div style={centerStyle}>

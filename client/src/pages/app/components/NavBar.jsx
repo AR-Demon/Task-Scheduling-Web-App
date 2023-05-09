@@ -32,7 +32,7 @@ export function NavBar(props) {
   return (
     <ThemeProvider theme={defaultTheme}>
       <AppBar position="fixed" sx={{ zIndex: 1 }}>
-        <Toolbar sx={{ height: 30 }}>
+        <Toolbar sx={{ height: 30, bgcolor: "primary.medium" }}>
           <Grid
             container
             direction="row"

@@ -16,10 +16,11 @@ import {
 } from "@mui/material";
 import { createTheme } from "@mui/material";
 import { NavBar } from "./components/NavBar";
-import UserStatsBar from "./components/UserStatsBar";
+import UserStatsBar from "./components/Profile";
 import { useRef } from "react";
 import { ToDoList } from "./components/TodoList";
 import { defaultTheme } from "./theme/defaultThemes";
+import React, { useLayoutEffect } from "react";
 
 function Test() {
   console.log("MainApp rendered");
@@ -90,15 +91,12 @@ function Test() {
   const theme = createTheme();
   const containerReference = useRef(null);
 
+  useLayoutEffect(() => {
+    document.body.style.backgroundColor = "black";
+  });
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Box
-        sx={{
-          backgroundColor: "background.main",
-          width: "100vw",
-          height: "100vh",
-        }}
-      >
+      <Box>
         <NavBar
           handelMenuClick={handleDrawerOpenStatus}
           sx={{ position: "fixed", zIndex: 1 }}
