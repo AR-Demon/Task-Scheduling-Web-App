@@ -20,35 +20,54 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { defaultTheme } from "../theme/defaultThemes";
-import React, { useState } from "react";
+import React from "react";
 import { Add, Brightness1Outlined, TaskAlt } from "@mui/icons-material";
 import { centerStyle, modalStyle, circleButtons } from "../theme/TodoTheme";
 import { TaskCard } from "../widget/TaskCardWidget";
 import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+
+function TodoDataPending (stateTodo) {
+  const TodoArray = [];
+  stateTodo.map((task, index) => {
+      //const keys = Object.keys(task);
+      const todoObject = {
+          user_id: task._id,
+          taskTitle:task.content,
+          taskDescription:task.description,
+          isPriority:((task.priority == 0)? false : true),
+          isDone: task.checked,
+          taskStat: (task.attachedAttribute),
+      };
+      if(!todoObject.isDone){TodoArray.push(todoObject);}
+  });
+  //console.log(TodoArray);
+  return TodoArray;
+}
+function TodoDataCompleted (stateTodo) {
+  const TodoArray = [];
+  stateTodo.map((task, index) => {
+      const keys = Object.keys(task);
+      const todoObject = {
+          user_id: task.userId,
+          todo_id:task._id,
+          taskTitle:task.content,
+          taskDescription:task.description,
+          isPriority:((task.priority == 0)? false : true),
+          isDone: task.checked,
+          taskStat: (task.attachedAttribute),
+      };
+      //console.log(todoObject.todo_id)
+      if(todoObject.isDone){TodoArray.push(todoObject);}
+  });
+  //console.log(TodoArray);
+  return TodoArray;
+}
+
 
 export function ToDoList() {
-  function TodoDataPending () {
-    const stateTodo = useSelector((state) => state.Todo);
-    const TodoArray = [];
-    stateTodo.map((task, index) => {
-        //const keys = Object.keys(task);
-        const todoObject = {
-            user_id: task._id,
-            taskTitle:task.content,
-            taskDescription:task.description,
-            isPriority:((task.priority == 0)? false : true),
-            isDone: task.checked,
-            taskStat: (task.attachedAttribute),
-        };
-        TodoArray.push(todoObject);
-        //console.log(task,todoObject,keys);
-        //console.log(task, index, keys);
-    });
-    //console.log(TodoArray);
-    return TodoArray;
-  }
   const stateTodo = useSelector((state) => state.Todo);
-  const [tasks, setTasks] = useState(TodoDataPending());
+  const [tasks, setTasks] = useState([]);
   const [completedTasks, setCompletedTasks] = useState([]);
   const [newTask, setNewTask] = useState({
     taskTitle: "",
@@ -61,6 +80,11 @@ export function ToDoList() {
   const [editTask, setEditTask] = useState("");
   const [editIndex, setEditIndex] = useState(-1);
   const [editOpen, setEditOpen] = useState(false);
+  
+  useEffect(() => {
+    setTasks(TodoDataPending(stateTodo));
+    setCompletedTasks(TodoDataCompleted(stateTodo));
+  }, [stateTodo]);
 
   const handleTitle = (event) => {
     newTask.taskTitle = event.target.value;
@@ -77,17 +101,17 @@ export function ToDoList() {
       newTask.isPriority = true;
     }
     setNewTask(newTask);
-    console.log(newTask.isPriority);
+    //console.log(newTask.isPriority);
   };
   const handleStat = (event) => {
-    console.log(event.target.value);
+    //console.log(event.target.value);
     newTask.taskStat = event.target.value;
     setNewTask(newTask);
   };
 
   const handleAddTask = (event) => {
     const addTask = [...tasks, newTask];
-    console.log(newTask);
+    //console.log(newTask);
     // const updatedTasks = [...tasks, newTask];
     setTasks(addTask);
     setNewTask({
@@ -124,7 +148,7 @@ export function ToDoList() {
     const i = editedCTasks.indexOf(index);
     editedCTasks.splice(i, 1);
     setCompletedTasks(editedCTasks);
-    console.log(index);
+    //console.log(index);
   };
 
   // const handleEditTaskChange = (event) => {
