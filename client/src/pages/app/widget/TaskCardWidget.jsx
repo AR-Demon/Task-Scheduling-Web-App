@@ -122,7 +122,7 @@ function CheckDescription(index) {
 }
 
 function CheckButton(index) {
-  console.log(index);
+  //console.log(index);
   if (index.isDone === false) {
     return <Brightness1Outlined />;
   } else if (index.isDone === true) {
