@@ -12,95 +12,95 @@ import {
   Divider,
   Avatar,
   Box,
+  ThemeProvider,
 } from "@mui/material";
 import {
   Edit,
   Delete,
-  PriorityHigh,
-  FitnessCenter,
-  Psychology,
-  ColorLens,
-  AutoAwesome,
-  Favorite,
   TaskAlt,
   Brightness1Outlined,
 } from "@mui/icons-material";
 import { centerStyle, modalStyle, circleButtons } from "../theme/TodoTheme";
+import { StatIcon } from "./statIcon";
 
-function statIcon(stat) {
-  switch (stat) {
-    case "Strength":
-      return (
-        <Avatar
-          sx={{
-            bgcolor: "#A00E1C",
-            margin: 2,
-            padding: 1,
-            alignSelf: "center",
-          }}
-        >
-          <FitnessCenter />
-        </Avatar>
-      );
+// function statIcon(stat) {
+//   switch (stat) {
+//     case "Strength":
+//       return (
+//         <Avatar
+//           sx={{
+//             bgcolor: "#1B1212",
+//             color: "#A00E1C",
+//             margin: 2,
+//             padding: 1,
+//             alignSelf: "center",
+//           }}
+//         >
+//           <FitnessCenter />
+//         </Avatar>
+//       );
 
-    case "Intelligence":
-      return (
-        <Avatar
-          sx={{
-            bgcolor: "#5296A5",
-            margin: 2,
-            padding: 1,
-            alignSelf: "center",
-          }}
-        >
-          <Psychology />
-        </Avatar>
-      );
-    case "Creativity":
-      return (
-        <Avatar
-          sx={{
-            bgcolor: "#623F7B",
-            margin: 2,
-            padding: 1,
-            alignSelf: "center",
-          }}
-        >
-          <ColorLens />
-        </Avatar>
-      );
+//     case "Intelligence":
+//       return (
+//         <Avatar
+//           sx={{
+//             // bgcolor: "#5296A5",
+//             bgcolor: "#A00E1C",
+//             margin: 2,
+//             padding: 1,
+//             alignSelf: "center",
+//           }}
+//         >
+//           <Psychology />
+//         </Avatar>
+//       );
+//     case "Creativity":
+//       return (
+//         <Avatar
+//           sx={{
+//             color: "#623F7B",
+//             margin: 2,
+//             padding: 1,
+//             alignSelf: "center",
+//           }}
+//         >
+//           <ColorLens />
+//         </Avatar>
+//       );
 
-    case "Charisma":
-      return (
-        <Avatar
-          sx={{
-            bgcolor: "#EE85B5",
-            margin: 2,
-            padding: 1,
-            alignSelf: "center",
-          }}
-        >
-          <AutoAwesome />
-        </Avatar>
-      );
+//     case "Charisma":
+//       return (
+//         <Avatar
+//           sx={{
+//             color: "#EE85B5",
+//             margin: 2,
+//             padding: 1,
+//             alignSelf: "center",
+//             bgcolor: "#1B1212",
+//           }}
+//         >
+//           <AutoAwesome />
+//         </Avatar>
+//       );
 
-    case "Health":
-      return (
-        <Avatar
-          sx={{
-            bgcolor: "#3CAB34",
-            margin: 2,
-            padding: 1,
-            alignSelf: "center",
-          }}
-        >
-          <Favorite />
-        </Avatar>
-      );
-    default:
-      break;
-  }
-}
+//     case "Health":
+//       return (
+//         <Avatar
+//           sx={{
+//             color: "#3CAB34",
+//             bgcolor: "#1B1212",
+//             margin: 2,
+//             padding: 1,
+//             alignSelf: "center",
+//           }}
+//         >
+//           <Favorite />
+//         </Avatar>
+//       );
+//     default:
+//       break;
+//   }
+// }
 
 function CheckDescription(index) {
   if (!(index.taskDescription.length === 0))
@@ -108,7 +108,7 @@ function CheckDescription(index) {
       <Paper
         elevation={0}
         sx={{
-          backgroundColor: "#ffe6c2",
+          bgcolor: "secondary.medium",
           padding: 2,
           marginRight: 2,
           display: "flex",
@@ -123,9 +123,9 @@ function CheckDescription(index) {
 
 function CheckButton(index) {
   console.log(index);
-  if (index.isDone == false) {
+  if (index.isDone === false) {
     return <Brightness1Outlined />;
-  } else if (index.isDone == true) {
+  } else if (index.isDone === true) {
     return <TaskAlt />;
   }
 }
@@ -176,7 +176,7 @@ export function TaskCard(props) {
             sx={{
               display: "flex",
               flexDirection: "column",
-              backgroundColor: "#ffdba8",
+              backgroundColor: "secondary.dark",
               color: "black",
               minHeight: 170,
               width: 370,
@@ -192,7 +192,7 @@ export function TaskCard(props) {
                 orientation="vertical"
                 flexItem
               />
-              {statIcon(index.taskStat)}
+              <StatIcon stat={index.taskStat} />
             </Stack>
             <Divider
               variant="middle"
@@ -222,7 +222,7 @@ export function TaskCard(props) {
                   color="error"
                   onClick={() => props.handleDeleteTask(index)}
                 >
-                  <Delete sx={{ color: "secondary.main" }} />
+                  <Delete sx={{ color: "primary.main" }} />
                 </IconButton>
                 <IconButton
                   variant="contained"
@@ -231,7 +231,7 @@ export function TaskCard(props) {
                     handleEditClick(index);
                   }}
                 >
-                  <Edit />
+                  <Edit sx={{ color: "primary.dark" }} />
                 </IconButton>
                 <IconButton
                   onClick={() => {
