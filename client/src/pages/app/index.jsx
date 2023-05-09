@@ -74,7 +74,7 @@ function Test() {
       userStats: await getUserStats(),
     };
     dispatch(SyncStateData(userStateData));
-    console.log(userStateData);
+    //console.log(userStateData);
   };
 
   // Execute the function when page reloads.
@@ -86,7 +86,8 @@ function Test() {
     getUserStats().then((data) => {
       dispatch(setUserStats(data));
     });
-  }, [getUserTodo, dispatch, getUserStats]);
+  }, []);
+
 
   const theme = createTheme();
   const containerReference = useRef(null);
