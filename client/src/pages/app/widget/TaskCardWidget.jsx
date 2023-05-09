@@ -17,91 +17,90 @@ import {
 import {
   Edit,
   Delete,
-  PriorityHigh,
-  FitnessCenter,
-  Psychology,
-  ColorLens,
-  AutoAwesome,
-  Favorite,
   TaskAlt,
   Brightness1Outlined,
 } from "@mui/icons-material";
 import { centerStyle, modalStyle, circleButtons } from "../theme/TodoTheme";
+import { StatIcon } from "./statIcon";
 
-function statIcon(stat) {
-  switch (stat) {
-    case "Strength":
-      return (
-        <Avatar
-          sx={{
-            bgcolor: "#A00E1C",
-            margin: 2,
-            padding: 1,
-            alignSelf: "center",
-          }}
-        >
-          <FitnessCenter />
-        </Avatar>
-      );
+// function statIcon(stat) {
+//   switch (stat) {
+//     case "Strength":
+//       return (
+//         <Avatar
+//           sx={{
+//             bgcolor: "#1B1212",
+//             color: "#A00E1C",
+//             margin: 2,
+//             padding: 1,
+//             alignSelf: "center",
+//           }}
+//         >
+//           <FitnessCenter />
+//         </Avatar>
+//       );
 
-    case "Intelligence":
-      return (
-        <Avatar
-          sx={{
-            bgcolor: "#5296A5",
-            margin: 2,
-            padding: 1,
-            alignSelf: "center",
-          }}
-        >
-          <Psychology />
-        </Avatar>
-      );
-    case "Creativity":
-      return (
-        <Avatar
-          sx={{
-            bgcolor: "#623F7B",
-            margin: 2,
-            padding: 1,
-            alignSelf: "center",
-          }}
-        >
-          <ColorLens />
-        </Avatar>
-      );
+//     case "Intelligence":
+//       return (
+//         <Avatar
+//           sx={{
+//             // bgcolor: "#5296A5",
+//             bgcolor: "#A00E1C",
+//             margin: 2,
+//             padding: 1,
+//             alignSelf: "center",
+//           }}
+//         >
+//           <Psychology />
+//         </Avatar>
+//       );
+//     case "Creativity":
+//       return (
+//         <Avatar
+//           sx={{
+//             color: "#623F7B",
+//             margin: 2,
+//             padding: 1,
+//             alignSelf: "center",
+//           }}
+//         >
+//           <ColorLens />
+//         </Avatar>
+//       );
 
-    case "Charisma":
-      return (
-        <Avatar
-          sx={{
-            bgcolor: "#EE85B5",
-            margin: 2,
-            padding: 1,
-            alignSelf: "center",
-          }}
-        >
-          <AutoAwesome />
-        </Avatar>
-      );
+//     case "Charisma":
+//       return (
+//         <Avatar
+//           sx={{
+//             color: "#EE85B5",
+//             margin: 2,
+//             padding: 1,
+//             alignSelf: "center",
+//             bgcolor: "#1B1212",
+//           }}
+//         >
+//           <AutoAwesome />
+//         </Avatar>
+//       );
 
-    case "Health":
-      return (
-        <Avatar
-          sx={{
-            bgcolor: "#3CAB34",
-            margin: 2,
-            padding: 1,
-            alignSelf: "center",
-          }}
-        >
-          <Favorite />
-        </Avatar>
-      );
-    default:
-      break;
-  }
-}
+//     case "Health":
+//       return (
+//         <Avatar
+//           sx={{
+//             color: "#3CAB34",
+//             bgcolor: "#1B1212",
+//             margin: 2,
+//             padding: 1,
+//             alignSelf: "center",
+//           }}
+//         >
+//           <Favorite />
+//         </Avatar>
+//       );
+//     default:
+//       break;
+//   }
+// }
 
 function CheckDescription(index) {
   if (!(index.taskDescription.length === 0))
@@ -193,7 +192,7 @@ export function TaskCard(props) {
                 orientation="vertical"
                 flexItem
               />
-              {statIcon(index.taskStat)}
+              <StatIcon stat={index.taskStat} />
             </Stack>
             <Divider
               variant="middle"

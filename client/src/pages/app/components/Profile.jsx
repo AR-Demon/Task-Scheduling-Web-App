@@ -8,10 +8,12 @@ import {
   createTheme,
   Avatar,
   Typography,
+  Stack,
 } from "@mui/material";
 import { useRef } from "react";
 import { defaultTheme } from "../theme/defaultThemes";
 import dobby from "../widget/dobby.png";
+import { StatIcon } from "../widget/statIcon";
 
 function UserStatsBar(props) {
   const containerReference = useRef(null);
@@ -37,6 +39,13 @@ function UserStatsBar(props) {
         <Avatar sx={{ width: 200, height: 200, marginTop: 15 }} src={dobby} />
 
         <Typography variant="h4">Dobby</Typography>
+        <Stack direction="column">
+          <StatIcon stat={"Strength"} />
+          <StatIcon stat={"Intelligence"} />
+          <StatIcon stat={"Charisma"} />
+          <StatIcon stat={"Creativity"} />
+          <StatIcon stat={"Health"} />
+        </Stack>
       </Box>
     </ThemeProvider>
   );
