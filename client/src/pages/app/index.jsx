@@ -68,14 +68,15 @@ function Test() {
     const userStatsData = await Response.json();
     return userStatsData;
   };
-
-  const SyncData = async () => {
-    const userStateData = {
+  
+  const SyncData = async() => {
+    const userData = {
       userTodo: await getUserTodo(),
       userStats: await getUserStats(),
     };
-    dispatch(SyncStateData(userStateData));
-    //console.log(userStateData);
+    dispatch(SyncStateData(userData));
+    //console.log(userData);
+    return;
   };
 
   //function to get Pending todo from stats and display it
@@ -84,7 +85,8 @@ function Test() {
     stateTodo.map((task, index) => {
       //const keys = Object.keys(task);
       const todoObject = {
-        user_id: task._id,
+        user_id: task.userId,
+        todo_id:task._id,
         taskTitle: task.content,
         taskDescription: task.description,
         isPriority: task.priority == 0 ? false : true,
@@ -103,7 +105,7 @@ function Test() {
   function TodoDataCompleted(stateTodo) {
     const TodoArray = [];
     stateTodo.map((task, index) => {
-      const keys = Object.keys(task);
+      //const keys = Object.keys(task);
       const todoObject = {
         user_id: task.userId,
         todo_id: task._id,
@@ -132,32 +134,44 @@ function Test() {
       },
       body:JSON.stringify(BodyData)
     });
-    /* {
-        //CreateTodoBody
-        "email":"random01@gmail.com",
-        "content":"#050 TODO",
-        "description":"test for pending todo",
-        "priority":0,
-        "label":"Tomorrow",
-        "attachedAttribute":"Health",
-      } */
 
     const Todo = await Response.json();
-    //console.log(Todo);
-    return Todo;
+    return Todo._id;
   };
 
+  // delete User Todo
+  const DeleteTodo = async(TodoId) => {
+    console.log(TodoId);
+    const response = await fetch(`http://localhost:3001/user/todo?todoId=${TodoId}`, {
+      method:"DELETE",
+      headers:{
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const DeleteMessage = await response.json();
+    //SyncData().then((data) => {dispatch(SyncStateData(data))});
+    return DeleteMessage;
+
+  }
+
   // Execute the function when page reloads.
-  useEffect(() => {
+  /*useEffect(() => {
     getUserTodo().then((data) => {
       //console.log(data);
       dispatch(setUserTodo(data));
     });
+    
     getUserStats().then((data) => {
       dispatch(setUserStats(data));
     });
     //CreateTodo().then((data) => {console.log(data)});
-  }, [openStatus]);
+  }, []);*/
+
+  useEffect(() => {
+    SyncData();
+  }, []);
 
 
   const theme = createTheme();
@@ -194,7 +208,9 @@ function Test() {
               todoPending = {TodoDataPending} 
               todoCompleted = {TodoDataCompleted}
               addTask = {CreateTodo}
-              Sync = {SyncData}
+              deleteTodo = {DeleteTodo}
+              completeTodo = {() => {}}
+              Sync = {() =>{SyncData(getUserTodo(), getUserStats())}}
               />
 
             </Grid>

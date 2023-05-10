@@ -28,7 +28,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import StatContext from "./StatContext";
 import { useContext } from "react";
-import { SyncStateData } from "../../../state/userReducer";
+import { SyncStateData, setUserTodo } from "../../../state/userReducer";
 
 
 
@@ -49,8 +49,10 @@ export function ToDoList(props) {
   const [tasks, setTasks] = useState([]);
   const [completedTasks, setCompletedTasks] = useState([]);
   const [newTask, setNewTask] = useState({
+    user_id: user._id,
+    todo_id:"",
     taskTitle: "",
-    taskDescription: "",
+    taskDescription: "Todo Description",
     isPriority: false,
     isDone: false,
     taskStat: "",
@@ -60,10 +62,12 @@ export function ToDoList(props) {
   const [editIndex, setEditIndex] = useState(-1);
   const [editOpen, setEditOpen] = useState(false);
 
+  const [syncStatus, setSyncStatus] = useState(true);
+
   useEffect(() => {
     setTasks(props.todoPending(stateTodo));
     setCompletedTasks(props.todoCompleted(stateTodo));
-  }, [stateTodo]);
+  }, [syncStatus, stateTodo]);
 
   const handleTitle = (event) => {
     newTask.taskTitle = event.target.value;
@@ -97,13 +101,16 @@ export function ToDoList(props) {
       label: "Today",
       attachedAttribute: newTask.taskStat,
     }
-    props.addTask(CreateTodoBody);
+    const todoId = props.addTask(CreateTodoBody);
     props.Sync();
+    //setSyncStatus(syncStatus + 1 % 5);
     // const updatedTasks = [...tasks, newTask];
-    setTasks(addTasks);
+    //setTasks(addTasks);
+    newTask.todo_id = todoId,
     setNewTask({
+      todo_id: "",
       taskTitle: "",
-      taskDescription: "",
+      taskDescription: "Todo Description",
       isPriority: false,
       isDone: false,
       taskStat: "",
@@ -135,18 +142,24 @@ export function ToDoList(props) {
   //   <Levels statLevel={statLevel} />;
   // };
 
-  const handleDeleteTask = (index) => {
-    const editedTasks = [...tasks];
-    const i = editedTasks.indexOf(index);
-    editedTasks.splice(i, 1);
-    setTasks(editedTasks);
+  const handleDeleteTask = (Todo) => {
+    //console.log(Todo.todo_id);
+    props.deleteTodo(Todo.todo_id);
+    props.Sync();
+
+    // const editedTasks = [...tasks];
+    // const i = editedTasks.indexOf(index);
+    // editedTasks.splice(i, 1);
+    // setTasks(editedTasks);
   };
 
-  const handleDeleteCompletedTask = (index) => {
-    const editedCTasks = [...completedTasks];
+  const handleDeleteCompletedTask = (Todo) => {
+    props.deleteTodo(Todo.todo_id);
+    props.Sync();
+    /*const editedCTasks = [...completedTasks];
     const i = editedCTasks.indexOf(index);
     editedCTasks.splice(i, 1);
-    setCompletedTasks(editedCTasks);
+    setCompletedTasks(editedCTasks);*/
   };
 
   // const handleEditTaskChange = (event) => {
