@@ -14,8 +14,8 @@ export function StatIcon(props) {
       return (
         <Avatar
           sx={{
-            bgcolor: "#1B1212",
-            color: "#A00E1C",
+            bgcolor: "icon.background",
+            color: "#f5c658",
             margin: 2,
             padding: 1,
             alignSelf: "center",
@@ -30,7 +30,8 @@ export function StatIcon(props) {
         <Avatar
           sx={{
             // bgcolor: "#5296A5",
-            bgcolor: "#A00E1C",
+            bgcolor: "icon.background",
+            color: "#0d78ba",
             margin: 2,
             padding: 1,
             alignSelf: "center",
@@ -43,7 +44,8 @@ export function StatIcon(props) {
       return (
         <Avatar
           sx={{
-            color: "#623F7B",
+            color: "#e37917",
+            bgcolor: "icon.background",
             margin: 2,
             padding: 1,
             alignSelf: "center",
@@ -57,7 +59,8 @@ export function StatIcon(props) {
       return (
         <Avatar
           sx={{
-            color: "#EE85B5",
+            bgcolor: "icon.background",
+            color: "#b458f5",
             margin: 2,
             padding: 1,
             alignSelf: "center",
@@ -73,7 +76,7 @@ export function StatIcon(props) {
         <Avatar
           sx={{
             color: "#3CAB34",
-            bgcolor: "#1B1212",
+            bgcolor: "icon.background",
             margin: 2,
             padding: 1,
             alignSelf: "center",
