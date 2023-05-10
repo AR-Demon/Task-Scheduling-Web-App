@@ -91,7 +91,7 @@ export function ToDoList(props) {
   };
 
   const handleAddTask = (event) => {
-    const addTasks = [...tasks, newTask];
+    //const addTasks = [...tasks, newTask];
     //change data to backend recognizing format
     const CreateTodoBody = {
       email: user.email,
@@ -118,8 +118,8 @@ export function ToDoList(props) {
     setOpen(false);
   };
 
-  const handleComplete = (index) => {
-    const editedTasks = [...tasks];
+  const handleComplete = (Todo) => {
+    /*const editedTasks = [...tasks];
     const editedCTasks = [...completedTasks];
     const i = editedTasks.indexOf(index);
     let storeTask = editedTasks[i];
@@ -127,7 +127,10 @@ export function ToDoList(props) {
     editedCTasks.push(storeTask);
     editedTasks.splice(i, 1);
     setTasks(editedTasks);
-    setCompletedTasks(editedCTasks);
+    setCompletedTasks(editedCTasks);*/
+    console.log(Todo.todo_id, Todo.isDone);
+    props.completeTodo(Todo.todo_id, Todo.isDone);
+    props.Sync();
   };
   const handleDone = (index) => {
     handleComplete(index);
