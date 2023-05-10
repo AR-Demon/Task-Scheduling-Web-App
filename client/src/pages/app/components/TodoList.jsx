@@ -21,58 +21,22 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { defaultTheme } from "../theme/defaultThemes";
 import React from "react";
-import { Add, Brightness1Outlined, TaskAlt } from "@mui/icons-material";
+import { Add, Brightness1Outlined, Sync, TaskAlt } from "@mui/icons-material";
 import { centerStyle, modalStyle, circleButtons } from "../theme/TodoTheme";
 import { TaskCard } from "../widget/TaskCardWidget";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-
-function TodoDataPending(stateTodo) {
-  const TodoArray = [];
-  stateTodo.map((task, index) => {
-    //const keys = Object.keys(task);
-    const todoObject = {
-      user_id: task._id,
-      taskTitle: task.content,
-      taskDescription: task.description,
-      isPriority: task.priority == 0 ? false : true,
-      isDone: task.checked,
-      taskStat: task.attachedAttribute,
-    };
-    if (!todoObject.isDone) {
-      TodoArray.push(todoObject);
-    }
-  });
-  //console.log(TodoArray);
-  return TodoArray;
-}
-function TodoDataCompleted(stateTodo) {
-  const TodoArray = [];
-  stateTodo.map((task, index) => {
-    const keys = Object.keys(task);
-    const todoObject = {
-      user_id: task.userId,
-      todo_id: task._id,
-      taskTitle: task.content,
-      taskDescription: task.description,
-      isPriority: task.priority == 0 ? false : true,
-      isDone: task.checked,
-      taskStat: task.attachedAttribute,
-    };
-    //console.log(todoObject.todo_id)
-    if (todoObject.isDone) {
-      TodoArray.push(todoObject);
-    }
-  });
-  //console.log(TodoArray);
-  return TodoArray;
-}
-
 import StatContext from "./StatContext";
 import { useContext } from "react";
+import { SyncStateData, setUserTodo } from "../../../state/userReducer";
 
-export function ToDoList() {
+
+
+export function ToDoList(props) {
+  const dispatch = useDispatch();
+
   const stateTodo = useSelector((state) => state.Todo);
+  const user = useSelector((state) => state.user);
   // const [statLevel, setStatLevel] = useState({
   //   Strength: 0,
   //   Intelligence: 0,
@@ -85,8 +49,10 @@ export function ToDoList() {
   const [tasks, setTasks] = useState([]);
   const [completedTasks, setCompletedTasks] = useState([]);
   const [newTask, setNewTask] = useState({
+    user_id: user._id,
+    todo_id:"",
     taskTitle: "",
-    taskDescription: "",
+    taskDescription: "Todo Description",
     isPriority: false,
     isDone: false,
     taskStat: "",
@@ -96,10 +62,12 @@ export function ToDoList() {
   const [editIndex, setEditIndex] = useState(-1);
   const [editOpen, setEditOpen] = useState(false);
 
+  const [syncStatus, setSyncStatus] = useState(true);
+
   useEffect(() => {
-    setTasks(TodoDataPending(stateTodo));
-    setCompletedTasks(TodoDataCompleted(stateTodo));
-  }, [stateTodo]);
+    setTasks(props.todoPending(stateTodo));
+    setCompletedTasks(props.todoCompleted(stateTodo));
+  }, [syncStatus, stateTodo]);
 
   const handleTitle = (event) => {
     newTask.taskTitle = event.target.value;
@@ -123,13 +91,26 @@ export function ToDoList() {
   };
 
   const handleAddTask = (event) => {
-    const addTask = [...tasks, newTask];
-
+    const addTasks = [...tasks, newTask];
+    //change data to backend recognizing format
+    const CreateTodoBody = {
+      email: user.email,
+      content: newTask.taskTitle,
+      description: newTask.taskDescription,
+      priority: (newTask.isPriority)? 1 : 0,
+      label: "Today",
+      attachedAttribute: newTask.taskStat,
+    }
+    const todoId = props.addTask(CreateTodoBody);
+    props.Sync();
+    //setSyncStatus(syncStatus + 1 % 5);
     // const updatedTasks = [...tasks, newTask];
-    setTasks(addTask);
+    //setTasks(addTasks);
+    newTask.todo_id = todoId,
     setNewTask({
+      todo_id: "",
       taskTitle: "",
-      taskDescription: "",
+      taskDescription: "Todo Description",
       isPriority: false,
       isDone: false,
       taskStat: "",
@@ -161,18 +142,24 @@ export function ToDoList() {
   //   <Levels statLevel={statLevel} />;
   // };
 
-  const handleDeleteTask = (index) => {
-    const editedTasks = [...tasks];
-    const i = editedTasks.indexOf(index);
-    editedTasks.splice(i, 1);
-    setTasks(editedTasks);
+  const handleDeleteTask = (Todo) => {
+    //console.log(Todo.todo_id);
+    props.deleteTodo(Todo.todo_id);
+    props.Sync();
+
+    // const editedTasks = [...tasks];
+    // const i = editedTasks.indexOf(index);
+    // editedTasks.splice(i, 1);
+    // setTasks(editedTasks);
   };
 
-  const handleDeleteCompletedTask = (index) => {
-    const editedCTasks = [...completedTasks];
+  const handleDeleteCompletedTask = (Todo) => {
+    props.deleteTodo(Todo.todo_id);
+    props.Sync();
+    /*const editedCTasks = [...completedTasks];
     const i = editedCTasks.indexOf(index);
     editedCTasks.splice(i, 1);
-    setCompletedTasks(editedCTasks);
+    setCompletedTasks(editedCTasks);*/
   };
 
   // const handleEditTaskChange = (event) => {
