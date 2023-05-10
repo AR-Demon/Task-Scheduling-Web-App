@@ -141,7 +141,7 @@ function Test() {
 
   // delete User Todo
   const DeleteTodo = async(TodoId) => {
-    console.log(TodoId);
+    //console.log(TodoId);
     const response = await fetch(`http://localhost:3001/user/todo?todoId=${TodoId}`, {
       method:"DELETE",
       headers:{
@@ -156,19 +156,27 @@ function Test() {
 
   }
 
-  // Execute the function when page reloads.
-  /*useEffect(() => {
-    getUserTodo().then((data) => {
-      //console.log(data);
-      dispatch(setUserTodo(data));
+  const TodoComplete = async(TodoId, CompleteStatus) => {
+    const response = await fetch(`http://localhost:3001/user/todo/complete/${TodoId}`, {
+      method:"PATCH",
+      headers:{
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body:JSON.stringify(
+        {
+        "checked": !CompleteStatus,
+        "completed_at":""
+        }
+        ),
     });
-    
-    getUserStats().then((data) => {
-      dispatch(setUserStats(data));
-    });
-    //CreateTodo().then((data) => {console.log(data)});
-  }, []);*/
 
+    const message = await response.json();
+    return !CompleteStatus;
+  }
+
+  // Execute the function when page reloads.
+  
   useEffect(() => {
     SyncData();
   }, []);
@@ -209,7 +217,7 @@ function Test() {
               todoCompleted = {TodoDataCompleted}
               addTask = {CreateTodo}
               deleteTodo = {DeleteTodo}
-              completeTodo = {() => {}}
+              completeTodo = {TodoComplete}
               Sync = {() =>{SyncData(getUserTodo(), getUserStats())}}
               />
 
@@ -221,3 +229,16 @@ function Test() {
   );
 }
 export default Test;
+
+
+/*useEffect(() => {
+    getUserTodo().then((data) => {
+      //console.log(data);
+      dispatch(setUserTodo(data));
+    });
+    
+    getUserStats().then((data) => {
+      dispatch(setUserStats(data));
+    });
+    //CreateTodo().then((data) => {console.log(data)});
+  }, []);*/
