@@ -16,11 +16,12 @@ import {
 } from "@mui/material";
 import { createTheme } from "@mui/material";
 import { NavBar } from "./components/NavBar";
-import UserStatsBar from "./components/Profile";
+import { UserStatsBar } from "./components/Profile";
 import { useRef } from "react";
 import { ToDoList } from "./components/TodoList";
 import { defaultTheme } from "./theme/defaultThemes";
 import React, { useLayoutEffect } from "react";
+import { StatProvider } from "./components/StatContext";
 
 function Test() {
   console.log("MainApp rendered");
@@ -96,36 +97,39 @@ function Test() {
     document.body.style.backgroundColor = "black";
   });
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Box>
-        <NavBar
-          handelMenuClick={handleDrawerOpenStatus}
-          sx={{ position: "fixed", zIndex: 1 }}
-        />
-        <Grid
-          container
-          direction="row"
-          justifyContent="flex-start"
-          spacing={{ xs: 0, md: 0 }}
-          columns={{ xs: 5, sm: 5, md: 5 }}
-          ref={containerReference}
-        >
-          {/*<Slide direction="right" in={openStatus} mountOnEnter unmountOnExit container={containerReference.current}>*/}
-          <Fade in={openStatus} mountOnEnter unmountOnExit>
-            <Grid item xs={2} sm={2} md={1}>
-              <UserStatsBar openStatus={openStatus} />
-            </Grid>
-          </Fade>
-          {/*</Slide>*/}
-          <Grid item xs sm md>
-            {/*<div>
+    <StatProvider>
+      <ThemeProvider theme={defaultTheme}>
+        <Box>
+          <NavBar
+            handelMenuClick={handleDrawerOpenStatus}
+            sx={{ position: "fixed", zIndex: 1 }}
+          />
+          <Grid
+            container
+            direction="row"
+            justifyContent="flex-start"
+            spacing={{ xs: 0, md: 0 }}
+            columns={{ xs: 5, sm: 5, md: 5 }}
+            ref={containerReference}
+          >
+            {/*<Slide direction="right" in={openStatus} mountOnEnter unmountOnExit container={containerReference.current}>*/}
+            <Fade in={openStatus} mountOnEnter unmountOnExit>
+              <Grid item xs={2} sm={2} md={1}>
+                <UserStatsBar openStatus={openStatus} />
+              </Grid>
+            </Fade>
+            {/*</Slide>*/}
+            <Grid item xs sm md>
+              {/*<div>
                     <Button onClick = {SyncData}>toggle</Button>
                   </div>*/}
-            <ToDoList />
+
+              <ToDoList />
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
-    </ThemeProvider>
+        </Box>
+      </ThemeProvider>
+    </StatProvider>
   );
 }
 export default Test;

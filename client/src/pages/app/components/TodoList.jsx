@@ -27,46 +27,61 @@ import { TaskCard } from "../widget/TaskCardWidget";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
-function TodoDataPending (stateTodo) {
+function TodoDataPending(stateTodo) {
   const TodoArray = [];
   stateTodo.map((task, index) => {
-      //const keys = Object.keys(task);
-      const todoObject = {
-          user_id: task._id,
-          taskTitle:task.content,
-          taskDescription:task.description,
-          isPriority:((task.priority == 0)? false : true),
-          isDone: task.checked,
-          taskStat: (task.attachedAttribute),
-      };
-      if(!todoObject.isDone){TodoArray.push(todoObject);}
+    //const keys = Object.keys(task);
+    const todoObject = {
+      user_id: task._id,
+      taskTitle: task.content,
+      taskDescription: task.description,
+      isPriority: task.priority == 0 ? false : true,
+      isDone: task.checked,
+      taskStat: task.attachedAttribute,
+    };
+    if (!todoObject.isDone) {
+      TodoArray.push(todoObject);
+    }
   });
   //console.log(TodoArray);
   return TodoArray;
 }
-function TodoDataCompleted (stateTodo) {
+function TodoDataCompleted(stateTodo) {
   const TodoArray = [];
   stateTodo.map((task, index) => {
-      const keys = Object.keys(task);
-      const todoObject = {
-          user_id: task.userId,
-          todo_id:task._id,
-          taskTitle:task.content,
-          taskDescription:task.description,
-          isPriority:((task.priority == 0)? false : true),
-          isDone: task.checked,
-          taskStat: (task.attachedAttribute),
-      };
-      //console.log(todoObject.todo_id)
-      if(todoObject.isDone){TodoArray.push(todoObject);}
+    const keys = Object.keys(task);
+    const todoObject = {
+      user_id: task.userId,
+      todo_id: task._id,
+      taskTitle: task.content,
+      taskDescription: task.description,
+      isPriority: task.priority == 0 ? false : true,
+      isDone: task.checked,
+      taskStat: task.attachedAttribute,
+    };
+    //console.log(todoObject.todo_id)
+    if (todoObject.isDone) {
+      TodoArray.push(todoObject);
+    }
   });
   //console.log(TodoArray);
   return TodoArray;
 }
 
+import StatContext from "./StatContext";
+import { useContext } from "react";
 
 export function ToDoList() {
   const stateTodo = useSelector((state) => state.Todo);
+  // const [statLevel, setStatLevel] = useState({
+  //   Strength: 0,
+  //   Intelligence: 0,
+  //   Health: 0,
+  //   Charisma: 0,
+  //   Creativity: 0,
+  // });
+  const { handleStatLevel } = useContext(StatContext);
+
   const [tasks, setTasks] = useState([]);
   const [completedTasks, setCompletedTasks] = useState([]);
   const [newTask, setNewTask] = useState({
@@ -80,7 +95,7 @@ export function ToDoList() {
   const [editTask, setEditTask] = useState("");
   const [editIndex, setEditIndex] = useState(-1);
   const [editOpen, setEditOpen] = useState(false);
-  
+
   useEffect(() => {
     setTasks(TodoDataPending(stateTodo));
     setCompletedTasks(TodoDataCompleted(stateTodo));
@@ -101,17 +116,15 @@ export function ToDoList() {
       newTask.isPriority = true;
     }
     setNewTask(newTask);
-    //console.log(newTask.isPriority);
   };
   const handleStat = (event) => {
-    //console.log(event.target.value);
     newTask.taskStat = event.target.value;
     setNewTask(newTask);
   };
 
   const handleAddTask = (event) => {
     const addTask = [...tasks, newTask];
-    //console.log(newTask);
+
     // const updatedTasks = [...tasks, newTask];
     setTasks(addTask);
     setNewTask({
@@ -124,7 +137,7 @@ export function ToDoList() {
     setOpen(false);
   };
 
-  const handleDone = (index) => {
+  const handleComplete = (index) => {
     const editedTasks = [...tasks];
     const editedCTasks = [...completedTasks];
     const i = editedTasks.indexOf(index);
@@ -135,6 +148,18 @@ export function ToDoList() {
     setTasks(editedTasks);
     setCompletedTasks(editedCTasks);
   };
+  const handleDone = (index) => {
+    handleComplete(index);
+    handleStatLevel(index.taskStat);
+  };
+
+  // const handleStatLevel = (selectedStat) => {
+  //   const stats = statLevel;
+  //   console.log(selectedStat);
+  //   stats[selectedStat] += 5;
+  //   setStatLevel(stats);
+  //   <Levels statLevel={statLevel} />;
+  // };
 
   const handleDeleteTask = (index) => {
     const editedTasks = [...tasks];
@@ -148,7 +173,6 @@ export function ToDoList() {
     const i = editedCTasks.indexOf(index);
     editedCTasks.splice(i, 1);
     setCompletedTasks(editedCTasks);
-    //console.log(index);
   };
 
   // const handleEditTaskChange = (event) => {
