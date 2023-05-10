@@ -26,52 +26,12 @@ import { centerStyle, modalStyle, circleButtons } from "../theme/TodoTheme";
 import { TaskCard } from "../widget/TaskCardWidget";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-
-function TodoDataPending(stateTodo) {
-  const TodoArray = [];
-  stateTodo.map((task, index) => {
-    //const keys = Object.keys(task);
-    const todoObject = {
-      user_id: task._id,
-      taskTitle: task.content,
-      taskDescription: task.description,
-      isPriority: task.priority == 0 ? false : true,
-      isDone: task.checked,
-      taskStat: task.attachedAttribute,
-    };
-    if (!todoObject.isDone) {
-      TodoArray.push(todoObject);
-    }
-  });
-  //console.log(TodoArray);
-  return TodoArray;
-}
-function TodoDataCompleted(stateTodo) {
-  const TodoArray = [];
-  stateTodo.map((task, index) => {
-    const keys = Object.keys(task);
-    const todoObject = {
-      user_id: task.userId,
-      todo_id: task._id,
-      taskTitle: task.content,
-      taskDescription: task.description,
-      isPriority: task.priority == 0 ? false : true,
-      isDone: task.checked,
-      taskStat: task.attachedAttribute,
-    };
-    //console.log(todoObject.todo_id)
-    if (todoObject.isDone) {
-      TodoArray.push(todoObject);
-    }
-  });
-  //console.log(TodoArray);
-  return TodoArray;
-}
-
 import StatContext from "./StatContext";
 import { useContext } from "react";
 
-export function ToDoList() {
+
+
+export function ToDoList(props) {
   const stateTodo = useSelector((state) => state.Todo);
   // const [statLevel, setStatLevel] = useState({
   //   Strength: 0,
@@ -97,8 +57,8 @@ export function ToDoList() {
   const [editOpen, setEditOpen] = useState(false);
 
   useEffect(() => {
-    setTasks(TodoDataPending(stateTodo));
-    setCompletedTasks(TodoDataCompleted(stateTodo));
+    setTasks(props.todoPending(stateTodo));
+    setCompletedTasks(props.todoCompleted(stateTodo));
   }, [stateTodo]);
 
   const handleTitle = (event) => {

@@ -37,7 +37,7 @@ function Test() {
   const user_id = useSelector((state) => state.user._id);
   const token = useSelector((state) => state.token);
 
-  //function to get particular user todo
+  //function to get this user todo
   const getUserTodo = async () => {
     const Response = await fetch(
       `http://localhost:3001/user/todos?Id=${user_id}`,
@@ -53,7 +53,7 @@ function Test() {
     return UserTodoData;
   };
 
-  //function to get particular user stats
+  //function to get this user stats
   const getUserStats = async () => {
     const Response = await fetch(
       `http://localhost:3001/user/stats?Id=${user_id}`,
@@ -77,6 +77,53 @@ function Test() {
     dispatch(SyncStateData(userStateData));
     //console.log(userStateData);
   };
+
+  //function to get Pending todo from stats and display it
+  function TodoDataPending(stateTodo) {
+    const TodoArray = [];
+    stateTodo.map((task, index) => {
+      //const keys = Object.keys(task);
+      const todoObject = {
+        user_id: task._id,
+        taskTitle: task.content,
+        taskDescription: task.description,
+        isPriority: task.priority == 0 ? false : true,
+        isDone: task.checked,
+        taskStat: task.attachedAttribute,
+      };
+      if (!todoObject.isDone) {
+        TodoArray.push(todoObject);
+      }
+    });
+    //console.log(TodoArray);
+    return TodoArray;
+  };
+
+  // function to get completed todo from stats and display it
+  function TodoDataCompleted(stateTodo) {
+    const TodoArray = [];
+    stateTodo.map((task, index) => {
+      const keys = Object.keys(task);
+      const todoObject = {
+        user_id: task.userId,
+        todo_id: task._id,
+        taskTitle: task.content,
+        taskDescription: task.description,
+        isPriority: task.priority == 0 ? false : true,
+        isDone: task.checked,
+        taskStat: task.attachedAttribute,
+      };
+      //console.log(todoObject.todo_id)
+      if (todoObject.isDone) {
+        TodoArray.push(todoObject);
+      }
+    });
+    //console.log(TodoArray);
+    return TodoArray;
+  };
+
+  // Create User Todo
+  const CreateTodo = async() => {};
 
   // Execute the function when page reloads.
   useEffect(() => {
@@ -124,7 +171,7 @@ function Test() {
                     <Button onClick = {SyncData}>toggle</Button>
                   </div>*/}
 
-              <ToDoList />
+              <ToDoList todoPending = {TodoDataPending} todoCompleted = {TodoDataCompleted} />
             </Grid>
           </Grid>
         </Box>
