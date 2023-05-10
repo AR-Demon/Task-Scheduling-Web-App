@@ -21,18 +21,22 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { defaultTheme } from "../theme/defaultThemes";
 import React from "react";
-import { Add, Brightness1Outlined, TaskAlt } from "@mui/icons-material";
+import { Add, Brightness1Outlined, Sync, TaskAlt } from "@mui/icons-material";
 import { centerStyle, modalStyle, circleButtons } from "../theme/TodoTheme";
 import { TaskCard } from "../widget/TaskCardWidget";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import StatContext from "./StatContext";
 import { useContext } from "react";
+import { SyncStateData } from "../../../state/userReducer";
 
 
 
 export function ToDoList(props) {
+  const dispatch = useDispatch();
+
   const stateTodo = useSelector((state) => state.Todo);
+  const user = useSelector((state) => state.user);
   // const [statLevel, setStatLevel] = useState({
   //   Strength: 0,
   //   Intelligence: 0,
@@ -83,10 +87,20 @@ export function ToDoList(props) {
   };
 
   const handleAddTask = (event) => {
-    const addTask = [...tasks, newTask];
-
+    const addTasks = [...tasks, newTask];
+    //change data to backend recognizing format
+    const CreateTodoBody = {
+      email: user.email,
+      content: newTask.taskTitle,
+      description: newTask.taskDescription,
+      priority: (newTask.isPriority)? 1 : 0,
+      label: "Today",
+      attachedAttribute: newTask.taskStat,
+    }
+    props.addTask(CreateTodoBody);
+    props.Sync();
     // const updatedTasks = [...tasks, newTask];
-    setTasks(addTask);
+    setTasks(addTasks);
     setNewTask({
       taskTitle: "",
       taskDescription: "",

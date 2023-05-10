@@ -123,7 +123,29 @@ function Test() {
   };
 
   // Create User Todo
-  const CreateTodo = async() => {};
+  const CreateTodo = async(BodyData) => {
+    const Response = await fetch(`http://localhost:3001/user/todo?Id=${user_id}&userName=Ar`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body:JSON.stringify(BodyData)
+    });
+    /* {
+        //CreateTodoBody
+        "email":"random01@gmail.com",
+        "content":"#050 TODO",
+        "description":"test for pending todo",
+        "priority":0,
+        "label":"Tomorrow",
+        "attachedAttribute":"Health",
+      } */
+
+    const Todo = await Response.json();
+    //console.log(Todo);
+    return Todo;
+  };
 
   // Execute the function when page reloads.
   useEffect(() => {
@@ -134,7 +156,8 @@ function Test() {
     getUserStats().then((data) => {
       dispatch(setUserStats(data));
     });
-  }, []);
+    //CreateTodo().then((data) => {console.log(data)});
+  }, [openStatus]);
 
 
   const theme = createTheme();
@@ -159,19 +182,21 @@ function Test() {
             columns={{ xs: 5, sm: 5, md: 5 }}
             ref={containerReference}
           >
-            {/*<Slide direction="right" in={openStatus} mountOnEnter unmountOnExit container={containerReference.current}>*/}
             <Fade in={openStatus} mountOnEnter unmountOnExit>
               <Grid item xs={2} sm={2} md={1}>
                 <UserStatsBar openStatus={openStatus} />
               </Grid>
             </Fade>
-            {/*</Slide>*/}
-            <Grid item xs sm md>
-              {/*<div>
-                    <Button onClick = {SyncData}>toggle</Button>
-                  </div>*/}
 
-              <ToDoList todoPending = {TodoDataPending} todoCompleted = {TodoDataCompleted} />
+            <Grid item xs sm md>
+
+              <ToDoList 
+              todoPending = {TodoDataPending} 
+              todoCompleted = {TodoDataCompleted}
+              addTask = {CreateTodo}
+              Sync = {SyncData}
+              />
+
             </Grid>
           </Grid>
         </Box>
