@@ -10,14 +10,14 @@ import {
   Typography,
   Stack,
 } from "@mui/material";
-import { useRef } from "react";
 import { defaultTheme } from "../theme/defaultThemes";
 import dobby from "../widget/dobby.png";
 import { StatIcon } from "../widget/statIcon";
+import { useContext } from "react";
+import StatContext from "./StatContext";
 
-function UserStatsBar(props) {
-  const containerReference = useRef(null);
-  const theme = createTheme();
+export function UserStatsBar() {
+  const { statLevel } = useContext(StatContext);
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box
@@ -39,16 +39,31 @@ function UserStatsBar(props) {
         <Avatar sx={{ width: 200, height: 200, marginTop: 15 }} src={dobby} />
 
         <Typography variant="h4">Dobby</Typography>
-        <Stack direction="column">
-          <StatIcon stat={"Strength"} />
-          <StatIcon stat={"Intelligence"} />
-          <StatIcon stat={"Charisma"} />
-          <StatIcon stat={"Creativity"} />
-          <StatIcon stat={"Health"} />
-        </Stack>
+        <Box>
+          <Stack direction={"row"}>
+            <StatIcon stat={"Strength"} />
+            {statLevel.Strength}
+          </Stack>
+          <Stack direction={"row"}>
+            <StatIcon stat={"Intelligence"} />
+            {statLevel.Intelligence}
+          </Stack>
+          <Stack direction={"row"}>
+            <StatIcon stat={"Charisma"} />
+            {statLevel.Charisma}
+          </Stack>
+
+          <Stack direction={"row"}>
+            <StatIcon stat={"Creativity"} />
+            {statLevel.Creativity}
+          </Stack>
+
+          <Stack direction={"row"}>
+            <StatIcon stat={"Health"} />
+            {statLevel.Health}
+          </Stack>
+        </Box>
       </Box>
     </ThemeProvider>
   );
 }
-
-export default UserStatsBar;
