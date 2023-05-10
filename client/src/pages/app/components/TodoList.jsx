@@ -26,8 +26,20 @@ import { centerStyle, modalStyle, circleButtons } from "../theme/TodoTheme";
 import { TaskCard } from "../widget/TaskCardWidget";
 import { useSelector } from "react-redux";
 
+import StatContext from "./StatContext";
+import { useContext } from "react";
+
 export function ToDoList() {
   const stateTodo = useSelector((state) => state.Todo);
+  // const [statLevel, setStatLevel] = useState({
+  //   Strength: 0,
+  //   Intelligence: 0,
+  //   Health: 0,
+  //   Charisma: 0,
+  //   Creativity: 0,
+  // });
+  const { handleStatLevel } = useContext(StatContext);
+
   const [tasks, setTasks] = useState([]);
   const [completedTasks, setCompletedTasks] = useState([]);
   const [newTask, setNewTask] = useState({
@@ -57,17 +69,15 @@ export function ToDoList() {
       newTask.isPriority = true;
     }
     setNewTask(newTask);
-    console.log(newTask.isPriority);
   };
   const handleStat = (event) => {
-    console.log(event.target.value);
     newTask.taskStat = event.target.value;
     setNewTask(newTask);
   };
 
   const handleAddTask = (event) => {
     const addTask = [...tasks, newTask];
-    console.log(newTask);
+
     // const updatedTasks = [...tasks, newTask];
     setTasks(addTask);
     setNewTask({
@@ -80,7 +90,7 @@ export function ToDoList() {
     setOpen(false);
   };
 
-  const handleDone = (index) => {
+  const handleComplete = (index) => {
     const editedTasks = [...tasks];
     const editedCTasks = [...completedTasks];
     const i = editedTasks.indexOf(index);
@@ -91,6 +101,18 @@ export function ToDoList() {
     setTasks(editedTasks);
     setCompletedTasks(editedCTasks);
   };
+  const handleDone = (index) => {
+    handleComplete(index);
+    handleStatLevel(index.taskStat);
+  };
+
+  // const handleStatLevel = (selectedStat) => {
+  //   const stats = statLevel;
+  //   console.log(selectedStat);
+  //   stats[selectedStat] += 5;
+  //   setStatLevel(stats);
+  //   <Levels statLevel={statLevel} />;
+  // };
 
   const handleDeleteTask = (index) => {
     const editedTasks = [...tasks];
@@ -104,7 +126,6 @@ export function ToDoList() {
     const i = editedCTasks.indexOf(index);
     editedCTasks.splice(i, 1);
     setCompletedTasks(editedCTasks);
-    console.log(index);
   };
 
   // const handleEditTaskChange = (event) => {
