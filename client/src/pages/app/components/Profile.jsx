@@ -73,7 +73,7 @@ export function UserStatsBar() {
             <Box sx={{ translate: -30 }}>
               <StatIcon stat={"Strength"} />
             </Box>
-            <Box sx={{ width: "100%" }}>
+            <Box sx={{ width: "80%" }}>
               <LinearProgress variant="determinate" value={progress} />
             </Box>
             {statLevel.Strength}

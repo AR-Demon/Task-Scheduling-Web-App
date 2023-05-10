@@ -1,13 +1,13 @@
-import 
-{ Box, 
-  Button, 
-  TextField, 
-  Typography, 
-  FormControl, 
-  InputLabel, 
-  OutlinedInput, 
-  InputAdornment, 
-  IconButton 
+import {
+  Box,
+  Button,
+  TextField,
+  Typography,
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import * as React from "react";
@@ -15,7 +15,7 @@ import { Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import { setUserLogin} from "../../state/userReducer";
+import { setUserLogin } from "../../state/userReducer";
 import { useState } from "react";
 
 const loginSchema = yup.object().shape({
@@ -53,11 +53,9 @@ const Form = () => {
       if (loggedIn.msg === "User Does Not Exist") {
         navigate("/auth/register");
         alert(loggedIn.msg + " or Invalid Email/Username");
-      }
-      else if (loggedIn.msg === "Invalid Credentials"){
+      } else if (loggedIn.msg === "Invalid Credentials") {
         alert(loggedIn.msg);
-      }
-      else {
+      } else {
         dispatch(
           setUserLogin({
             token: loggedIn.token,
@@ -114,32 +112,34 @@ const Form = () => {
               helperText={touched.password && errors.password}
               sx={{ gridColumn: "span 2" }}
           />*/}
-          <FormControl sx={{ gridColumn: "span 2" }} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-password"
-            type={showPassword ? 'text' : 'password'}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-            label="Password"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            value={values.password}
-            name="password"
-            error={Boolean(touched.password) && Boolean(errors.password)}
-            helperText={touched.password && errors.password}
-          />
-        </FormControl>
+            <FormControl sx={{ gridColumn: "span 2" }} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Password
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Password"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.password}
+                name="password"
+                error={Boolean(touched.password) && Boolean(errors.password)}
+                helperText={touched.password && errors.password}
+              />
+            </FormControl>
             <Box gridColumn="span 2">
               <Button
                 fullWidth

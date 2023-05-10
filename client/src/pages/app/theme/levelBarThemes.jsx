@@ -3,9 +3,9 @@ export const levelBarTheme = {
   marginLeft: 4,
   bgcolor: "transparent",
   backdropFilter: "invert(10%)",
-  borderRadius: "50em",
+  borderRadius: 4,
   minWidth: 350,
   margin: 1,
   maxHeight: 75,
-  boxShadow: " 0 0 6px 2px #f5dfe1",
+  boxShadow: " 0 0 5px 4px #ffffff",
 };
