@@ -8,7 +8,7 @@ import {
   Favorite,
 } from "@mui/icons-material";
 
-export function StatIcon(props) {
+export function StatIconLevel(props) {
   switch (props.stat) {
     case "Strength":
       return (
@@ -16,12 +16,12 @@ export function StatIcon(props) {
           sx={{
             bgcolor: "icon.background",
             color: "#f5c658",
-            margin: 2,
-            padding: 1,
+            padding: 1.5,
             alignSelf: "center",
+            boxShadow: " 0 0 2px 4px #ffffff",
           }}
         >
-          <FitnessCenter />
+          <FitnessCenter sx={{ fontSize: 30 }} />
         </Avatar>
       );
 
@@ -32,12 +32,12 @@ export function StatIcon(props) {
             // bgcolor: "#5296A5",
             bgcolor: "icon.background",
             color: "#0d78ba",
-            margin: 2,
-            padding: 1,
+            padding: 1.5,
             alignSelf: "center",
+            boxShadow: " 0 0 2px 4px #ffffff",
           }}
         >
-          <Psychology />
+          <Psychology sx={{ fontSize: 30 }} />
         </Avatar>
       );
     case "Creativity":
@@ -46,12 +46,12 @@ export function StatIcon(props) {
           sx={{
             color: "#e37917",
             bgcolor: "icon.background",
-            margin: 2,
-            padding: 1,
+            padding: 1.5,
             alignSelf: "center",
+            boxShadow: " 0 0 2px 4px #ffffff",
           }}
         >
-          <ColorLens />
+          <ColorLens sx={{ fontSize: 30 }} />
         </Avatar>
       );
 
@@ -61,13 +61,13 @@ export function StatIcon(props) {
           sx={{
             bgcolor: "icon.background",
             color: "#b458f5",
-            margin: 2,
-            padding: 1,
+            padding: 1.5,
             alignSelf: "center",
             bgcolor: "#1B1212",
+            boxShadow: " 0 0 2px 4px #ffffff",
           }}
         >
-          <AutoAwesome />
+          <AutoAwesome sx={{ fontSize: 30 }} />
         </Avatar>
       );
 
@@ -77,12 +77,12 @@ export function StatIcon(props) {
           sx={{
             color: "#3CAB34",
             bgcolor: "icon.background",
-            margin: 2,
-            padding: 1,
+            padding: 1.5,
             alignSelf: "center",
+            boxShadow: " 0 0 2px 4px #ffffff",
           }}
         >
-          <Favorite />
+          <Favorite sx={{ fontSize: 30 }} />
         </Avatar>
       );
     default:

@@ -14,7 +14,7 @@ export function StatProvider({ children }) {
   const handleStatLevel = (selectedStat) => {
     const stats = statLevel;
     console.log(selectedStat);
-    stats[selectedStat] += 5;
+    stats[selectedStat] += 20;
     setStatLevel(stats);
     console.log(statLevel);
   };

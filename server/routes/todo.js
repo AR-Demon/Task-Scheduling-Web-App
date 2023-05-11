@@ -5,10 +5,13 @@ import {verifyToken} from "../middleware/auth.js"
 const Routes = express.Router();
 
 /* TODO ROUTES */
-//create todo
+
+//create todo for the user with specific user id
 Routes.post("/todo", verifyToken, createTodo);
+
 //get single todo of user from todoId 
 Routes.get("/todo",verifyToken ,GetTodo);
+
 //get multiple Todos pf the user by userId
 Routes.get("/todos",verifyToken, GetTodos);
 Routes.delete("/todo",verifyToken, deleteTodo);

@@ -20,6 +20,9 @@ export const defaultTheme = createTheme({
     text: {
       main: "white",
     },
+    icon: {
+      background: "#1B1212",
+    },
   },
   typography: {
     fontFamily: "Lusitana, Outfit",

@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import tracker from "./tracker.png";
+import tracker from "../../../assets/tracker.png";
 
 export function TrackerLogo() {
   return (

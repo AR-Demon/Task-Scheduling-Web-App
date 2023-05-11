@@ -37,7 +37,7 @@ function Test() {
   const user_id = useSelector((state) => state.user._id);
   const token = useSelector((state) => state.token);
 
-  //function to get particular user todo
+  //function to get this user todo
   const getUserTodo = async () => {
     const Response = await fetch(
       `http://localhost:3001/user/todos?Id=${user_id}`,
@@ -53,7 +53,7 @@ function Test() {
     return UserTodoData;
   };
 
-  //function to get particular user stats
+  //function to get this user stats
   const getUserStats = async () => {
     const Response = await fetch(
       `http://localhost:3001/user/stats?Id=${user_id}`,
@@ -68,25 +68,117 @@ function Test() {
     const userStatsData = await Response.json();
     return userStatsData;
   };
-
-  const SyncData = async () => {
-    const userStateData = {
+  
+  const SyncData = async() => {
+    const userData = {
       userTodo: await getUserTodo(),
       userStats: await getUserStats(),
     };
-    dispatch(SyncStateData(userStateData));
-    //console.log(userStateData);
+    dispatch(SyncStateData(userData));
+    //console.log(userData);
+    return;
   };
 
+  //function to get Pending todo from stats and display it
+  function TodoDataPending(stateTodo) {
+    const TodoArray = [];
+    stateTodo.map((task, index) => {
+      //const keys = Object.keys(task);
+      const todoObject = {
+        user_id: task.userId,
+        todo_id:task._id,
+        taskTitle: task.content,
+        taskDescription: task.description,
+        isPriority: task.priority == 0 ? false : true,
+        isDone: task.checked,
+        taskStat: task.attachedAttribute,
+      };
+      if (!todoObject.isDone) {
+        TodoArray.push(todoObject);
+      }
+    });
+    //console.log(TodoArray);
+    return TodoArray;
+  };
+
+  // function to get completed todo from stats and display it
+  function TodoDataCompleted(stateTodo) {
+    const TodoArray = [];
+    stateTodo.map((task, index) => {
+      //const keys = Object.keys(task);
+      const todoObject = {
+        user_id: task.userId,
+        todo_id: task._id,
+        taskTitle: task.content,
+        taskDescription: task.description,
+        isPriority: task.priority == 0 ? false : true,
+        isDone: task.checked,
+        taskStat: task.attachedAttribute,
+      };
+      //console.log(todoObject.todo_id)
+      if (todoObject.isDone) {
+        TodoArray.push(todoObject);
+      }
+    });
+    //console.log(TodoArray);
+    return TodoArray;
+  };
+
+  // Create User Todo
+  const CreateTodo = async(BodyData) => {
+    const Response = await fetch(`http://localhost:3001/user/todo?Id=${user_id}&userName=Ar`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body:JSON.stringify(BodyData)
+    });
+
+    const Todo = await Response.json();
+    return Todo._id;
+  };
+
+  // delete User Todo
+  const DeleteTodo = async(TodoId) => {
+    //console.log(TodoId);
+    const response = await fetch(`http://localhost:3001/user/todo?todoId=${TodoId}`, {
+      method:"DELETE",
+      headers:{
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const DeleteMessage = await response.json();
+    //SyncData().then((data) => {dispatch(SyncStateData(data))});
+    return DeleteMessage;
+
+  }
+
+  const TodoComplete = async(TodoId, CompleteStatus) => {
+    const response = await fetch(`http://localhost:3001/user/todo/complete/${TodoId}`, {
+      method:"PATCH",
+      headers:{
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body:JSON.stringify(
+        {
+        "checked": !CompleteStatus,
+        "completed_at":""
+        }
+        ),
+    });
+
+    const message = await response.json();
+    return !CompleteStatus;
+  }
+
   // Execute the function when page reloads.
+  
   useEffect(() => {
-    getUserTodo().then((data) => {
-      //console.log(data);
-      dispatch(setUserTodo(data));
-    });
-    getUserStats().then((data) => {
-      dispatch(setUserStats(data));
-    });
+    SyncData();
   }, []);
 
 
@@ -112,19 +204,23 @@ function Test() {
             columns={{ xs: 5, sm: 5, md: 5 }}
             ref={containerReference}
           >
-            {/*<Slide direction="right" in={openStatus} mountOnEnter unmountOnExit container={containerReference.current}>*/}
             <Fade in={openStatus} mountOnEnter unmountOnExit>
               <Grid item xs={2} sm={2} md={1}>
                 <UserStatsBar openStatus={openStatus} />
               </Grid>
             </Fade>
-            {/*</Slide>*/}
-            <Grid item xs sm md>
-              {/*<div>
-                    <Button onClick = {SyncData}>toggle</Button>
-                  </div>*/}
 
-              <ToDoList />
+            <Grid item xs sm md>
+
+              <ToDoList 
+              todoPending = {TodoDataPending} 
+              todoCompleted = {TodoDataCompleted}
+              addTask = {CreateTodo}
+              deleteTodo = {DeleteTodo}
+              completeTodo = {TodoComplete}
+              Sync = {() =>{SyncData(getUserTodo(), getUserStats())}}
+              />
+
             </Grid>
           </Grid>
         </Box>
@@ -133,3 +229,16 @@ function Test() {
   );
 }
 export default Test;
+
+
+/*useEffect(() => {
+    getUserTodo().then((data) => {
+      //console.log(data);
+      dispatch(setUserTodo(data));
+    });
+    
+    getUserStats().then((data) => {
+      dispatch(setUserStats(data));
+    });
+    //CreateTodo().then((data) => {console.log(data)});
+  }, []);*/
