@@ -43,12 +43,17 @@ export const updateStats = async(req,res) => {
 
         //user_Id for finding user stats
         const user_Id = req.query.userId;
+        const token = req.query.token;
+        
 
         //url of getTodo backend
         const url = "http://localhost:3001/user/todo?todoId="+req.query.todoId;
 
         //fetching todo with the url and storing in response
-        const response = await fetch(url);
+        const response = await fetch(url,{
+            method:"GET",
+            headers:{Authorization:`Bearer ${token}`},
+        });
 
         //converting response into json to access associatedAttribute
         const userTodo = await response.json();
@@ -56,10 +61,9 @@ export const updateStats = async(req,res) => {
         //error handling if there are any errors
         if(!userTodo){return res.status(400).json({msg:"failed",text:url});}
         if(userTodo.msg == "User Have No Todo"){return res.status(404).json({msg:"Todo not Found!"});}
-        //if(userTodo.status == 410){return res.status(404).json({msg:"Todo not Found!"});}
 
         //userAttribute store the attribute of the user todo
-        const userAttribute = userTodo.attachedAttribute;
+        const todoAttribute = userTodo.attachedAttribute;
         //userStats store full user stats 
         const userStats = await UserStats.findOne({user_Id});
         if(!userStats){return res.status(404).json({msg:"Invalid UserId"});}
@@ -70,9 +74,15 @@ export const updateStats = async(req,res) => {
             2.associated stats status is incremented by 1, if status reaches 5 reset it to zero and stats xp is incremented by X
             3.then i Don't know
         */
+       let updatedUserStats = userStats;
+       let updatedAttribute = {
+        "":"",
+       };
 
-        res.status(200).json({userAttribute,userStats});
-        //const userStats = await UserStats.findOne({user_Id});
+       console.log(updatedUserStats);
+
+
+        res.status(200).json({attribute:todoAttribute, Stats:updatedUserStats});
 
     } catch (error) {
         res.status(500).json({error: error.message});

@@ -57,9 +57,9 @@ export const updateTodo = async(req, res) => {
                 _date:req.body.date,
                 date:req.body.date,
                 isRecurring:false,
-                string:"hello",
+                string:"hi",
             }
-        }, {new: true, runValidators: true});
+        }, {new: true, runValidators: true, omitUndefined: true});
         if(!userTodo){return res.status(404).json({error:'User Todo Not Found'});}
         res.status(200).json(userTodo);
     }catch(error){
