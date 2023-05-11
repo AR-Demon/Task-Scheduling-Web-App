@@ -19,7 +19,7 @@ export const modalStyle = {
   display: "flex",
   flexDirection: "column",
   color: "#65000B",
-  backgroundColor: "#686868	",
+  backgroundColor: "#E8E8E8	",
   padding: 40,
   outline: "none",
   gap: 20,
@@ -27,3 +27,5 @@ export const modalStyle = {
   justifyContent: "space-around",
   borderRadius: 20,
 };
+
+export const taskCardIcons = {};
