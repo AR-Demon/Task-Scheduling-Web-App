@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ThemeProvider } from "@emotion/react";
 import {
   Drawer,
@@ -19,15 +19,15 @@ import {
 
 import { defaultTheme } from "../theme/defaultThemes";
 import dobby from "../../../assets/dobby.png";
-import { useContext } from "react";
-import StatContext from "./StatContext";
 import { levelBarTheme } from "../theme/levelBarThemes";
 import { StatIconLevel } from "../widget/statIconLevel";
+import { useSelector } from "react-redux";
 
 export function UserStatsBar() {
-  const [progress, setProgress] = React.useState(0);
+  const UserStats_State = useSelector((state) => state.userStats);
+  const [userStats, setUserStats] = useState(UserStats_State);
 
-  const { statLevel } = useContext(StatContext);
+  useEffect(() => {setUserStats(UserStats_State)}, [UserStats_State]);
 
   //Linear Progress function for style
   const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -42,34 +42,18 @@ export function UserStatsBar() {
     },
   }));
 
-  //code to refresh stat level state every 500 milliseconds for progress of level bar
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((oldProgress) => {
-        if (oldProgress === 100) {
-          return 0;
-        }
-        return statLevel.Strength;
-      });
-    }, 500);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
-
   //Returns a level bar with styled linear progress and stat icon attached
-  function LevelBar(stat) {
+  function LevelBar(attributeName, attributeLevel, attributeXp) {
     return (
       <Box display={"flex"} alignItems={"center"}>
         <Box sx={{ translate: 40, zIndex: 1 }}>
-          <StatIconLevel stat={stat} />
+          <StatIconLevel stat={attributeName} />
         </Box>
         <Toolbar variant="dense" sx={levelBarTheme}>
           <Box sx={{ width: "80%", marginLeft: 5, marginRight: 2 }}>
-            <BorderLinearProgress variant="determinate" value={progress} />
+            <BorderLinearProgress variant="determinate" value={2*attributeXp} />
           </Box>
-          {statLevel[stat]}
+          {attributeLevel}
         </Toolbar>
       </Box>
     );
@@ -105,11 +89,11 @@ export function UserStatsBar() {
             gap: 3,
           }}
         >
-          {LevelBar("Strength")}
-          {LevelBar("Intelligence")}
-          {LevelBar("Health")}
-          {LevelBar("Charisma")}
-          {LevelBar("Creativity")}
+          {LevelBar("Strength",userStats.userAttribute.strengthLevel, userStats.userAttribute.strengthXp)}
+          {LevelBar("Intelligence",userStats.userAttribute.intelligenceLevel, userStats.userAttribute.intelligenceXp)}
+          {LevelBar("Health",userStats.userAttribute.healthLevel, userStats.userAttribute.healthXp)}
+          {LevelBar("Charisma",userStats.userAttribute.charismaLevel, userStats.userAttribute.charismaXp)}
+          {LevelBar("Creativity",userStats.userAttribute.creativityLevel,userStats.userAttribute.creativityXp)}
         </Box>
       </Box>
     </ThemeProvider>

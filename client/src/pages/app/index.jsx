@@ -21,7 +21,6 @@ import { useRef } from "react";
 import { ToDoList } from "./components/TodoList";
 import { defaultTheme } from "./theme/defaultThemes";
 import React, { useLayoutEffect } from "react";
-import { StatProvider } from "./components/StatContext";
 
 function Test() {
   console.log("MainApp rendered");
@@ -82,7 +81,7 @@ function Test() {
   //function to get Pending todo from stats and display it
   function TodoDataPending(stateTodo) {
     const TodoArray = [];
-    stateTodo.map((task, index) => {
+    stateTodo.map((task) => {
       //const keys = Object.keys(task);
       const todoObject = {
         user_id: task.userId,
@@ -174,6 +173,18 @@ function Test() {
     const message = await response.json();
     return !CompleteStatus;
   }
+  // function to Update User Stats
+  async function UpdateStats(Todo_Id){
+    const response = await fetch(`http://localhost:3001/user/stats/update?userId=${user_id}&todoId=${Todo_Id}&token=${token}`,{
+      method:"PATCH",
+      headers:{
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      }
+    });
+    const updatedStats = await response.json();
+    return updatedStats;
+  }
 
   // Execute the function when page reloads.
   
@@ -189,7 +200,6 @@ function Test() {
     document.body.style.backgroundColor = "black";
   });
   return (
-    <StatProvider>
       <ThemeProvider theme={defaultTheme}>
         <Box>
           <NavBar
@@ -218,6 +228,7 @@ function Test() {
               addTask = {CreateTodo}
               deleteTodo = {DeleteTodo}
               completeTodo = {TodoComplete}
+              statsUpdate = {UpdateStats}
               Sync = {() =>{SyncData(getUserTodo(), getUserStats())}}
               />
 
@@ -225,7 +236,6 @@ function Test() {
           </Grid>
         </Box>
       </ThemeProvider>
-    </StatProvider>
   );
 }
 export default Test;
