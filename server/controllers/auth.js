@@ -26,7 +26,11 @@ export const register = async (req, res) => {
 
         const saveUser = await newUser.save();
         delete saveUser.password;
-        res.status(201).json(saveUser);
+        const response = await fetch(`http://localhost:3001/user/stats?Id=${saveUser._id}`, {
+            method:"POST",
+        });
+        const CreateUserStats = await response.json();
+        res.status(201).json({saveUser, CreateUserStats});
     }catch(error){
         res.status(500).json({ error : error.message}); 
     }
