@@ -25,9 +25,34 @@ import { useSelector } from "react-redux";
 
 export function UserStatsBar() {
   const UserStats_State = useSelector((state) => state.userStats);
-  const [userStats, setUserStats] = useState(UserStats_State);
+  const [userStats, setUserStats] = useState({
+    "userAttribute": {
+        "strengthLevel": 0,
+        "strengthStatus": 0,
+        "strengthXp": 0,
+        "intelligenceLevel": 0,
+        "intelligenceStatus": 0,
+        "intelligenceXp": 0,
+        "healthLevel": 0,
+        "healthStatus": 0,
+        "healthXp": 0,
+        "charismaLevel": 0,
+        "charismaStatus": 0,
+        "charismaXp": 0,
+        "creativityLevel": 0,
+        "creativityStatus": 0,
+        "creativityXp": 0
+    },
+    "userLevel": 0,
+    "userLevelExp": 0,
 
-  useEffect(() => {setUserStats(UserStats_State)}, [UserStats_State]);
+});
+
+  useEffect(() => {
+    if(UserStats_State == null){}
+  else{setUserStats(UserStats_State)}
+    
+  }, [UserStats_State]);
 
   //Linear Progress function for style
   const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({

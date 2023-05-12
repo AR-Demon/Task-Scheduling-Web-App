@@ -4,7 +4,7 @@ import {verifyToken} from "../middleware/auth.js"
 const Routes = express.Router();
 
 /* User Stats Routes */
-Routes.post("/stats",verifyToken,createStats);
+Routes.post("/stats",createStats);
 Routes.patch("/stats/reset", verifyToken, resetUserStats);
 Routes.patch("/stats/update",verifyToken,updateStats);
 Routes.get("/stats",verifyToken,getStats);
