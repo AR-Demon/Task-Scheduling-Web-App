@@ -23,6 +23,7 @@ import { StatIconLevel } from "../widget/statIconLevel";
 import { useSelector } from "react-redux";
 
 export function UserStatsBar() {
+  const userName = useSelector((state) => state.user.userName)
   const UserStats_State = useSelector((state) => state.userStats);
   const [userStats, setUserStats] = useState({
     userAttribute: {
@@ -47,10 +48,9 @@ export function UserStatsBar() {
   });
 
   useEffect(() => {
-    if (UserStats_State == null) {
-    } else {
-      setUserStats(UserStats_State);
-    }
+    //can set if not null setUserStats(USerStats) 
+    if(UserStats_State == null){}
+  else{setUserStats(UserStats_State)}
   }, [UserStats_State]);
 
   //Returns a level bar with styled linear progress and stat icon attached
@@ -96,6 +96,7 @@ export function UserStatsBar() {
       >
         <Avatar sx={{ width: 200, height: 200, marginTop: 12 }} src={dobby} />
 
+
         <Box
           sx={{
             marginLeft: 5,
@@ -107,7 +108,7 @@ export function UserStatsBar() {
             alignItems: "center",
           }}
         >
-          <Typography variant="h4">Dobby</Typography>
+          <Typography variant="h4">{userName}</Typography>
           <CircularProgressbarWithChildren value={userStats.userLevelExp}>
             <Typography>{userStats.userLevel}</Typography>
           </CircularProgressbarWithChildren>
