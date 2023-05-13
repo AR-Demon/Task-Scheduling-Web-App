@@ -8,6 +8,7 @@ import {
   OutlinedInput,
   InputAdornment,
   IconButton,
+  ThemeProvider,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import * as React from "react";
@@ -17,10 +18,11 @@ import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { setUserLogin } from "../../state/userReducer";
 import { useState } from "react";
+import { defaultTheme } from "../app/theme/defaultThemes";
 
 const loginSchema = yup.object().shape({
-  email: yup.string().email("Invalid Email").required("Required"),
-  password: yup.string().required("Required"),
+  email: yup.string(),
+  password: yup.string(),
 });
 
 const initialValueLogin = {
@@ -84,12 +86,12 @@ const Form = () => {
       }) => (
         <form onSubmit={handleSubmit}>
           <Box
-            display="grid"
-            gridTemplateColumns="repeat(2, minmax(0,1fr))"
-            gap={1}
+            display="flex"
             sx={{
-              mx: 0.5,
-              padding: 1,
+              height: 300,
+              width: 400,
+              flexDirection: "column",
+              gap: 5,
             }}
           >
             <TextField
@@ -102,17 +104,8 @@ const Form = () => {
               helperText={touched.email && errors.email}
               sx={{ gridColumn: "span 2" }}
             />
-            {/*<TextField
-              label="Password"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.password}
-              name="password"
-              error={Boolean(touched.password) && Boolean(errors.password)}
-              helperText={touched.password && errors.password}
-              sx={{ gridColumn: "span 2" }}
-          />*/}
-            <FormControl sx={{ gridColumn: "span 2" }} variant="outlined">
+
+            <FormControl variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password">
                 Password
               </InputLabel>
@@ -142,20 +135,22 @@ const Form = () => {
             </FormControl>
             <Box gridColumn="span 2">
               <Button
-                fullWidth
                 variant="contained"
                 type="submit"
                 sx={{
-                  m: "1rem 0",
-                  p: "0.5em",
+                  display: "flex",
+                  width: 250,
+                  margin: "0 auto",
+                  fontFamily: "outfit",
+                  fontSize: 20,
                 }}
               >
                 Sign In
               </Button>
               <Typography
                 sx={{
-                  gridColumn: "span 2",
                   textAlign: "center",
+                  margin: 2.5,
                 }}
               >
                 Don't have an account? <Link to="/auth/register">Sign Up </Link>

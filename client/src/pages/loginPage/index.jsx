@@ -1,42 +1,42 @@
+import { defaultTheme } from "../app/theme/defaultThemes";
 import coffee from "./coffee.png";
 import Form from "./Form";
-import { Box, Typography } from "@mui/material";
+import { useLayoutEffect } from "react";
+import { Box, ThemeProvider, Typography } from "@mui/material";
+import { formTheme } from "../app/theme/loginFormThemes";
 
 const LoginPage = () => {
+  useLayoutEffect(() => {
+    document.body.style.backgroundColor = "black";
+  });
   return (
-    <Box
-      display="grid"
-      gridTemplateColumns="repeat(20, minmax(0, 1fr))"
-      sx={{ height: "100vh" }}
-    >
-      <Box
-        gridColumn="span 15"
-        sx={{
-          backgroundImage: `url(${coffee})`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          width: "100%",
-          backgroundPosition: "center",
-        }}
-      />
-      <Box
-        gridColumn="span 5"
-        sx={{
-          my: 30,
-        }}
-      >
-        <Typography
-          variant="h4"
-          gridColumn="span 2"
+    <ThemeProvider theme={defaultTheme}>
+      <Box display="flex" sx={{ height: "100%" }}>
+        <Box
           sx={{
-            textAlign: "center",
+            backgroundImage: `url(${coffee})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            width: 1500,
+            backgroundPosition: "center",
           }}
-        >
-          Sign In
-        </Typography>
-        <Form />
+        />
+        <Box sx={formTheme}>
+          <Typography
+            variant="h2"
+            gridColumn="span 2"
+            sx={{
+              textAlign: "center",
+              fontFamily: "Lusitana",
+              marginBottom: 5,
+            }}
+          >
+            Sign In
+          </Typography>
+          <Form />
+        </Box>
       </Box>
-    </Box>
+    </ThemeProvider>
   );
 };
 
