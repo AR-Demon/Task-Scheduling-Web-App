@@ -1,8 +1,16 @@
-import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Paper,
+  TextField,
+  ThemeProvider,
+  Typography,
+} from "@mui/material";
 import { Formik } from "formik";
 import { Link, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import { defaultTheme } from "../app/theme/defaultThemes";
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("Required"),
@@ -34,108 +42,124 @@ const Form = () => {
     );
 
     const savedUser = await savedUserResponse.json();
-    if(savedUser.error){alert("Email Already Taken");}
-    else if (savedUser) {
+    if (savedUser.error) {
+      alert("Email Already Taken");
+    } else if (savedUser) {
       navigate("/auth/login");
     }
     //onSubmitProps.resetForm();
   };
   return (
-    <Formik
-      onSubmit={handleFormSubmit}
-      initialValues={initialValueRegister}
-      validationSchema={registerSchema}
-    >
-      {({
-        values,
-        errors,
-        touched,
-        handleBlur,
-        handleChange,
-        handleSubmit,
-        setFieldValue,
-        resetForm,
-      }) => (
-        <form onSubmit={handleSubmit}>
-          <Box
-            display="grid"
-            gridTemplateColumns="repeat(2, minmax(0,1fr))"
-            gap={1}
-            sx={{
-              mx: 0.5,
-              padding: 1,
-            }}
-          >
-            <TextField
-              label="First Name"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.firstName}
-              name="firstName"
-              error={Boolean(touched.firstName) && Boolean(errors.firstName)}
-              helperText={touched.firstName && errors.firstName}
-              sx={{ gridColumn: "span 1" }}
-            />
-            <TextField
-              label="Last Name"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.lastName}
-              name="lastName"
-              error={Boolean(touched.lastName) && Boolean(errors.lastName)}
-              helperText={touched.lastName && errors.lastName}
-              sx={{ gridColumn: "span 1" }}
-            />
-            <TextField
-              label="User Name"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.userName}
-              name="userName"
-              error={Boolean(touched.userName) && Boolean(errors.userName)}
-              helperText={touched.userName && errors.userName}
-              sx={{ gridColumn: "span 2" }}
-            />
-            <TextField
-              label="Email"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.email}
-              name="email"
-              error={Boolean(touched.email) && Boolean(errors.email)}
-              helperText={touched.email && errors.email}
-              sx={{ gridColumn: "span 2" }}
-            />
-            <TextField
-              label="Password"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.password}
-              name="password"
-              error={Boolean(touched.password) && Boolean(errors.password)}
-              helperText={touched.password && errors.password}
-              sx={{ gridColumn: "span 1" }}
-            />
-            <TextField
-              label="Confirm Password"
+    <ThemeProvider theme={defaultTheme}>
+      <Formik
+        onSubmit={handleFormSubmit}
+        initialValues={initialValueRegister}
+        validationSchema={registerSchema}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleBlur,
+          handleChange,
+          handleSubmit,
+          setFieldValue,
+          resetForm,
+        }) => (
+          <form onSubmit={handleSubmit}>
+            <Box
+              display="grid"
+              gridTemplateColumns="repeat(2, minmax(0,1fr))"
+              gap={2}
               sx={{
-                gridColumn: "span 1",
+                mx: 0.5,
+                padding: 1,
               }}
-            />
-            <Box gridColumn="span 2">
+            >
+              <TextField
+                label="First Name"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.firstName}
+                name="firstName"
+                error={Boolean(touched.firstName) && Boolean(errors.firstName)}
+                helperText={touched.firstName && errors.firstName}
+                sx={{ gridColumn: "span 1" }}
+              />
+              <TextField
+                label="Last Name"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.lastName}
+                name="lastName"
+                error={Boolean(touched.lastName) && Boolean(errors.lastName)}
+                helperText={touched.lastName && errors.lastName}
+                sx={{ gridColumn: "span 1" }}
+              />
+              <TextField
+                label="User Name"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.userName}
+                name="userName"
+                error={Boolean(touched.userName) && Boolean(errors.userName)}
+                helperText={touched.userName && errors.userName}
+                sx={{ gridColumn: "span 2" }}
+              />
+              <TextField
+                label="Email"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.email}
+                name="email"
+                error={Boolean(touched.email) && Boolean(errors.email)}
+                helperText={touched.email && errors.email}
+                sx={{ gridColumn: "span 2" }}
+              />
+              <TextField
+                label="Password"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.password}
+                name="password"
+                error={Boolean(touched.password) && Boolean(errors.password)}
+                helperText={touched.password && errors.password}
+                sx={{ gridColumn: "span 1" }}
+              />
+              <TextField
+                label="Confirm Password"
+                sx={{
+                  gridColumn: "span 1",
+                }}
+              />
+            </Box>
+            <Box
+              sx={{
+                margin: 2,
+                gap: 2,
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
               <Button
-                fullWidth
                 variant="contained"
                 type="submit"
                 sx={{
-                  m: "1rem 0",
-                  p: "0.5em",
+                  display: "flex",
+                  width: 250,
+                  margin: "auto",
+
+                  fontFamily: "outfit",
+                  fontSize: 20,
                 }}
               >
                 Sign Up
               </Button>
+
               <Typography
-                onClick = {() => {resetForm();}}
+                onClick={() => {
+                  resetForm();
+                }}
                 sx={{
                   gridColumn: "span 2",
                   textAlign: "center",
@@ -145,10 +169,10 @@ const Form = () => {
                 here.
               </Typography>
             </Box>
-          </Box>
-        </form>
-      )}
-    </Formik>
+          </form>
+        )}
+      </Formik>
+    </ThemeProvider>
   );
 };
 
