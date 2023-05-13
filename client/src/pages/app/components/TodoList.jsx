@@ -153,7 +153,7 @@ export function ToDoList(props) {
           sx={{
             height: "100%",
 
-            width: "83%",
+            width: "84%",
             paddingTop: 4,
             marginTop: 20,
             marginLeft: 23,
