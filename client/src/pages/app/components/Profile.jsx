@@ -110,7 +110,7 @@ export function UserStatsBar() {
         >
           <Typography variant="h4">{userName}</Typography>
           <CircularProgressbarWithChildren value={userStats.userLevelExp}>
-            <Typography>{userStats.userLevel}</Typography>
+            <Typography variant="h5">{userStats.userLevel}</Typography>
           </CircularProgressbarWithChildren>
         </Box>
 
