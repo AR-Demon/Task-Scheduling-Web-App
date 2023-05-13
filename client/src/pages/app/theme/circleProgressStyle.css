@@ -31,7 +31,7 @@
 .CircularProgressbar .CircularProgressbar-text {
   fill: #ffffff;
   font-size: 20px;
-  dominant-baseline: middle;
+
   text-anchor: middle;
 }
 
