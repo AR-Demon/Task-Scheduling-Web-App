@@ -26,7 +26,8 @@ import { centerStyle, modalStyle, circleButtons } from "../theme/TodoTheme";
 import { TaskCard } from "../widget/TaskCardWidget";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-
+import * as yup from "yup";
+import { Formik } from "formik";
 
 
 export function ToDoList(props) {
@@ -49,6 +50,28 @@ export function ToDoList(props) {
   const [editTask, setEditTask] = useState("");
   const [editIndex, setEditIndex] = useState(-1);
   const [editOpen, setEditOpen] = useState(false);
+
+  const taskSchema = yup.object().shape(
+    {
+    user_id: yup.string(),
+    todo_id:yup.string(),
+    taskTitle: yup.string().required("Required"),
+    taskDescription: yup.string().required("Required"),
+    isPriority: yup.number(),
+    isDone: yup.boolean(),
+    taskStat: yup.string().required("Required")
+    }
+  )
+
+  const taskInitialValues = {
+    user_id: user._id,
+    todo_id:"",
+    taskTitle: "",
+    taskDescription: "click to add description",
+    isPriority: false,
+    isDone: false,
+    taskStat: "",
+  }
 
   const [syncStatus, setSyncStatus] = useState(true);
 
@@ -269,7 +292,22 @@ export function ToDoList(props) {
             </TabPanel>
           </TabContext>
 
-          <Modal //Add Task Modal
+          <Formik
+          onSubmit={() => {}}
+          initialValues={taskInitialValues}
+          validationSchema={taskSchema}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleBlur,
+              handleChange,
+              handleSubmit,
+              setFieldValue,
+              resetForm,
+            }) => (
+              <Modal //Add Task Modal
             open={open}
             onClose={() => setOpen(false)}
             sx={centerStyle}
@@ -282,8 +320,12 @@ export function ToDoList(props) {
               <TextField
                 label="Task"
                 sx={{ width: "75%" }}
-                value={tasks.taskTitle}
-                onChange={handleTitle}
+                value={values.taskTitle}
+                name="taskTitle"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={Boolean(touched.taskTitle) && Boolean(errors.taskTitle)}
+                helperText={touched.taskTitle && errors.taskTitle}
                 inputProps={{ maxLength: 36 }}
               />
 
@@ -339,6 +381,8 @@ export function ToDoList(props) {
               </Button>
             </FormControl>
           </Modal>
+            )}
+          </Formik>
         </Paper>
       </div>
     </ThemeProvider>
