@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { ThemeProvider } from "@emotion/react";
 import {
-  Drawer,
   Box,
-  Grid,
-  Slide,
-  createTheme,
   Avatar,
   Typography,
-  Stack,
-  AppBar,
   Toolbar,
-  styled,
   LinearProgress,
-  linearProgressClasses,
   CircularProgress,
+  Stack,
 } from "@mui/material";
+
+import {
+  CircularProgressbar,
+  CircularProgressbarWithChildren,
+} from "react-circular-progressbar";
+import "../theme/circleProgressStyle.css";
 
 import { defaultTheme } from "../theme/defaultThemes";
 import dobby from "../../../assets/dobby.png";
@@ -24,48 +23,35 @@ import { StatIconLevel } from "../widget/statIconLevel";
 import { useSelector } from "react-redux";
 
 export function UserStatsBar() {
+  const userName = useSelector((state) => state.user.userName)
   const UserStats_State = useSelector((state) => state.userStats);
   const [userStats, setUserStats] = useState({
-    "userAttribute": {
-        "strengthLevel": 0,
-        "strengthStatus": 0,
-        "strengthXp": 0,
-        "intelligenceLevel": 0,
-        "intelligenceStatus": 0,
-        "intelligenceXp": 0,
-        "healthLevel": 0,
-        "healthStatus": 0,
-        "healthXp": 0,
-        "charismaLevel": 0,
-        "charismaStatus": 0,
-        "charismaXp": 0,
-        "creativityLevel": 0,
-        "creativityStatus": 0,
-        "creativityXp": 0
+    userAttribute: {
+      strengthLevel: 0,
+      strengthStatus: 0,
+      strengthXp: 0,
+      intelligenceLevel: 0,
+      intelligenceStatus: 0,
+      intelligenceXp: 0,
+      healthLevel: 0,
+      healthStatus: 0,
+      healthXp: 0,
+      charismaLevel: 0,
+      charismaStatus: 0,
+      charismaXp: 0,
+      creativityLevel: 0,
+      creativityStatus: 0,
+      creativityXp: 0,
     },
-    "userLevel": 0,
-    "userLevelExp": 0,
-
-});
+    userLevel: 0,
+    userLevelExp: 0,
+  });
 
   useEffect(() => {
+    //can set if not null setUserStats(USerStats) 
     if(UserStats_State == null){}
   else{setUserStats(UserStats_State)}
-    
   }, [UserStats_State]);
-
-  //Linear Progress function for style
-  const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
-    height: 10,
-    borderRadius: 10,
-    [`&.${linearProgressClasses.colorPrimary}`]: {
-      backgroundColor: "white",
-    },
-    [`& .${linearProgressClasses.bar}`]: {
-      borderRadius: 5,
-      backgroundColor: "text.main",
-    },
-  }));
 
   //Returns a level bar with styled linear progress and stat icon attached
   function LevelBar(attributeName, attributeLevel, attributeXp) {
@@ -76,7 +62,15 @@ export function UserStatsBar() {
         </Box>
         <Toolbar variant="dense" sx={levelBarTheme}>
           <Box sx={{ width: "80%", marginLeft: 5, marginRight: 2 }}>
-            <BorderLinearProgress variant="determinate" value={2*attributeXp} />
+            <LinearProgress
+              variant="determinate"
+              value={2 * attributeXp}
+              sx={{
+                animationDuration: "8s",
+                height: 10,
+                borderRadius: 10,
+              }}
+            />
           </Box>
           {attributeLevel}
         </Toolbar>
@@ -100,25 +94,59 @@ export function UserStatsBar() {
           width: "25vw",
         }}
       >
-        <Avatar sx={{ width: 175, height: 175, marginTop: 12 }} src={dobby} />
+        <Avatar sx={{ width: 200, height: 200, marginTop: 12 }} src={dobby} />
 
-        <CircularProgress variant="determinate" value={25} />
-
-        <Typography variant="h4">Dobby</Typography>
 
         <Box
           sx={{
-            marginTop: 15,
+            marginLeft: 5,
+            display: "flex",
+            flexDirection: "row",
+            maxHeight: 100,
+            maxWidth: 200,
+            gap: 2,
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="h4">{userName}</Typography>
+          <CircularProgressbarWithChildren value={userStats.userLevelExp}>
+            <Typography>{userStats.userLevel}</Typography>
+          </CircularProgressbarWithChildren>
+        </Box>
+
+        <Box
+          sx={{
+            marginTop: 3,
             display: "flex",
             flexDirection: "column",
             gap: 3,
           }}
         >
-          {LevelBar("Strength",userStats.userAttribute.strengthLevel, userStats.userAttribute.strengthXp)}
-          {LevelBar("Intelligence",userStats.userAttribute.intelligenceLevel, userStats.userAttribute.intelligenceXp)}
-          {LevelBar("Health",userStats.userAttribute.healthLevel, userStats.userAttribute.healthXp)}
-          {LevelBar("Charisma",userStats.userAttribute.charismaLevel, userStats.userAttribute.charismaXp)}
-          {LevelBar("Creativity",userStats.userAttribute.creativityLevel,userStats.userAttribute.creativityXp)}
+          {LevelBar(
+            "Strength",
+            userStats.userAttribute.strengthLevel,
+            userStats.userAttribute.strengthXp
+          )}
+          {LevelBar(
+            "Intelligence",
+            userStats.userAttribute.intelligenceLevel,
+            userStats.userAttribute.intelligenceXp
+          )}
+          {LevelBar(
+            "Health",
+            userStats.userAttribute.healthLevel,
+            userStats.userAttribute.healthXp
+          )}
+          {LevelBar(
+            "Charisma",
+            userStats.userAttribute.charismaLevel,
+            userStats.userAttribute.charismaXp
+          )}
+          {LevelBar(
+            "Creativity",
+            userStats.userAttribute.creativityLevel,
+            userStats.userAttribute.creativityXp
+          )}
         </Box>
       </Box>
     </ThemeProvider>

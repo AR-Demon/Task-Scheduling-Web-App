@@ -27,10 +27,7 @@ import { TaskCard } from "../widget/TaskCardWidget";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
-
-
 export function ToDoList(props) {
-
   const stateTodo = useSelector((state) => state.Todo);
   const user = useSelector((state) => state.user);
 
@@ -38,7 +35,7 @@ export function ToDoList(props) {
   const [completedTasks, setCompletedTasks] = useState([]);
   const [newTask, setNewTask] = useState({
     user_id: user._id,
-    todo_id:"",
+    todo_id: "",
     taskTitle: "",
     taskDescription: "Todo Description",
     isPriority: false,
@@ -83,10 +80,10 @@ export function ToDoList(props) {
       email: user.email,
       content: newTask.taskTitle,
       description: newTask.taskDescription,
-      priority: (newTask.isPriority)? 1 : 0,
+      priority: newTask.isPriority ? 1 : 0,
       label: "Today",
       attachedAttribute: newTask.taskStat,
-    }
+    };
     props.addTask(CreateTodoBody);
     props.Sync();
     setNewTask({
@@ -108,7 +105,6 @@ export function ToDoList(props) {
   const handleStatLevel = (Todo) => {
     props.statsUpdate(Todo.todo_id);
     props.Sync();
-
   };
   const handleDone = (Todo) => {
     handleComplete(Todo);
