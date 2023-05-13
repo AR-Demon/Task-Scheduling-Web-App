@@ -10,7 +10,8 @@ export const defaultTheme = createTheme({
     secondary: {
       main: "#383838", //to do list paper color
       medium: "#D3D3D3", //card description color
-      dark: "#E8E8E8", //card color
+      card: "#E8E8E8", //card color
+      cardPriority: "#e8b7bb", //card color when priority selected
     },
     background: {
       main: "#000000", //main background

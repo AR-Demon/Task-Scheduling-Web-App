@@ -86,6 +86,14 @@ function TaskTitle(index) {
   }
 }
 
+function PriorityBorder(index) {
+  if (index.isPriority == true) {
+    return "primary.main";
+  } else {
+    return "secondary.medium";
+  }
+}
+
 export function TaskCard(props) {
   return (
     <Grid container sx={{ display: "flex", flexWrap: "wrap" }}>
@@ -96,7 +104,9 @@ export function TaskCard(props) {
             sx={{
               display: "flex",
               flexDirection: "column",
-              backgroundColor: "secondary.dark",
+              backgroundColor: "secondary.card",
+              border: "solid 5px",
+              borderColor: PriorityBorder(index),
               color: "black",
               minHeight: 170,
               width: 370,
