@@ -24,6 +24,7 @@ import { StatIconLevel } from "../widget/statIconLevel";
 import { useSelector } from "react-redux";
 
 export function UserStatsBar() {
+  const userName = useSelector((state) => state.user.userName)
   const UserStats_State = useSelector((state) => state.userStats);
   const [userStats, setUserStats] = useState({
     "userAttribute": {
@@ -49,6 +50,7 @@ export function UserStatsBar() {
 });
 
   useEffect(() => {
+    //can set if not null setUserStats(USerStats) 
     if(UserStats_State == null){}
   else{setUserStats(UserStats_State)}
     
@@ -104,7 +106,7 @@ export function UserStatsBar() {
 
         <CircularProgress variant="determinate" value={25} />
 
-        <Typography variant="h4">Dobby</Typography>
+        <Typography variant="h4">{userName}</Typography>
 
         <Box
           sx={{
