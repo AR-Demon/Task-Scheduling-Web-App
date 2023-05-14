@@ -5,9 +5,13 @@ import LoginPage from "./pages/loginPage";
 import RegisterPage from "./pages/registerPage";
 import Test from "./pages/Test"
 import { useSelector } from "react-redux";
+import { useLayoutEffect } from "react";
 
 function App() {
   const isAuth = Boolean(useSelector((state) => state.token));
+  useLayoutEffect(() => {
+    document.body.style.backgroundColor = "black";
+  });
   return (
     <div className="app">
       <BrowserRouter>
