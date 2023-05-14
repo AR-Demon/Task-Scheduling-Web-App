@@ -5,13 +5,21 @@ import LoginPage from "./pages/loginPage";
 import RegisterPage from "./pages/registerPage";
 import Test from "./pages/Test"
 import { useSelector } from "react-redux";
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useEffect } from "react";
+import WebFont from "webfontloader";
 
 function App() {
   const isAuth = Boolean(useSelector((state) => state.token));
   useLayoutEffect(() => {
     document.body.style.backgroundColor = "black";
   });
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ["Lusitana", "Outfit"],
+      },
+    });
+  }, []);
   return (
     <div className="app">
       <BrowserRouter>
