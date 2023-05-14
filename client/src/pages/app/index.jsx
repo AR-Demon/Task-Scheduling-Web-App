@@ -203,10 +203,6 @@ function Test() {
 
   const theme = createTheme();
   const containerReference = useRef(null);
-
-  useLayoutEffect(() => {
-    document.body.style.backgroundColor = "black";
-  });
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box>
