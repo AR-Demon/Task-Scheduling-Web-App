@@ -15,13 +15,13 @@ export function NavBar(props) {
   const theme = useTheme();
 
   //webLoader module to load custom fonts from google
-  useEffect(() => {
+  /*useEffect(() => {
     WebFont.load({
       google: {
         families: ["Lusitana", "Outfit"],
       },
     });
-  }, []);
+  }, []);*/
 
   //Dispatch function for Logout functionality
   const dispatch = useDispatch();
