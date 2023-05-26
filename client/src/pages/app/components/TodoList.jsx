@@ -26,6 +26,7 @@ import { centerStyle, modalStyle, circleButtons } from "../theme/TodoTheme";
 import { TaskCard } from "../widget/TaskCardWidget";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import { Formik } from "formik";
 
 export function ToDoList(props) {
   const stateTodo = useSelector((state) => state.Todo);
@@ -265,6 +266,7 @@ export function ToDoList(props) {
             </TabPanel>
           </TabContext>
 
+          <Formik>
           <Modal //Add Task Modal
             open={open}
             onClose={() => setOpen(false)}
@@ -335,6 +337,7 @@ export function ToDoList(props) {
               </Button>
             </FormControl>
           </Modal>
+          </Formik>
         </Paper>
       </div>
     </ThemeProvider>

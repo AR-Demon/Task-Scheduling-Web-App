@@ -26,7 +26,8 @@ function Test() {
   console.log("MainApp rendered");
   //useDispatch to use Reducer Function for local storage
   const dispatch = useDispatch();
-
+  const [counter, onCounterChange] = useState(0);
+  function counterChange (){onCounterChange((counter+1)%10)}
   const [openStatus, setOpenStatus] = useState(true);
   const handleDrawerOpenStatus = () => {
     setOpenStatus(!openStatus);
@@ -220,7 +221,7 @@ function Test() {
         >
           <Fade in={openStatus} mountOnEnter unmountOnExit>
             <Grid item xs={2} sm={2} md={1}>
-              <UserStatsBar openStatus={openStatus} />
+              <UserStatsBar openStatus={openStatus} counter = {counter}/>
             </Grid>
           </Fade>
 
@@ -232,6 +233,8 @@ function Test() {
               deleteTodo={DeleteTodo}
               completeTodo={TodoComplete}
               statsUpdate={UpdateStats}
+              counter = {counter}
+              CounterChange = {counterChange}
               Sync={() => {
                 SyncData(getUserTodo(), getUserStats());
               }}
