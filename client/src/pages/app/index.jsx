@@ -22,12 +22,14 @@ import { ToDoList } from "./components/TodoList";
 import { defaultTheme } from "./theme/defaultThemes";
 import React, { useLayoutEffect } from "react";
 
-function Test() {
+function MainApp() {
   console.log("MainApp rendered");
   //useDispatch to use Reducer Function for local storage
   const dispatch = useDispatch();
   const [counter, onCounterChange] = useState(0);
-  function counterChange (){onCounterChange((counter+1)%10)}
+  function counterChange() {
+    onCounterChange((counter + 1) % 10);
+  }
   const [openStatus, setOpenStatus] = useState(true);
   const handleDrawerOpenStatus = () => {
     setOpenStatus(!openStatus);
@@ -204,13 +206,15 @@ function Test() {
 
   const theme = createTheme();
   const containerReference = useRef(null);
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box>
-        <NavBar
+        <NavBar //Component for navigation bar
           handelMenuClick={handleDrawerOpenStatus}
           sx={{ position: "fixed", zIndex: 1 }}
         />
+
         <Grid
           container
           direction="row"
@@ -221,20 +225,23 @@ function Test() {
         >
           <Fade in={openStatus} mountOnEnter unmountOnExit>
             <Grid item xs={2} sm={2} md={1}>
-              <UserStatsBar openStatus={openStatus} counter = {counter}/>
+              <UserStatsBar //Component for profile tab
+                openStatus={openStatus}
+                counter={counter}
+              />
             </Grid>
           </Fade>
 
           <Grid item xs sm md>
-            <ToDoList
+            <ToDoList //COmponent for to-do list
               todoPending={TodoDataPending}
               todoCompleted={TodoDataCompleted}
               addTask={CreateTodo}
               deleteTodo={DeleteTodo}
               completeTodo={TodoComplete}
               statsUpdate={UpdateStats}
-              counter = {counter}
-              CounterChange = {counterChange}
+              counter={counter}
+              CounterChange={counterChange}
               Sync={() => {
                 SyncData(getUserTodo(), getUserStats());
               }}
@@ -245,7 +252,7 @@ function Test() {
     </ThemeProvider>
   );
 }
-export default Test;
+export default MainApp;
 
 /*useEffect(() => {
     getUserTodo().then((data) => {

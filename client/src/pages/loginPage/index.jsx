@@ -1,9 +1,10 @@
 import { defaultTheme } from "../app/theme/defaultThemes";
-import coffee from "./coffee.png";
-import Form from "./Form";
+import loginBackground from "./loginBackground.jpg";
+import LoginForm from "./Form";
 import { useLayoutEffect } from "react";
-import { Box, ThemeProvider, Typography } from "@mui/material";
+import { Box, ThemeProvider, Typography, Stack } from "@mui/material";
 import { formTheme } from "../app/theme/loginFormThemes";
+import { TrackerLogoBig } from "../app/widget/trackerLogoLogin";
 
 const LoginPage = () => {
   useLayoutEffect(() => {
@@ -11,18 +12,29 @@ const LoginPage = () => {
   });
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Box display="flex" sx={{ height: "100%" }}>
-        <Box
-          sx={{
-            backgroundImage: `url(${coffee})`,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            width: 1500,
-            backgroundPosition: "center",
-          }}
-        />
-        <Box sx={formTheme}>
-          <Typography
+      <Box
+        display="grid"
+        gridTemplateColumns="repeat(20, minmax(0, 1fr))"
+        sx={{ height: "100vh" }}
+      >
+        <Box gridColumn="span 5">
+          <Box sx={formTheme}>
+            <Box
+              sx={{
+                marginTop: 25,
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "flex-start",
+              }}
+            >
+              <TrackerLogoBig />
+              <Typography variant="h4" sx={{ fontFamily: "Outfit" }}>
+                TRACKER
+              </Typography>
+            </Box>
+
+            {/* <Typography
             variant="h2"
             gridColumn="span 2"
             sx={{
@@ -32,9 +44,21 @@ const LoginPage = () => {
             }}
           >
             Sign In
-          </Typography>
-          <Form />
+          </Typography> */}
+
+            <LoginForm />
+          </Box>
         </Box>
+        <Box
+          gridColumn="span 15"
+          sx={{
+            backgroundImage: `url(${loginBackground})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+
+            backgroundPosition: "center",
+          }}
+        />
       </Box>
     </ThemeProvider>
   );
