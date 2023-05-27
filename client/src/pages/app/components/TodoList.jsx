@@ -267,76 +267,76 @@ export function ToDoList(props) {
           </TabContext>
 
           <Formik>
-          <Modal //Add Task Modal
-            open={open}
-            onClose={() => setOpen(false)}
-            sx={centerStyle}
-          >
-            <FormControl style={modalStyle}>
-              <Typography variant="h2" fontWeight={400} fontFamily={"Outfit"}>
-                {" "}
-                ADD NEW TASK
-              </Typography>
-              <TextField
-                label="Task"
-                sx={{ width: "75%" }}
-                value={tasks.taskTitle}
-                onChange={handleTitle}
-                inputProps={{ maxLength: 36 }}
-              />
-
-              <TextField
-                label="Description"
-                sx={{ width: "75%" }}
-                value={tasks.taskDescription}
-                onChange={handleDescription}
-                multiline
-                maxRows={4}
-              />
-
-              <Stack direction={"row"} spacing={5}>
+            <Modal //Add Task Modal
+              open={open}
+              onClose={() => setOpen(false)}
+              sx={centerStyle}
+            >
+              <FormControl style={modalStyle}>
+                <Typography variant="h2" fontWeight={400} fontFamily={"Outfit"}>
+                  {" "}
+                  ADD NEW TASK
+                </Typography>
                 <TextField
-                  size="medium"
-                  variant="standard"
-                  value={tasks.taskStat}
-                  label="Select a Stat"
-                  onChange={handleStat}
-                  select
-                  sx={{ width: 200 }}
-                >
-                  <MenuItem value={"Strength"}> Strength</MenuItem>
-                  <MenuItem value={"Intelligence"}>Intelligence</MenuItem>
-                  <MenuItem value={"Health"}>Health</MenuItem>
-                  <MenuItem value={"Charisma"}>Charisma</MenuItem>
-                  <MenuItem value={"Creativity"}>Creativity</MenuItem>
-                </TextField>
-
-                <FormControlLabel
-                  control={
-                    <Switch
-                      sx={{ flexGrow: "1" }}
-                      value={tasks.isPriority}
-                      onChange={handlePriority}
-                    />
-                  }
-                  label="Priority"
-                  labelPlacement="top"
+                  label="Task"
+                  sx={{ width: "75%" }}
+                  value={tasks.taskTitle}
+                  onChange={handleTitle}
+                  inputProps={{ maxLength: 36 }}
                 />
-              </Stack>
 
-              <Button
-                sx={{
-                  width: 20,
-                  alignSelf: "center",
-                  fontFamily: "Outfit",
-                }}
-                variant="contained"
-                onClick={(event) => handleAddTask(event)}
-              >
-                Add
-              </Button>
-            </FormControl>
-          </Modal>
+                <TextField
+                  label="Description"
+                  sx={{ width: "75%" }}
+                  value={tasks.taskDescription}
+                  onChange={handleDescription}
+                  multiline
+                  maxRows={4}
+                />
+
+                <Stack direction={"row"} spacing={5}>
+                  <TextField
+                    size="medium"
+                    variant="standard"
+                    value={tasks.taskStat}
+                    label="Select a Stat"
+                    onChange={handleStat}
+                    select
+                    sx={{ width: 200 }}
+                  >
+                    <MenuItem value={"Strength"}> Strength</MenuItem>
+                    <MenuItem value={"Intelligence"}>Intelligence</MenuItem>
+                    <MenuItem value={"Health"}>Health</MenuItem>
+                    <MenuItem value={"Charisma"}>Charisma</MenuItem>
+                    <MenuItem value={"Creativity"}>Creativity</MenuItem>
+                  </TextField>
+
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        sx={{ flexGrow: "1" }}
+                        value={tasks.isPriority}
+                        onChange={handlePriority}
+                      />
+                    }
+                    label="Priority"
+                    labelPlacement="top"
+                  />
+                </Stack>
+
+                <Button
+                  sx={{
+                    width: 20,
+                    alignSelf: "center",
+                    fontFamily: "Outfit",
+                  }}
+                  variant="contained"
+                  onClick={(event) => handleAddTask(event)}
+                >
+                  Add
+                </Button>
+              </FormControl>
+            </Modal>
           </Formik>
         </Paper>
       </div>

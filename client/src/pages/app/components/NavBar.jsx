@@ -1,4 +1,12 @@
-import { AppBar, Button, Toolbar, IconButton, Grid, Box } from "@mui/material";
+import {
+  AppBar,
+  Button,
+  Toolbar,
+  IconButton,
+  Grid,
+  Box,
+  Typography,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useDispatch } from "react-redux";
 import WebFont from "webfontloader";
@@ -50,7 +58,13 @@ export function NavBar(props) {
             >
               <MenuIcon />
             </IconButton>
-            <Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
               <IconButton
                 disableRipple
                 onClick={() => {
@@ -60,15 +74,17 @@ export function NavBar(props) {
                 sx={{ borderRadius: 1 }}
               >
                 <TrackerLogo />
-                <div
-                  style={{
-                    fontFamily: "Lusitana",
-                    fontWeight: "1000",
-                    fontSize: 20,
+
+                <Typography
+                  sx={{
+                    fontFamily: "Outfit",
+                    opacity: "70%",
+                    color: "black",
+                    fontSize: 30,
                   }}
                 >
                   TRACKER
-                </div>
+                </Typography>
               </IconButton>
             </Box>
             <Box>
@@ -87,7 +103,7 @@ export function NavBar(props) {
                   style={{
                     fontFamily: "Outfit",
                     fontWeight: "bold",
-                    fontSize: 16,
+                    fontSize: 20,
                   }}
                 >
                   Logout

@@ -4,7 +4,7 @@ export const defaultTheme = createTheme({
   palette: {
     primary: {
       main: "#8B0000", //main red
-      medium: "#660000", //navbar red
+      medium: "#8c0101", //navbar red
       dark: "#81173c", //darker red
     },
     secondary: {

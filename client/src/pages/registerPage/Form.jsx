@@ -28,7 +28,7 @@ const initialValueRegister = {
   password: "",
 };
 
-const Form = () => {
+const RegisterForm = () => {
   const navigate = useNavigate();
 
   const handleFormSubmit = async (values, onSubmitProps) => {
@@ -69,16 +69,14 @@ const Form = () => {
           <form onSubmit={handleSubmit}>
             <Box
               display="grid"
-              gridTemplateColumns="repeat(2, minmax(0,1fr))"
               gap={2}
               sx={{
                 mx: 0.5,
-                padding: 1,
+                padding: 5,
               }}
             >
               <TextField
                 label="First Name"
-                onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.firstName}
                 name="firstName"
@@ -88,7 +86,6 @@ const Form = () => {
               />
               <TextField
                 label="Last Name"
-                onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.lastName}
                 name="lastName"
@@ -98,7 +95,6 @@ const Form = () => {
               />
               <TextField
                 label="User Name"
-                onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.userName}
                 name="userName"
@@ -108,7 +104,6 @@ const Form = () => {
               />
               <TextField
                 label="Email"
-                onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.email}
                 name="email"
@@ -118,7 +113,6 @@ const Form = () => {
               />
               <TextField
                 label="Password"
-                onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.password}
                 name="password"
@@ -135,7 +129,6 @@ const Form = () => {
             </Box>
             <Box
               sx={{
-                margin: 2,
                 gap: 2,
                 display: "flex",
                 flexDirection: "column",
@@ -150,7 +143,7 @@ const Form = () => {
                   margin: "auto",
 
                   fontFamily: "outfit",
-                  fontSize: 20,
+                  fontSize: 25,
                 }}
               >
                 Sign Up
@@ -176,4 +169,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default RegisterForm;

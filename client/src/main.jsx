@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
+import AppRoutes from "./Routes";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import {
@@ -35,7 +35,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistStore(store)}>
-        <App />
+        <AppRoutes />
       </PersistGate>
     </Provider>
   </React.StrictMode>
