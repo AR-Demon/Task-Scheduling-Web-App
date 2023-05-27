@@ -22,9 +22,11 @@ import { levelBarTheme } from "../theme/levelBarThemes";
 import { StatIconLevel } from "../widget/statIconLevel";
 import { useSelector } from "react-redux";
 
-export function UserStatsBar() {
-  const userName = useSelector((state) => state.user.userName)
+export function UserStatsBar(props) {
+  const userName = useSelector((state) => state.user.userName);
   const UserStats_State = useSelector((state) => state.userStats);
+  const counter = props.counter;
+  console.log(counter);
   const [userStats, setUserStats] = useState({
     userAttribute: {
       strengthLevel: 0,
@@ -50,8 +52,10 @@ export function UserStatsBar() {
   useEffect(() => {
     //can set if not null setUserStats(USerStats) 
     if(UserStats_State == null){}
-  else{setUserStats(UserStats_State)}
-  }, [UserStats_State]);
+  else{
+    setUserStats(UserStats_State);
+  }
+  }, [UserStats_State,]);
 
   //Returns a level bar with styled linear progress and stat icon attached
   function LevelBar(attributeName, attributeLevel, attributeXp) {
@@ -108,7 +112,7 @@ export function UserStatsBar() {
             alignItems: "center",
           }}
         >
-          <Typography variant="h4">{userName}</Typography>
+          <Typography variant="h4" sx ={{fontSize:30}}>{userName}</Typography>
           <CircularProgressbarWithChildren value={userStats.userLevelExp}>
             <Typography variant="h5">{userStats.userLevel}</Typography>
           </CircularProgressbarWithChildren>
