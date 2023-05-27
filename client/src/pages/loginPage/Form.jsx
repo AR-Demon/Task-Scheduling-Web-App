@@ -28,7 +28,7 @@ const initialValueLogin = {
   password: "",
 };
 
-const Form = () => {
+const LoginForm = () => {
   //dispatch function for login functionality
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -85,16 +85,15 @@ const Form = () => {
         <form onSubmit={handleSubmit}>
           <Box
             display="grid"
-            gridTemplateColumns="repeat(2, minmax(0,1fr))"
-            gap={1}
+            gap={3}
             sx={{
-              mx: 0.5,
-              padding: 1,
+              padding: 5,
+              translate: -30,
+              width: "100%",
             }}
           >
             <TextField
               label="Email"
-              onBlur={handleBlur}
               onChange={handleChange}
               value={values.email}
               name="email"
@@ -124,7 +123,6 @@ const Form = () => {
                     <IconButton
                       aria-label="toggle password visibility"
                       onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
                       {showPassword ? <VisibilityOff /> : <Visibility />}
@@ -140,14 +138,25 @@ const Form = () => {
                 helperText={touched.password && errors.password}
               />
             </FormControl>
-            <Box gridColumn="span 2">
+            <Box
+              gridColumn="span 2"
+              sx={{
+                marginTop: 2,
+                gap: 2,
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
               <Button
-                fullWidth
                 variant="contained"
                 type="submit"
                 sx={{
-                  m: "1rem 0",
-                  p: "0.5em",
+                  display: "flex",
+                  width: 250,
+                  margin: "auto",
+
+                  fontFamily: "outfit",
+                  fontSize: 25,
                 }}
               >
                 Sign In
@@ -169,4 +178,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default LoginForm;

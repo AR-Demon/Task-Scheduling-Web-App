@@ -1,27 +1,39 @@
-import picture from "../../assets/react.svg";
-import Form from "./Form";
-import { Box, Typography } from "@mui/material";
-import { formTheme } from "../app/theme/loginFormThemes";
+import loginBackground from "./loginBackground.jpg";
+import { defaultTheme } from "../app/theme/defaultThemes";
 
-const LoginPage = () => {
+import RegisterForm from "./Form";
+import { useLayoutEffect } from "react";
+import { Box, Typography, ThemeProvider } from "@mui/material";
+import { formTheme } from "../app/theme/loginFormThemes";
+import { TrackerLogoBig } from "../app/widget/trackerLogoLogin";
+
+const RegisterPage = () => {
+  useLayoutEffect(() => {
+    document.body.style.backgroundColor = "black";
+  });
   return (
-    <Box
-      display="grid"
-      gridTemplateColumns="repeat(20, minmax(0, 1fr))"
-      sx={{ height: "100vh" }}
-    >
+    <ThemeProvider theme={defaultTheme}>
       <Box
-        gridColumn="span 15"
-        sx={{
-          backgroundImage: `url(${picture})`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          width: "100%",
-          backgroundPosition: "center",
-        }}
-      />
-      <Box gridColumn="span 5" sx={formTheme}>
-        <Typography
+        display="grid"
+        gridTemplateColumns="repeat(20, minmax(0, 1fr))"
+        sx={{ height: "100vh" }}
+      >
+        <Box gridColumn="span 5" sx={formTheme}>
+          <Box
+            sx={{
+              marginTop: 25,
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "flex-start",
+            }}
+          >
+            <TrackerLogoBig />
+            <Typography variant="h4" sx={{ fontFamily: "Outfit" }}>
+              TRACKER
+            </Typography>
+          </Box>
+          {/* <Typography
           variant="h2"
           gridColumn="span 2"
           sx={{
@@ -30,11 +42,22 @@ const LoginPage = () => {
           }}
         >
           Sign Up
-        </Typography>
-        <Form />
+        </Typography> */}
+          <RegisterForm />
+        </Box>
+        <Box
+          gridColumn="span 15"
+          sx={{
+            backgroundImage: `url(${loginBackground})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            width: "100%",
+            backgroundPosition: "center",
+          }}
+        />
       </Box>
-    </Box>
+    </ThemeProvider>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
