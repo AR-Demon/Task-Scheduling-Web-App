@@ -34,18 +34,6 @@ const LoginPage = () => {
               </Typography>
             </Box>
 
-            {/* <Typography
-            variant="h2"
-            gridColumn="span 2"
-            sx={{
-              textAlign: "center",
-              fontFamily: "Lusitana",
-              marginBottom: 5,
-            }}
-          >
-            Sign In
-          </Typography> */}
-
             <LoginForm />
           </Box>
         </Box>
