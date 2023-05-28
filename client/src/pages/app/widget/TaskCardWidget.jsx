@@ -24,7 +24,7 @@ import { centerStyle, modalStyle, circleButtons } from "../theme/TodoTheme";
 import { StatIcon } from "./statIcon";
 
 function CheckDescription(index) {
-  if (!(index.taskDescription.length === 0))
+  if (!(index.taskDescription === " "))
     return (
       <Paper
         elevation={0}

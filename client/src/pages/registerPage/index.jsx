@@ -33,16 +33,7 @@ const RegisterPage = () => {
               TRACKER
             </Typography>
           </Box>
-          {/* <Typography
-          variant="h2"
-          gridColumn="span 2"
-          sx={{
-            textAlign: "center",
-            fontFamily: "Lusitana",
-          }}
-        >
-          Sign Up
-        </Typography> */}
+
           <RegisterForm />
         </Box>
         <Box

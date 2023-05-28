@@ -38,7 +38,7 @@ export function ToDoList(props) {
     user_id: user._id,
     todo_id: "",
     taskTitle: "",
-    taskDescription: "Todo Description",
+    taskDescription: " ",
     isPriority: false,
     isDone: false,
     taskStat: "",
@@ -121,25 +121,6 @@ export function ToDoList(props) {
     props.deleteTodo(Todo.todo_id);
     props.Sync();
   };
-
-  // const handleEditTaskChange = (event) => {
-  //   setEditTask(event.target.value);
-  // };
-
-  // const handleEditTask = () => {
-  //   const newTasks = [...tasks];
-  //   newTasks[editIndex] = editTask;
-  //   setTasks(newTasks);
-  //   setEditTask({});
-  //   setEditIndex(-1);
-  //   setEditOpen(false);
-  // };
-
-  // const handleEditClick = (index) => {
-  //   setEditTask(tasks[index]);
-  //   setEditIndex(index);
-  //   setEditOpen(true);
-  // };
 
   const [tabValue, setTabValue] = useState(0);
 
