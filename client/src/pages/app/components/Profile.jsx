@@ -48,6 +48,9 @@ export function UserStatsBar(props) {
     userLevel: 0,
     userLevelExp: 0,
   });
+  const alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","o","p","q","r","s","t","u","v","w","x","y","z"];
+  const seed = Math.floor(Math.random()*26);
+  const profilePicture = `https://api.dicebear.com/6.x/personas/svg?seed=${alphabet[seed]}}`;
 
   useEffect(() => {
     //can set if not null setUserStats(USerStats) 
@@ -98,7 +101,7 @@ export function UserStatsBar(props) {
           width: "25vw",
         }}
       >
-        <Avatar sx={{ width: 200, height: 200, marginTop: 12 }} src={dobby} />
+        <Avatar sx={{ width: 200, height: 200, marginTop: 12 }} src={profilePicture} />
 
 
         <Box
